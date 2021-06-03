@@ -28,14 +28,20 @@ class car():
     client.connect("test.mosquitto.org", 1883, 60)
 
 
-    zahl = 150 + randint(1, 10)
-
-    data = {
-     "name": "Taxi",
-     "cordinaten": zahl,
-     "topic": "hshl/mqtt_exercise/taxi"
-     }
-
-    client.publish("hshl/mqtt_exercise/taxi", json.dumps(data))   #Senden zum server
+    zahly = randint(0, 4)
+    zahlx = randint(0, 4)
+    coordinates = str(zahly)+"."+str(zahlx)
+    #data = {
+    # "name": "Taxi",
+    ## "cordinaten": coordinates,
+    # "topic": "hshl/mqtt_exercise/taxi"
+    # }
+    temp = ["Id1", "taxischmitt" ,str(coordinates)]
+    data= ""
+    for i in range(0,len(temp)):
+        if i != 0:
+            data += ","
+        data += temp[i]
+    client.publish("hshl/mqtt_exercise/taxi", data)#json.dumps(data))   #Senden zum server
 
     client.loop_forever()
