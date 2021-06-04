@@ -30,13 +30,13 @@ class car():
 
     zahly = randint(0, 4)
     zahlx = randint(0, 4)
-    coordinates = str(zahly)+"."+str(zahlx)
+    coordinates = str(zahly)+";"+str(zahlx)
     #data = {
     # "name": "Taxi",
     ## "cordinaten": coordinates,
     # "topic": "hshl/mqtt_exercise/taxi"
     # }
-    temp = ["Id1", "taxischmitt" ,str(coordinates)]
+    temp = ["1", "taxischmitt" ,str(coordinates)]
     data= ""
     for i in range(0,len(temp)):
         if i != 0:
