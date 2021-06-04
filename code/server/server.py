@@ -2,6 +2,7 @@
 import time
 import paho.mqtt.client as mqtt
 from random import *
+import json
 TOPIC = "hshl/mqtt_exercise/services"
 BROKER_ADDRESS = "test.mosquitto.org"
 PORT = 1883
@@ -61,7 +62,7 @@ def send(object,topic):
     print("test")
     def __init__(self, name):
         self.name = name
-    print("Connected to MQTT Broker: " + BROKER_ADDRESS)
+    print("Send Connected to MQTT Broker: " + BROKER_ADDRESS)
     msg = str(name)
     print(msg)
     client.publish(topic, msg)
@@ -75,11 +76,10 @@ def receive():
         msg = str(message.payload.decode("utf-8"))
         print("message received: ", msg)
         print("message topic: ", message.topic)
-        print("message name",message.Client)
-        print(msg.split(",")[0])
         temp =  [message.topic,msg]
         messageprocessing(temp)
     def on_connect(client, userdata, flags, rc):
+        client.subscribe("hshl/mqtt_exercise/user/0",2)
         print("Server Connected to MQTT Broker: " + BROKER_ADDRESS)
         for i in range(0,len(subtopic)):
             print(str(subtopic[i]))
@@ -112,31 +112,50 @@ def findnextCar(gpsUser,car):
                     elif int(car[c][2].split(';')[0]) == i and int(car[c][2].split(';')[0]) == j:
                         print("2 Das nächst gelegene fahrzeug ist:"+str(i)+"."+str(j))
                         return car[c]
+def findid(car):
+    highid = 0
+    for i in range(0,len(car)):
+        if highid < int(car[i][0]):
+            highid = car[i][0]
+    return highid
 
 def messageprocessing(msg):
+    js = json.loads(str(msg[1]))
+    print(str(msg[1]))
     data = []
-    print(format(msg[1]))
-    if msg[0] == "hshl/mqtt_exercise/taxi":         #Taxi
-        data.append(msg[1].split(",")[0])
-        data.append(msg[1].split(",")[1])
-        data.append(msg[1].split(",")[2])
+    if msg[0] == "hshl/mqtt_exercise/taxi": #and js['id'] == "register": #Taxi
+        data.append(js['id'])
+        data.append(js['name'])
+        data.append(js['coordinates'])
+        #data.append(msg[1].split(",")[0])
+        #data.append(msg[1].split(",")[1])
+        #data.append(msg[1].split(",")[2])
         print(data[2])
         registrationCar(data,0)
-        for i in range(0,len(taxi)):
-            print(str(taxi[i]))
-            pass
-    elif msg[0] == "hshl/mqtt_exercise/user":       #user
-        data.append(msg[1].split(",")[0])
-        data.append(msg[1].split(",")[1])
-        data.append(msg[1].split(",")[2])
+    elif msg[0] == "hshl/mqtt_exercise/user" and str(js['id']) == "register":       #user
+        data.append(findid(user))
+        data.append(js['name'])
+        data.append(js['coordinates'])
+        #data.append(msg[1].split(",")[0])
+        #data.append(msg[1].split(",")[1])
+        #data.append(msg[1].split(",")[2])
         registrationUser(data)
-        subtopic.append("hshl/mqtt_exercise/user/"+data[0])
+        subtopic.append("hshl/mqtt_exercise/user/"+ str(data[0]))
+        userdata = {
+        "id": data[0],
+        "name": data[1],
+        }
+        time.sleep(3)
+        send(json.dumps(userdata),"hshl/mqtt_exercise/user/back")
+        time.sleep(2)
         receive()
         print("joojooo")
-    elif msg[0] == "hshl/mqtt_exercise/user/1" and msg[1].split(',')[0] == "taxi":
+
+
+    elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']) :#and js['type'] == "taxi":
         print("hallo")
         car = []
-        car.append(findnextCar(msg[1].split(',')[1],taxi))
+        car.append(findnextCar(js['coordinates'],taxi))
         print("car"+str(car[0]))
         for i in range(0,len(taxi)):
             temp1 = str(car[0][0])
@@ -149,18 +168,27 @@ def messageprocessing(msg):
                 print("send")
     elif msg[0] == "hshl/mqtt_exercise/services/police" or msg[0] == "hshl/mqtt_exercise/services/firefighter" or msg[0] == "hshl/mqtt_exercise/services/ambulance":
         if msg[0] == "hshl/mqtt_exercise/police":
-            data.append(msg[1].split(",")[0])
-            data.append(msg[1].split(",")[1])
-            data.append(msg[1].split(",")[2])
+            data.append(js['id'])
+            data.append(js['name'])
+            data.append(js['coordinates'])
+        #    data.append(msg[1].split(",")[0])
+            #data.append(msg[1].split(",")[1])
+            #data.append(msg[1].split(",")[2])
             registrationCar(data,1)
         elif msg[0] == "hshl/mqtt_exercise/firefighter":
-            data.append(msg[1].split(",")[0])
-            data.append(msg[1].split(",")[1])
-            data.append(msg[1].split(",")[2])
+            data.append(js['id'])
+            data.append(js['name'])
+            data.append(js['coordinates'])
+            #data.append(msg[1].split(",")[0])
+            #data.append(msg[1].split(",")[1])
+            #data.append(msg[1].split(",")[2])
             registrationCar(data,2)
         elif msg[0] == "hshl/mqtt_exercise/ambulance":
-            data.append(msg[1].split(",")[0])
-            data.append(msg[1].split(",")[1])
-            data.append(msg[1].split(",")[2])
+            data.append(js['id'])
+            data.append(js['name'])
+            data.append(js['coordinates'])
+            #data.append(msg[1].split(",")[0])
+            #data.append(msg[1].split(",")[1])
+            #data.append(msg[1].split(",")[2])
             registrationCar(data,3)
 receive()
