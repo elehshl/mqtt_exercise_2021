@@ -14,16 +14,18 @@ ambulance = []
 user =[]
 gpsUser = ""
 subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/police","hshl/mqtt_exercise/firefighter","hshl/mqtt_exercise/ambulance"]
+
+#registration for user
 def registrationUser(data):
     inliste = False
-    for i in range(0,len(user)):
+    for i in range(0,len(user)):    #alredy exists ?
         if str(data[0]) == str(user[i][0]):
             inliste = True
-
-    if inliste == False:
+    if inliste == False:    # no ? add!
         user.append(data)
-    elif inliste == True:
+    elif inliste == True:   #yes ? print(user exists alredy !)
         print("user bereits vorhanden")
+# same but seperated for each car type
 def registrationCar(data,type):
     car = []
     inliste = False
@@ -53,7 +55,7 @@ def registrationCar(data,type):
             ambulance.append(data)
     elif inliste == True:
         print("fahrezug bereits hinzu gefügt")
-
+#############################################
 
 def send(object,topic):
     client = mqtt.Client("master")
@@ -112,17 +114,20 @@ def findnextCar(gpsUser,car):
                     elif int(car[c][2].split(';')[0]) == i and int(car[c][2].split(';')[0]) == j:
                         print("2 Das nächst gelegene fahrzeug ist:"+str(i)+"."+str(j))
                         return car[c]
-def findid(car):
+# find next id #
+def findid(object):
     highid = 0
-    for i in range(0,len(car)):
-        if highid < int(car[i][0]):
-            highid = car[i][0]
+    for i in range(0,len(object)):
+        if highid < int(object[i][0]):
+            highid = object[i][0]
     return highid
+#######
 
 def messageprocessing(msg):
     js = json.loads(str(msg[1]))
     print(str(msg[1]))
     data = []
+    #registration taxi
     if msg[0] == "hshl/mqtt_exercise/taxi": #and js['id'] == "register": #Taxi
         data.append(js['id'])
         data.append(js['name'])
@@ -132,40 +137,42 @@ def messageprocessing(msg):
         #data.append(msg[1].split(",")[2])
         print(data[2])
         registrationCar(data,0)
+        #registration user
     elif msg[0] == "hshl/mqtt_exercise/user" and str(js['id']) == "register":       #user
-        data.append(findid(user))
-        data.append(js['name'])
-        data.append(js['coordinates'])
+        data.append(findid(user))   #call find next id
+        data.append(js['name']) #decode name from js and store
+        data.append(js['coordinates']) #decode coordinates from js and store
         #data.append(msg[1].split(",")[0])
         #data.append(msg[1].split(",")[1])
         #data.append(msg[1].split(",")[2])
-        registrationUser(data)
-        subtopic.append("hshl/mqtt_exercise/user/"+ str(data[0]))
-        userdata = {
+        registrationUser(data)  #call user registration
+        subtopic.append("hshl/mqtt_exercise/user/"+ str(data[0]))   #add new exclusiv topic for the client/user
+        userdata = {            #and send this to the user
         "id": data[0],
         "name": data[1],
         }
-        time.sleep(3)
+        time.sleep(2) #delay is needed ??
         send(json.dumps(userdata),"hshl/mqtt_exercise/user/back")
-        time.sleep(2)
         receive()
-        print("joojooo")
-
-
+        #wait for order
     elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']) :#and js['type'] == "taxi":
-        print("hallo")
         car = []
-        car.append(findnextCar(js['coordinates'],taxi))
+        car.append(findnextCar(js['coordinates'],taxi)) #search for the closest taxi
         print("car"+str(car[0]))
+        #set status of the taxi to busy
         for i in range(0,len(taxi)):
             temp1 = str(car[0][0])
             temp2 = str(taxi[i][0])
             print(temp1+"=="+temp2)
             if temp1 == temp2:
                 taxi[i][3] = "busy"
+        ################################
+        #send the taxi to the user
                 print("sending")
                 send(taxi[i],"hshl/mqtt_exercise/user/1/back")
                 print("send")
+        #############################
+        #wait for service registration
     elif msg[0] == "hshl/mqtt_exercise/services/police" or msg[0] == "hshl/mqtt_exercise/services/firefighter" or msg[0] == "hshl/mqtt_exercise/services/ambulance":
         if msg[0] == "hshl/mqtt_exercise/police":
             data.append(js['id'])
