@@ -31,17 +31,12 @@ class car():
     zahly = randint(0, 4)
     zahlx = randint(0, 4)
     coordinates = str(zahly)+";"+str(zahlx)
-    #data = {
-    # "name": "Taxi",
-    ## "cordinaten": coordinates,
-    # "topic": "hshl/mqtt_exercise/taxi"
-    # }
-    temp = ["1", "taxischmitt" ,str(coordinates)]
-    data= ""
-    for i in range(0,len(temp)):
-        if i != 0:
-            data += ","
-        data += temp[i]
-    client.publish("hshl/mqtt_exercise/taxi", data)#json.dumps(data))   #Senden zum server
+    data = {
+     "id": "1",
+     "name": "Taxi",
+     "coordinates": coordinates,
+     "topic": "hshl/mqtt_exercise/taxi"
+     }
+    client.publish("hshl/mqtt_exercise/taxi",json.dumps(data))   #Senden zum server
 
     client.loop_forever()
