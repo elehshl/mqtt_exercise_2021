@@ -54,7 +54,7 @@ def registrationCar(data,type):
             data.append("free")
             ambulance.append(data)
     elif inliste == True:
-        print("fahrezug bereits hinzu gefügt")
+        print("fahrezug bereits hinzugefügt")
 #############################################
 
 def send(object,topic):
