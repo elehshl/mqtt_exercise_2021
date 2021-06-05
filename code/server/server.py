@@ -90,7 +90,7 @@ def receive():
     client.on_message = on_message
     client.loop_forever()
 
-def findnextCar(gpsUser,car):
+def findnextCar(gpsUser,car): # find closest car
     for k in range(int(gpsUser.split(";")[0]),5):
         for i in range((k-1)*1, k+1):
             print("i ist:"+str(i))
@@ -122,7 +122,7 @@ def findid(object):
             highid = object[i][0]
     return highid
 #######
-
+#msg[0] ist das topic und msg[1] ist die eigentliche
 def messageprocessing(msg):
     js = json.loads(str(msg[1]))
     print(str(msg[1]))
