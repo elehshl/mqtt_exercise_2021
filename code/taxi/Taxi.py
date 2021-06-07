@@ -28,11 +28,11 @@ class car():
     client.connect("test.mosquitto.org", 1883, 60)
 
 
-    zahly = randint(0, 4)
+    zahly = randint(1, 4)
     zahlx = randint(0, 4)
     coordinates = str(zahly)+";"+str(zahlx)
     data = {
-     "id": "1",
+     "id": "register",
      "name": "Taxi",
      "coordinates": coordinates,
      "topic": "hshl/mqtt_exercise/taxi"

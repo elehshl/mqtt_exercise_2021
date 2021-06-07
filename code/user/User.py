@@ -5,14 +5,14 @@ import json
 TOPIC = "hshl/mqtt_exercise/services"
 BROKER_ADDRESS = "test.mosquitto.org"
 PORT = 1883
-id =""
-
+id = ""
+idCar = ""
 
 def send(object,topic):
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
     name = object
-    print("test")
+    print("User")
     def __init__(self, name):
         self.name = name
     print("Connected to MQTT Broker: " + BROKER_ADDRESS)
@@ -22,7 +22,7 @@ def send(object,topic):
     client.loop()
 
 def receive():
-
+    global id
     temp = []
     client = mqtt.Client("user")
     client.connect(BROKER_ADDRESS, PORT)
@@ -36,44 +36,24 @@ def receive():
 
     Abfrage = 4
 
-    if Abfrage == 4:
-     coordinates1 = str(zahly)+";"+str(zahlx)
-     print("444444")
-     data = {
-      "id": "1",
-      "name": "User",
-      "coordinates1": coordinates1,
-      "topic": "hshl/mqtt_exercise/user"
-          }
-    client.publish("hshl/mqtt_exercise/taxi",json.dumps(data))
-
-    if Abfrage == 5:
-     coordinates2 = str(zahly)+";"+str(zahlx)
-     data = {
-      "id": "2",
-      "name": "User",
-      "coordinates2": coordinates2,
-      "topic": "hshl/mqtt_exercise/user"
-          }
-    client.publish("hshl/mqtt_exercise/services",json.dumps(data))
-
 
 
     def on_connect(client, userdata, flags, rc):
         print("receive Connected to MQTT Broker: " + BROKER_ADDRESS)
         client.subscribe("hshl/mqtt_exercise/user/back",2)
-        client.subscribe("hshl/mqtt_exercise/user/"+str(id)+"/back", 2)
+        client.subscribe("hshl/mqtt_exercise/user/"+str(id)+"/order/back", 2)
 
     client.on_connect = on_connect
     client.on_message = on_message
     client.loop_forever()
 # zufalls coordinaten
-zahly = randint(0, 4)
+zahly = randint(1, 4)
 zahlx = randint(0, 4)
 coordinates = str(zahly)+";"+str(zahlx)
 #######
 #order taxi
-def ordertaxi(id):
+def ordertaxi():
+    global id
     data1 = {
         "type": "taxi",
         "id": id,
@@ -82,7 +62,7 @@ def ordertaxi(id):
     time.sleep(5)
     send(json.dumps(data1),"hshl/mqtt_exercise/user/"+str(id))
     ###########
-
+    receive()
      #id vom server bekommen
 def getid():
     data = {
@@ -93,9 +73,25 @@ def getid():
     send(json.dumps(data),"hshl/mqtt_exercise/user")
     receive()
 #########
+def setToFree(): #seting the status to free
+    global id
+    global idCar
+    print("freeee")
+    data = {
+    "code": "free",
+    "id": id,
+    "idCar": idCar,
+
+
+    }
+    send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(id)+"/status/reset")
 
 #erst einmal testweise dinge mit den erhaltenen nachrichten machen
 def processing(msg):
+    global id
+    global idCar
+    data = ""
+    Abfrage = 1
     print(msg[1])
     #die erhaltene id verarbeiten
     js = json.loads(msg[1])
@@ -103,8 +99,32 @@ def processing(msg):
         id = js['id']
         print(id)
         pass
+
+    if msg[0] == "hshl/mqtt_exercise/user"+str(id)+"/order/back" and js['type'] == "taxi":
+     coordinates1 = str(zahly)+";"+str(zahlx)
+     print("idCa"+str(js['id']))
+     idCar = js['id']
+     data = {
+     "id": id,
+     "name": "User",
+     "coordinates1": coordinates1,
+     "topic": "hshl/mqtt_exercise/user"
+     }
+    send(json.dumps(data),"hshl/mqtt_exercise/taxi")
+
+    if Abfrage == 5:
+     coordinates2 = str(zahly)+";"+str(zahlx)
+     data = {
+      "id": "2",
+      "name": "User",
+      "coordinates2": coordinates2,
+      "topic": "hshl/mqtt_exercise/user"
+          }
+    send(json.dumps(data),"hshl/mqtt_exercise/services")
     ###
-    ordertaxi(id)   #testweise ein taxi bestellen
+    ordertaxi()   #testweise ein taxi bestellen
+    time.sleep(5)
+    setToFree()
 getid()
 time.sleep(2)
 receive()

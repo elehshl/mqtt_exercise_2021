@@ -13,7 +13,7 @@ firefighter = []
 ambulance = []
 user =[]
 gpsUser = ""
-subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/police","hshl/mqtt_exercise/firefighter","hshl/mqtt_exercise/ambulance"]
+subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/police","hshl/mqtt_exercise/firefighter","hshl/mqtt_exercise/ambulance","hshl/mqtt_exercise/user/+/status/reset"]
 
 #registration for user
 def registrationUser(data):
@@ -58,6 +58,7 @@ def registrationCar(data,type):
 #############################################
 
 def send(object,topic):
+    time.sleep(2)
     client = mqtt.Client("master")
     client.connect(BROKER_ADDRESS, PORT)
     name = object
@@ -79,7 +80,11 @@ def receive():
         print("message received: ", msg)
         print("message topic: ", message.topic)
         temp =  [message.topic,msg]
-        messageprocessing(temp)
+        if msg == "" or msg == " " or None:
+            print ("leere Nachricht erhalten!")
+        else:
+            messageprocessing(temp)
+
     def on_connect(client, userdata, flags, rc):
         client.subscribe("hshl/mqtt_exercise/user/0",2)
         print("Server Connected to MQTT Broker: " + BROKER_ADDRESS)
@@ -128,14 +133,14 @@ def messageprocessing(msg):
     print(str(msg[1]))
     data = []
     #registration taxi
-    if msg[0] == "hshl/mqtt_exercise/taxi": #and js['id'] == "register": #Taxi
-        data.append(js['id'])
+    if msg[0] == "hshl/mqtt_exercise/taxi" and str(js['id']) == "register": #Taxi
+        data.append(1)
         data.append(js['name'])
         data.append(js['coordinates'])
         #data.append(msg[1].split(",")[0])
         #data.append(msg[1].split(",")[1])
         #data.append(msg[1].split(",")[2])
-        print(data[2])
+        print(str(data[2]))
         registrationCar(data,0)
         #registration user
     elif msg[0] == "hshl/mqtt_exercise/user" and str(js['id']) == "register":       #user
@@ -169,9 +174,18 @@ def messageprocessing(msg):
         ################################
         #send the taxi to the user
                 print("sending")
-                send(taxi[i],"hshl/mqtt_exercise/user/1/back")
+                data = {
+                "type":"taxi",
+                "id": taxi[i][0],
+                "name": taxi[i][1],
+                "coordinates": taxi[i][2],
+                "status": taxi[i][3]
+                }
+                send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(js['id'])+"/order/back")
                 print("send")
+    elif msg[0] == "hshl/mqtt_exercise/user//status/reset":
         #############################
+        print("TESTTEST##################################################")
         #wait for service registration
     elif msg[0] == "hshl/mqtt_exercise/services/police" or msg[0] == "hshl/mqtt_exercise/services/firefighter" or msg[0] == "hshl/mqtt_exercise/services/ambulance":
         if msg[0] == "hshl/mqtt_exercise/police":
