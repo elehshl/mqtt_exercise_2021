@@ -16,6 +16,8 @@ class car():
         client.subscribe("hshl/mqtt_exercise/taxi", 2)
 
         client.subscribe("hshl/mqtt_exercise/server", 2)
+        
+        client.subscribe("hshl/mqtt_exercise/taxi/get_postion", 2)
 
 
     def on_message(client, userdata, msg):
@@ -38,5 +40,14 @@ class car():
      "topic": "hshl/mqtt_exercise/taxi"
      }
     client.publish("hshl/mqtt_exercise/taxi",json.dumps(data))   #Senden zum server
+    
+    
+     if msg[0] == "hshl/mqtt_exercise/taxi/get_position":
+     
+     data = {
+      "postion": coordinates1, #Coordiante vom Zielort
+      }
+     client.publish("hshl/mqtt_exercise/server/set_postion,json.dumps(data)
+    
 
     client.loop_forever()
