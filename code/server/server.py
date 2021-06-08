@@ -13,7 +13,7 @@ firefighter = []
 ambulance = []
 user =[]
 gpsUser = ""
-subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/police","hshl/mqtt_exercise/firefighter","hshl/mqtt_exercise/ambulance","hshl/mqtt_exercise/user/+/status/reset"]
+subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/services/police","hshl/mqtt_exercise/services/firefighter","hshl/mqtt_exercise/services/ambulance","hshl/mqtt_exercise/user/+/status/reset"]
 
 #registration for user
 def registrationUser(data):
