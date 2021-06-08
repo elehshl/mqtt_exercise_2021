@@ -205,20 +205,20 @@ def messageprocessing(msg):
         tempcar = []
         if str(js['type']) == "taxi":
             car.append(findnextCar(js['coordinates'],taxi)) #search for the closest taxi
-            tempCar.append(taxi)
+            tempcar.append(taxi)
         elif str(js['type']) == "police":
             car.append(findnextCar(js['coordinates'],police)) #search for the closest police
-            tempCar.append(police)
+            tempcar.append(police)
         elif str(js['type']) == "firefighter":
             car.append(findnextCar(js['coordinates'],firefighter)) #search for the closest firefighter
-            tempCar.append(firefighter)
+            tempcar.append(firefighter)
         elif str(js['type']) == "ambulance":
             car.append(findnextCar(js['coordinates'],ambulance)) #search for the closest ambulance
-            tempCar.append(ambulance)
+            tempcar.append(ambulance)
         print("car"+str(car[0]))
     # find id in data
         temp1 = str(car[0][0])
-        for i in range(0,len(tempCar)):
+        for i in range(0,len(tempcar)):
             temp2 = str(tempcar[i][0])
             print(temp1+"=="+temp2)
     #set status to busy
