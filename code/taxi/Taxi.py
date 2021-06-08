@@ -4,11 +4,12 @@ from random import *
 
 class car():
 
-    def  __init__(self, name, coordinaten,zahl):
+    def  __init__(self, name, coordinaten,zahl,taxi):
          self.name  = name
          self.coordinaten = coordinaten
          self.zahl = zahl
-
+         self.taxi = taxi
+        
     cars = []
 
     def on_connect(client, userdata, flags, rc):
@@ -30,13 +31,14 @@ class car():
 
     client.connect("test.mosquitto.org", 1883, 60)
 
-
+    taxi = intput()
+    
     zahly = randint(1, 4)
     zahlx = randint(0, 4)
     coordinates = str(zahly)+";"+str(zahlx)
     data = {
      "id": "register",
-     "name": "Taxi",
+     "name": taxi,
      "coordinates": coordinates,
      "topic": "hshl/mqtt_exercise/taxi"
      }
