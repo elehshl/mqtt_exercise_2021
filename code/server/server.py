@@ -269,19 +269,19 @@ def messageprocessing(msg):
         #wait for service registration
     elif msg[0] == "hshl/mqtt_exercise/services/police" or msg[0] == "hshl/mqtt_exercise/services/firefighter" or msg[0] == "hshl/mqtt_exercise/services/ambulance":
 #register Police
-        if msg[0] == "hshl/mqtt_exercise/services/police" and str(js["id"]) == "register":
-            data.append(findid(police))
-            data.append(js['name'])
-            data.append(js['coordinates'])
-            registrationCar(data,1)
-            print("#Register Police:"+str(js['name'])+"by"+str(data[0]))
-            subtopic.append("hshl/mqtt_exercise/services/police/"+ str(data[0]))
-            userdata = {            #and send this to the taxi
+        if msg[0] == "hshl/mqtt_exercise/services/police" and str(js["id"]) == "register": #checlk for message {"id":"register", "name": "[irgend_ein_name]","coordinates": "irgend_welche koordinaten"} on adress "hshl/mqtt_exercise/services/police"
+            data.append(findid(police)) #find an free id for a police car
+            data.append(js['name']) #save his name temporarily
+            data.append(js['coordinates'])   #save his coordinates temporarily
+            registrationCar(data,1)   #call method register with the temporarily data and identifier 1
+            print("#Register Police:"+str(js['name'])+"by"+str(data[0]))#print name and id
+            subtopic.append("hshl/mqtt_exercise/services/police/"+ str(data[0]))  # add new topic to monizoring
+            userdata = {            # dataset with new data
             "id": data[0],
             "name": data[1],
             }
             time.sleep(2) #delay is needed ??
-            send(json.dumps(userdata),"hshl/mqtt_exercise/services/police/back")
+            send(json.dumps(userdata),"hshl/mqtt_exercise/services/police/back") #send new id with the name on adress "hshl/mqtt_exercise/services/police/back"
 #############################################################################################################
 #register Firefighter
         elif msg[0] == "hshl/mqtt_exercise/services/firefighter" and str(js["id"]) == "register":
