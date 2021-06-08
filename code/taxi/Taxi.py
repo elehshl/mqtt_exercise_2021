@@ -20,7 +20,7 @@ class car():
         
         client.subscribe("hshl/mqtt_exercise/taxi/get_postion", 2)
         
-        client.subscribe("hshl/mqtt_exercise/taxi/"+str(id)+"/back", 2)
+        client.subscribe("hshl/mqtt_exercise/taxi/back", 2)
 
     def on_message(client, userdata, msg):
         print(str(msg.payload))
