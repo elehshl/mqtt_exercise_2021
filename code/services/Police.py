@@ -40,10 +40,14 @@ class police():
     client.connect("test.mosquitto.org", 1883, 60)
 
 
+    zahly = randint(0, 4)
+    zahlx = randint(0, 4)
+    coordinates = str(zahly)+";"+str(zahlx)
+
     data = {
-     "ID": " ",
-     "car_name": "police",
-     "coordinaten": coornew,
+     "id": " ",
+     "car_name": "Police",
+     "coordinaten": coordinates,
      "topic": "hshl/mqtt_exercise/services/police"
     }
 
