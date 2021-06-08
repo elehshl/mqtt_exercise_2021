@@ -11,6 +11,41 @@ class police():
 
 
     polices = []
+    
+    def processing(msg):
+        global id
+        global idCar
+        global count
+        data = ""
+        Abfrage = 1
+        print(msg[1])
+        #die erhaltene id verarbeiten
+        js = json.loads(msg[1])
+        if msg[0]=="hshl/mqtt_exercise/police/back" and js['name'] == "Dan":
+            id = js['id']
+            print(id)
+            pass
+        elif msg[0] == "hshl/mqtt_exercise/set_position":
+            storePosition(js["id"],js["type"],js["coordinates"])
+
+    def requestPosition(idCar,type):
+        name =""
+        for i in range(0,len(type)):
+            pass
+        data ={
+        "id":idCar,
+        "name": name
+        }
+        send(data,"hshl/exercise/get_position")
+
+    def getid():
+      data = {
+       "id": "register",
+       "name": "Dan",
+       "coordinates": coordinates
+       }
+      send(json.dumps(data),"hshl/mqtt_exercise/user")
+      receive()
 
     def on_connect(client, userdata, flags, rc):
 
@@ -34,7 +69,7 @@ class police():
     coordinates = str(zahly)+";"+str(zahlx)
 
     data = {
-     "id": " ",
+     "id": "register",
      "car_name": "Police",
      "coordinaten": coordinates,
      "topic": "hshl/mqtt_exercise/services/police"
