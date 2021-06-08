@@ -13,6 +13,41 @@ class firefighter():
          self.coordinaten = coordinaten
 
     firefighters = []
+    
+    def processing(msg):
+        global id
+        global idCar
+        global count
+        data = ""
+        Abfrage = 2
+        print(msg[2])
+        #die erhaltene id verarbeiten
+        js = json.loads(msg[2])
+        if msg[0]=="hshl/mqtt_exercise/firefighter/back" and js['name'] == "Otto":
+            id = js['id']
+            print(id)
+            pass
+        elif msg[0] == "hshl/mqtt_exercise/set_position":
+            storePosition(js["id"],js["type"],js["coordinates"])
+
+    def requestPosition(idCar,type):
+        name =""
+        for i in range(0,len(type)):
+            pass
+        data ={
+        "id":idCar,
+        "name": name
+        }
+        send(data,"hshl/exercise/get_position")
+
+    def getid():
+      data = {
+       "id": "register",
+       "name": "Otto",
+       "coordinates": coordinates
+       }
+      send(json.dumps(data),"hshl/mqtt_exercise/user")
+      receive()
 
 
 
@@ -25,6 +60,8 @@ class firefighter():
 
     def on_message(client, userdata, msg):
         print(str(msg.payload))
+        temp =  [message.topic,msg]
+        processing(temp)
 
     client = mqtt.Client()
     client.on_connect = on_connect
