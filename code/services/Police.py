@@ -7,21 +7,10 @@ class police():
 
     def  __init__(self, car_name, coordinaten, coor1, coor2, coor):
          self.car_name = car_name
-         self.coordinaten = coordinaten
-         self.coor = coor
-         self.coor1 = coor1
-         self.coor2 = coor2
+         self.coordinates = coordinates
+
 
     polices = []
-
-    coor = [5, 2]
-    coor1 = (coor[0]+randint(-2, 5))
-    coor2 = (coor[0]+randint(-2, 5))
-    coor1 = round(coor1, 2)
-    coor2 = round(coor2, 2)
-    coornew = [coor1, coor2]
-
-
 
     def on_connect(client, userdata, flags, rc):
 
