@@ -127,13 +127,40 @@ def findid(object):
             highid = object[i][0]
     return highid
 #######
-#msg[0] ist das topic und msg[1] ist die eigentliche
+ #check for empty message
 def dataVerification(msg):
     if len(json.loads(str(msg))) > 0 :
         return True
     else:
         return False
         pass
+##############################
+
+ #call for new position
+def requestPosition(idCar,type):
+    name =""
+    for i in range(0,len(type)):
+        pass
+    data ={
+    "id":idCar,
+    "name": name
+    }
+    send(data,"hshl/exercise/get_position")
+########################
+
+
+    #store received coordinates
+def storePosition(idCar,type,coordinates):
+    if type == "taxi":
+        taxi[idCar][2] = coordinates
+    elif type == "police":
+        police[idCar][2] = coordinates
+    elif type == "ambulance":
+        ambulance[idCar][2] = coordinates
+    elif type == "firefighter":
+        firefighter[idCar][2] = coordinates
+########################################
+#msg[0] ist das topic und msg[1] ist die eigentliche
 def messageprocessing(msg):
     js = {}
     js = json.loads(str(msg[1]))
@@ -141,7 +168,7 @@ def messageprocessing(msg):
     #registration taxi
 
     if msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
-        data.append(1)
+        data.append(findid(js["id"]))
         data.append(js['name'])
         data.append(js['coordinates'])
         #data.append(msg[1].split(",")[0])
@@ -149,6 +176,10 @@ def messageprocessing(msg):
         #data.append(msg[1].split(",")[2])
         print(str(data[2]))
         registrationCar(data,0)
+
+
+    elif msg[0] == "hshl/mqtt_exercise/set_position":
+        storePosition(js["id"],js["type"],js["coordinates"])
         #registration user
     elif msg[0] == "hshl/mqtt_exercise/user" and str(js['id']) == "register":       #user
         data.append(findid(user))   #call find next id
