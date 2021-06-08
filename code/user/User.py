@@ -69,6 +69,19 @@ def ordertaxi():
     cartype = "taxi"
     time.sleep(5)
     send(json.dumps(data1),"hshl/mqtt_exercise/user/"+str(id))
+
+
+def orderpolice():
+    global id
+    global cartype
+    data2 = {
+        "type": "police",
+        "id": id,
+        "coordinates": coordinates
+        }
+    cartype = "police"
+    time.sleep(5)
+    send(json.dumps(data2),"hshl/mqtt_exercise/user/"+str(id))
     ###########
      #id vom server bekommen
 def getid():
@@ -136,7 +149,8 @@ def userin(userinput):
         ordertaxi()
         receive()
     elif userinput == "orderpolice":
-        print("not implemented yet")
+        orderpolice()
+        receive()
     elif userinput == "orderfire":
         print("not implemented yet")
     elif userinput == "orderambulance":
