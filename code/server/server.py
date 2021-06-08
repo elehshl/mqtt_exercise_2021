@@ -83,7 +83,13 @@ def receive():
         if msg == "" or msg == " " or None:
             print ("leere Nachricht erhalten!")
         else:
-            messageprocessing(temp)
+            try:
+                messageprocessing(temp)
+                pass
+            except Exception as e:
+                print("fehler in der Message verarbeitung"+str(e))
+                raise
+
 
     def on_connect(client, userdata, flags, rc):
         client.subscribe("hshl/mqtt_exercise/user/0",2)
@@ -129,7 +135,17 @@ def findid(object):
 #######
 #msg[0] ist das topic und msg[1] ist die eigentliche
 def messageprocessing(msg):
-    js = json.loads(str(msg[1]))
+    js = {}
+    try:
+        js = json.loads(str(msg[1]))
+        js.read()
+    except TypeError:
+        dat = {            #and send this to the user
+        "id": ""
+        }
+        js = json.dumps(dat)
+
+        print("FEHLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     print(str(msg[1]))
     data = []
     #registration taxi
