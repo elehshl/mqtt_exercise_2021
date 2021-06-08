@@ -80,16 +80,10 @@ def receive():
         print("message received: ", msg)
         print("message topic: ", message.topic)
         temp =  [message.topic,msg]
-        if msg == "" or msg == " " or None:
-            print ("leere Nachricht erhalten!")
+        if dataVerification(msg) == True:
+            messageprocessing(temp)
         else:
-            try:
-                messageprocessing(temp)
-                pass
-            except Exception as e:
-                print("fehler in der Message verarbeitung"+str(e))
-                raise
-
+            print("Failure! Empty Message received")
 
     def on_connect(client, userdata, flags, rc):
         client.subscribe("hshl/mqtt_exercise/user/0",2)
@@ -134,22 +128,19 @@ def findid(object):
     return highid
 #######
 #msg[0] ist das topic und msg[1] ist die eigentliche
+def dataVerification(msg):
+    if len(json.loads(str(msg))) > 0 :
+        return True
+    else:
+        return False
+        pass
 def messageprocessing(msg):
     js = {}
-    try:
-        js = json.loads(str(msg[1]))
-        js.read()
-    except TypeError:
-        dat = {            #and send this to the user
-        "id": ""
-        }
-        js = json.dumps(dat)
-
-        print("FEHLER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print(str(msg[1]))
+    js = json.loads(str(msg[1]))
     data = []
     #registration taxi
-    if msg[0] == "hshl/mqtt_exercise/taxi" and str(js['id']) == "register": #Taxi
+
+    if msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
         data.append(1)
         data.append(js['name'])
         data.append(js['coordinates'])
