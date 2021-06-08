@@ -19,7 +19,7 @@ class car():
         
         client.subscribe("hshl/mqtt_exercise/taxi/get_postion", 2)
         
-        client.subscribe("hshl/mqtt_exercise/taxi/coordinates1", 2)
+        client.subscribe("hshl/mqtt_exercise/taxi/"+str(id)+"/back", 2)
 
     def on_message(client, userdata, msg):
         print(str(msg.payload))
@@ -43,9 +43,12 @@ class car():
     client.publish("hshl/mqtt_exercise/taxi",json.dumps(data))   #Senden zum server
     
     
-     if msg[0] == "hshl/mqtt_exercise/taxi/get_position":
-     
+     if msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/back":
+            
+     coordinates1 = cordinates1 + randint(1, 4)
      data = {
+         "id" : 5
+         "type" : taxi
       "postion": coordinates1, #Coordiante vom Zielort
      
      }
