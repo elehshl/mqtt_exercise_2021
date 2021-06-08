@@ -31,7 +31,7 @@ class car():
 
     client.connect("test.mosquitto.org", 1883, 60)
 
-    taxi = intput()
+    taxi = input()
     
     zahly = randint(1, 4)
     zahlx = randint(0, 4)
