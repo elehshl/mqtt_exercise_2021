@@ -56,6 +56,8 @@ class police():
 
     def on_message(client, userdata, msg):
         print(str(msg.payload))
+        temp =  [message.topic,msg]
+        processing(temp)
 
     client = mqtt.Client()
     client.on_connect = on_connect
