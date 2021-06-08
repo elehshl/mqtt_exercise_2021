@@ -43,7 +43,7 @@ class car():
     client.publish("hshl/mqtt_exercise/taxi",json.dumps(data))   #Senden zum server
     
     
-     if msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/back":
+     if msg[0] == "hshl/mqtt_exercise/taxi/get_postion":
             
      coordinates1 = cordinates1 + randint(1, 4)
      data = {
