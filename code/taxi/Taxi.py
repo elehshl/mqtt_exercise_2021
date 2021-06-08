@@ -30,7 +30,8 @@ class car():
     client.on_message = on_message
 
     client.connect("test.mosquitto.org", 1883, 60)
-
+    
+    print("Taxi ID change")
     taxi = input()
     
     zahly = randint(1, 4)
