@@ -18,7 +18,8 @@ class car():
         client.subscribe("hshl/mqtt_exercise/server", 2)
         
         client.subscribe("hshl/mqtt_exercise/taxi/get_postion", 2)
-
+        
+        client.subscribe("hshl/mqtt_exercise/taxi/coordinates1", 2)
 
     def on_message(client, userdata, msg):
         print(str(msg.payload))
@@ -46,7 +47,8 @@ class car():
      
      data = {
       "postion": coordinates1, #Coordiante vom Zielort
-      }
+     
+     }
      client.publish("hshl/mqtt_exercise/server/set_postion,json.dumps(data)
     
 
