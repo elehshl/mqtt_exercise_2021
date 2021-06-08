@@ -110,7 +110,7 @@ def processing(msg):
      "coordinates1": coordinates1,
      "topic": "hshl/mqtt_exercise/user"
      }
-    send(json.dumps(data),"hshl/mqtt_exercise/taxi")
+    send(json.dumps(data),"hshl/mqtt_exercise/taxi/coordinates1")
 
     if Abfrage == 5:        #service fahrzeuge
      coordinates2 = str(zahly)+";"+str(zahlx)
