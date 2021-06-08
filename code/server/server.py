@@ -167,39 +167,22 @@ def storePosition(idCar,type,coordinates):
     elif type == "firefighter":
         firefighter[idCar][2] = coordinates
 ########################################
-#msg[0] ist das topic und msg[1] ist die eigentliche
+
+
+
+
+#msg[0] ist das topic und msg[1] ist die eigentliche Nachricht
 def messageprocessing(msg):
     js = {}
     js = json.loads(str(msg[1]))
     data = []
-    #registration taxi
 
-    if msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
-        data.append(findid(taxi))
-        data.append(js['name'])
-        data.append(js['coordinates'])
-        #data.append(msg[1].split(",")[0])
-        #data.append(msg[1].split(",")[1])
-        #data.append(msg[1].split(",")[2])
-        print(str(data[2]))
-        registrationCar(data,0)
-        subtopic.append("hshl/mqtt_exercise/user/"+ str(data[0]))
-        userdata = {            #and send this to the user
-        "id": data[0],
-        "name": data[1],
-        }
-        time.sleep(2) #delay is needed ??
-        send(json.dumps(userdata),"hshl/mqtt_exercise/taxi/back")
-    elif msg[0] == "hshl/mqtt_exercise/set_position":
-        storePosition(js["id"],js["type"],js["coordinates"])
-        #registration user
-    elif msg[0] == "hshl/mqtt_exercise/user" and str(js['id']) == "register":       #user
+
+#registration user
+    if msg[0] == "hshl/mqtt_exercise/user" and str(js['id']) == "register":       #user
         data.append(findid(user))   #call find next id
         data.append(js['name']) #decode name from js and store
         data.append(js['coordinates']) #decode coordinates from js and store
-        #data.append(msg[1].split(",")[0])
-        #data.append(msg[1].split(",")[1])
-        #data.append(msg[1].split(",")[2])
         registrationUser(data)  #call user registration
         subtopic.append("hshl/mqtt_exercise/user/"+ str(data[0]))   #add new exclusiv topic for the client/user
         userdata = {            #and send this to the user
@@ -209,58 +192,124 @@ def messageprocessing(msg):
         time.sleep(2) #delay is needed ??
         send(json.dumps(userdata),"hshl/mqtt_exercise/user/back")
         receive()
-        #wait for order
-    elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']) :#and js['type'] == "taxi":
+####################
+#Set new position in data
+    elif msg[0] == "hshl/mqtt_exercise/set_position":
+        storePosition(js["id"],js["type"],js["coordinates"])
+#####################
+
+
+#wait for order
+    elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']):
         car = []
-        car.append(findnextCar(js['coordinates'],taxi)) #search for the closest taxi
+        tempcar = []
+        if str(js['type']) == "taxi":
+            car.append(findnextCar(js['coordinates'],taxi)) #search for the closest taxi
+            tempCar.append(taxi)
+        elif str(js['type']) == "police":
+            car.append(findnextCar(js['coordinates'],police)) #search for the closest police
+            tempCar.append(police)
+        elif str(js['type']) == "firefighter":
+            car.append(findnextCar(js['coordinates'],firefighter)) #search for the closest firefighter
+            tempCar.append(firefighter)
+        elif str(js['type']) == "ambulance":
+            car.append(findnextCar(js['coordinates'],ambulance)) #search for the closest ambulance
+            tempCar.append(ambulance)
         print("car"+str(car[0]))
-        #set status of the taxi to busy
-        for i in range(0,len(taxi)):
-            temp1 = str(car[0][0])
-            temp2 = str(taxi[i][0])
+    # find id in data
+        temp1 = str(car[0][0])
+        for i in range(0,len(tempCar)):
+            temp2 = str(tempcar[i][0])
             print(temp1+"=="+temp2)
+    #set status to busy
             if temp1 == temp2:
-                taxi[i][3] = "busy"
-        ################################
-        #send the taxi to the user
-                print("#sending")
+                if str(js['type']) == "taxi":
+                    taxi[i][3] = "busy"
+                elif str(js['type']) == "police":
+                    police[i][3] = "busy"
+                elif str(js['type']) == "firefighter":
+                    firefighter[i][3] = "busy"
+                elif str(js['type']) == "ambulance":
+                    ambulance[i][3] = "busy"
+    #send the car to the user
+                print("# send ordered car")
                 data = {
                 "type":"taxi",
-                "id": taxi[i][0],
-                "name": taxi[i][1],
-                "coordinates": taxi[i][2],
-                "status": taxi[i][3]
+                "id": tempcar[i][0],
+                "name": tempcar[i][1],
+                "coordinates": tempcar[i][2],
+                "status": tempcar[i][3]
                 }
                 send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(js['id'])+"/order/back")
-                print("#send")
+                print("# Ordered car sent")
+########################################################################################################
+    #Reset status of cars
     elif msg[0] == "hshl/mqtt_exercise/user/"+str(js["id"])+"/status/reset":
         statusReset(js["idCar"],js["type"])
         print("#Status Reset to Free by"+str(js['id']))
-        ####################
+#########################################################################################################
+    #registration taxi
+    elif msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
+        data.append(findid(taxi))
+        data.append(js['name'])
+        data.append(js['coordinates'])
+        #data.append(msg[1].split(",")[0])
+        #data.append(msg[1].split(",")[1])
+        #data.append(msg[1].split(",")[2])
+        print("#Register Taxi:"+str(js['name'])+"by"+str(data[0]))
+        registrationCar(data,0)
+        subtopic.append("hshl/mqtt_exercise/taxi/"+ str(data[0]))
+        userdata = {            #and send this to the taxi
+        "id": data[0],
+        "name": data[1],
+        }
+        time.sleep(2) #delay is needed ??
+        send(json.dumps(userdata),"hshl/mqtt_exercise/taxi/back")
+################################################################################################################
         #wait for service registration
     elif msg[0] == "hshl/mqtt_exercise/services/police" or msg[0] == "hshl/mqtt_exercise/services/firefighter" or msg[0] == "hshl/mqtt_exercise/services/ambulance":
-        if msg[0] == "hshl/mqtt_exercise/police":
-            data.append(js['id'])
+#register Police
+        if msg[0] == "hshl/mqtt_exercise/services/police" and str(js["id"]) == "register":
+            data.append(findid(police))
             data.append(js['name'])
             data.append(js['coordinates'])
-        #    data.append(msg[1].split(",")[0])
-            #data.append(msg[1].split(",")[1])
-            #data.append(msg[1].split(",")[2])
             registrationCar(data,1)
-        elif msg[0] == "hshl/mqtt_exercise/firefighter":
-            data.append(js['id'])
+            print("#Register Police:"+str(js['name'])+"by"+str(data[0]))
+            subtopic.append("hshl/mqtt_exercise/services/police/"+ str(data[0]))
+            userdata = {            #and send this to the taxi
+            "id": data[0],
+            "name": data[1],
+            }
+            time.sleep(2) #delay is needed ??
+            send(json.dumps(userdata),"hshl/mqtt_exercise/services/police/back")
+#############################################################################################################
+#register Firefighter
+        elif msg[0] == "hshl/mqtt_exercise/services/firefighter" and str(js["id"]) == "register":
+            data.append(findid(firefighter))
             data.append(js['name'])
             data.append(js['coordinates'])
-            #data.append(msg[1].split(",")[0])
-            #data.append(msg[1].split(",")[1])
-            #data.append(msg[1].split(",")[2])
             registrationCar(data,2)
-        elif msg[0] == "hshl/mqtt_exercise/ambulance":
-            data.append(js['id'])
+            print("#Register Firefighter:"+str(js['name'])+"by"+str(data[0]))
+            subtopic.append("hshl/mqtt_exercise/services/firefighter/"+ str(data[0]))
+            userdata = {            #and send this to the taxi
+            "id": data[0],
+            "name": data[1],
+            }
+            time.sleep(2) #delay is needed ??
+            send(json.dumps(userdata),"hshl/mqtt_exercise/services/firefighter/back")
+############################################################################################################
+# register Ambulance
+        elif msg[0] == "hshl/mqtt_exercise/services/ambulance" and str(js["id"]) == "register":
+            data.append(findid(ambulance))
             data.append(js['name'])
             data.append(js['coordinates'])
-            #data.append(msg[1].split(",")[0])
-            #data.append(msg[1].split(",")[1])
-            #data.append(msg[1].split(",")[2])
             registrationCar(data,3)
+            print("#Register Firefighter:"+str(js['name'])+"by"+str(data[0]))
+            subtopic.append("hshl/mqtt_exercise/services/ambulance/"+ str(data[0]))
+            userdata = {            #and send this to the taxi
+            "id": data[0],
+            "name": data[1],
+            }
+            time.sleep(2) #delay is needed ??
+            send(json.dumps(userdata),"hshl/mqtt_exercise/services/ambulance/back")
 receive()
