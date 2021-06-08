@@ -9,6 +9,9 @@ id = ""
 idCar = ""
 count = 0
 cartype = ""
+userinput = ""
+
+
 def send(object,topic):
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
@@ -16,7 +19,7 @@ def send(object,topic):
     print("User")
     def __init__(self, name):
         self.name = name
-    print("Connected to MQTT Broker: " + BROKER_ADDRESS)
+    print(" SEND Connected to MQTT Broker: " + BROKER_ADDRESS)
     msg = str(name)
     print(msg)
     client.publish(topic, msg)
@@ -46,7 +49,9 @@ def receive():
 
     client.on_connect = on_connect
     client.on_message = on_message
-    client.loop_forever()
+    client.loop_start()
+    time.sleep(5)
+    client.loop_stop()
 # zufalls coordinaten
 zahly = randint(1, 4)
 zahlx = randint(0, 4)
@@ -65,7 +70,6 @@ def ordertaxi():
     time.sleep(5)
     send(json.dumps(data1),"hshl/mqtt_exercise/user/"+str(id))
     ###########
-    receive()
      #id vom server bekommen
 def getid():
     data = {
@@ -74,7 +78,6 @@ def getid():
      "coordinates": coordinates
      }
     send(json.dumps(data),"hshl/mqtt_exercise/user")
-    receive()
 #########
 def setToFree(): #seting the status to free
     global id
@@ -101,35 +104,47 @@ def processing(msg):
         id = js['id']
         print(id)
     elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
-     coordinates1 = str(zahly)+";"+str(zahlx)
-     print("idCa"+str(js['id']))
-     idCar = js['id']
-     data = {
-     "id": id,
-     "name": "User",
-     "coordinates1": coordinates1,
-     "topic": "hshl/mqtt_exercise/user"
-     }
-    send(json.dumps(data),"hshl/mqtt_exercise/taxi/coordinates1")
+        coordinates1 = str(2)+";"+str(4)
+        print("idCa"+str(js['id']))
+        idCar = js['id']
+        data = {
+        "id": id,
+        "name": "User",
+        "coordinates1": coordinates1,
+        "topic": "hshl/mqtt_exercise/user"
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi")
 
     if Abfrage == 5:        #service fahrzeuge
-     coordinates2 = str(zahly)+";"+str(zahlx)
-     data = {
-      "id": "2",
-      "name": "User",
-      "coordinates2": coordinates2,
-      "topic": "hshl/mqtt_exercise/user"
-          }
-    send(json.dumps(data),"hshl/mqtt_exercise/services")
+        coordinates2 = str(zahly)+";"+str(zahlx)
+        data = {
+        "id": "2",
+        "name": "User",
+        "coordinates2": coordinates2,
+        "topic": "hshl/mqtt_exercise/user"
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/services")
     ###
-    print("first"+str(count))
     if count == 0:
         count= count + 1
-        print("second"+str(count))
+def userin(userinput):
+    if userinput =="reg":
+        getid()
+        receive()
+        pass
+    elif userinput == "ordertaxi":
         ordertaxi()
-  #testweise ein taxi bestellen
-    time.sleep(5)
-    setToFree()
-getid()
-time.sleep(2)
-receive()
+        receive()
+    elif userinput == "orderpolice":
+        print("not implemented yet")
+    elif userinput == "orderfire":
+        print("not implemented yet")
+    elif userinput == "orderambulance":
+        print("not implemented yet")
+    elif userinput == "getout":
+        setToFree()
+        exit()
+
+while 0==0:
+    print("Enter Operation: ")
+    userin(input())
