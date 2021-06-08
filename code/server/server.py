@@ -246,6 +246,7 @@ def messageprocessing(msg):
     #Reset status of cars
     elif msg[0] == "hshl/mqtt_exercise/user/"+str(js["id"])+"/status/reset":
         statusReset(js["idCar"],js["type"])
+        requestPosition(js["idCar"],js["type"])
         print("#Status Reset to Free by"+str(js['id']))
 #########################################################################################################
     #registration taxi
