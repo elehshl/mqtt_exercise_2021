@@ -69,7 +69,7 @@ class police():
     coordinates = str(zahly)+";"+str(zahlx)
 
     data = {
-     "id": "register",
+     "id": " ",
      "car_name": "Police",
      "coordinaten": coordinates,
      "topic": "hshl/mqtt_exercise/services/police"
