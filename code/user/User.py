@@ -7,7 +7,8 @@ BROKER_ADDRESS = "test.mosquitto.org"
 PORT = 1883
 id = ""
 idCar = ""
-
+count = 0
+cartype = ""
 def send(object,topic):
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
@@ -54,11 +55,13 @@ coordinates = str(zahly)+";"+str(zahlx)
 #order taxi
 def ordertaxi():
     global id
+    global cartype
     data1 = {
         "type": "taxi",
         "id": id,
         "coordinates": coordinates
         }
+    cartype = "taxi"
     time.sleep(5)
     send(json.dumps(data1),"hshl/mqtt_exercise/user/"+str(id))
     ###########
@@ -76,13 +79,12 @@ def getid():
 def setToFree(): #seting the status to free
     global id
     global idCar
+    global cartype
     print("freeee")
     data = {
-    "code": "free",
+    "type": cartype,
     "id": id,
     "idCar": idCar,
-
-
     }
     send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(id)+"/status/reset")
 
@@ -90,17 +92,15 @@ def setToFree(): #seting the status to free
 def processing(msg):
     global id
     global idCar
+    global count
     data = ""
     Abfrage = 1
-    print(msg[1])
     #die erhaltene id verarbeiten
     js = json.loads(msg[1])
     if msg[0]=="hshl/mqtt_exercise/user/back" and js['name'] == "Peter":
         id = js['id']
         print(id)
-        pass
-
-    if msg[0] == "hshl/mqtt_exercise/user"+str(id)+"/order/back" and js['type'] == "taxi":
+    elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
      coordinates1 = str(zahly)+";"+str(zahlx)
      print("idCa"+str(js['id']))
      idCar = js['id']
@@ -112,7 +112,7 @@ def processing(msg):
      }
     send(json.dumps(data),"hshl/mqtt_exercise/taxi")
 
-    if Abfrage == 5:
+    if Abfrage == 5:        #service fahrzeuge
      coordinates2 = str(zahly)+";"+str(zahlx)
      data = {
       "id": "2",
@@ -122,7 +122,12 @@ def processing(msg):
           }
     send(json.dumps(data),"hshl/mqtt_exercise/services")
     ###
-    ordertaxi()   #testweise ein taxi bestellen
+    print("first"+str(count))
+    if count == 0:
+        count= count + 1
+        print("second"+str(count))
+        ordertaxi()
+  #testweise ein taxi bestellen
     time.sleep(5)
     setToFree()
 getid()

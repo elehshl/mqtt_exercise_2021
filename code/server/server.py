@@ -65,7 +65,7 @@ def send(object,topic):
     print("test")
     def __init__(self, name):
         self.name = name
-    print("Send Connected to MQTT Broker: " + BROKER_ADDRESS)
+    print("Send: " + topic)
     msg = str(name)
     print(msg)
     client.publish(topic, msg)
@@ -86,7 +86,6 @@ def receive():
             print("Failure! Empty Message received")
 
     def on_connect(client, userdata, flags, rc):
-        client.subscribe("hshl/mqtt_exercise/user/0",2)
         print("Server Connected to MQTT Broker: " + BROKER_ADDRESS)
         for i in range(0,len(subtopic)):
             print(str(subtopic[i]))
@@ -97,9 +96,9 @@ def receive():
 
 def findnextCar(gpsUser,car): # find closest car
     for k in range(int(gpsUser.split(";")[0]),5):
-        for i in range((k-1)*1, k+1):
+        for i in range((k-1)*(-1), k+1):
             print("i ist:"+str(i))
-            for j in range((i-1)*-1, i+1):
+            for j in range((i-1)*(-1), i+1):
 
                 print("j ist:"+str(j))
                 for c in range(0,len(car)):
@@ -145,9 +144,17 @@ def requestPosition(idCar,type):
     "id":idCar,
     "name": name
     }
-    send(data,"hshl/exercise/get_position")
+    send(data,"hshl/mqtt_exercise/get_position")
 ########################
-
+def statusReset(idCar,type):
+    if type == "taxi":
+        taxi[idCar][3] = "free"
+    elif type == "police":
+        police[idCar][3] = "free"
+    elif type == "ambulance":
+        ambulance[idCar][3] = "free"
+    elif type == "firefighter":
+        firefighter[idCar][3] = "free"
 
     #store received coordinates
 def storePosition(idCar,type,coordinates):
@@ -168,7 +175,7 @@ def messageprocessing(msg):
     #registration taxi
 
     if msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
-        data.append(findid(js["id"]))
+        data.append(findid(taxi))
         data.append(js['name'])
         data.append(js['coordinates'])
         #data.append(msg[1].split(",")[0])
@@ -176,8 +183,13 @@ def messageprocessing(msg):
         #data.append(msg[1].split(",")[2])
         print(str(data[2]))
         registrationCar(data,0)
-
-
+        subtopic.append("hshl/mqtt_exercise/user/"+ str(data[0]))
+        userdata = {            #and send this to the user
+        "id": data[0],
+        "name": data[1],
+        }
+        time.sleep(2) #delay is needed ??
+        send(json.dumps(userdata),"hshl/mqtt_exercise/taxi/back")
     elif msg[0] == "hshl/mqtt_exercise/set_position":
         storePosition(js["id"],js["type"],js["coordinates"])
         #registration user
@@ -211,7 +223,7 @@ def messageprocessing(msg):
                 taxi[i][3] = "busy"
         ################################
         #send the taxi to the user
-                print("sending")
+                print("#sending")
                 data = {
                 "type":"taxi",
                 "id": taxi[i][0],
@@ -220,10 +232,11 @@ def messageprocessing(msg):
                 "status": taxi[i][3]
                 }
                 send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(js['id'])+"/order/back")
-                print("send")
-    elif msg[0] == "hshl/mqtt_exercise/user//status/reset":
-        #############################
-        print("TESTTEST##################################################")
+                print("#send")
+    elif msg[0] == "hshl/mqtt_exercise/user/"+str(js["id"])+"/status/reset":
+        statusReset(js["idCar"],js["type"])
+        print("#Status Reset to Free by"+str(js['id']))
+        ####################
         #wait for service registration
     elif msg[0] == "hshl/mqtt_exercise/services/police" or msg[0] == "hshl/mqtt_exercise/services/firefighter" or msg[0] == "hshl/mqtt_exercise/services/ambulance":
         if msg[0] == "hshl/mqtt_exercise/police":
