@@ -74,12 +74,12 @@ def registration():
 registration()
 
 
-def receive_user():                                                           # Erhalten der Cordinaten vom User (Standort + Ziel)
+def receive_user():                                                           # Erhalten der Coordinaten vom User (Standort + Ziel)
  if msg[0] == "hshl/mqtt_exercise/user/"+ str(js['coordinates']):
   storePosition(js["coordinates"],js["coordinates_ziel"])
 receive_user()
 
-def receive_server():                                                         #Anfrage vom Server, senden der Cordinaten vom Standort Taxi
+def receive_server():                                                         #Anfrage vom Server, senden der Coordinaten vom Standort Taxi
  if msg[0] == "hshl/mqtt_exercise/server/"+ str(js['get_coordinates']):
    new_coordinates = coordinates_ziel + zahly
    send("hshl/mqtt_exercise/server/set_coordinates", json.dumps(new_coordinates))
