@@ -12,6 +12,20 @@ cartype = ""
 userinput = ""
 
 
+#########
+
+     #id vom server bekommen
+def getid():
+    data = {
+     "id": "register",
+     "name": "Peter",
+     "coordinates": coordinates
+     }
+    send(json.dumps(data),"hshl/mqtt_exercise/user")
+
+#########
+
+    #feedback received from server
 def send(object,topic):
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
@@ -24,6 +38,8 @@ def send(object,topic):
     print(msg)
     client.publish(topic, msg)
     client.loop()
+
+##########
 
 def receive():
     global id
@@ -56,8 +72,10 @@ def receive():
 zahly = randint(1, 4)
 zahlx = randint(0, 4)
 coordinates = str(zahly)+";"+str(zahlx)
-#######
-#order taxi
+
+#########
+
+    #methodenaufruf für Taxi
 def ordertaxi():
     global id
     global cartype
@@ -70,7 +88,9 @@ def ordertaxi():
     time.sleep(5)
     send(json.dumps(data1),"hshl/mqtt_exercise/user/"+str(id))
 
+#########
 
+    #methodenaufruf für Police
 def orderpolice():
     global id
     global cartype
@@ -82,17 +102,41 @@ def orderpolice():
     cartype = "police"
     time.sleep(5)
     send(json.dumps(data2),"hshl/mqtt_exercise/user/"+str(id))
-    ###########
-     #id vom server bekommen
-def getid():
-    data = {
-     "id": "register",
-     "name": "Peter",
-     "coordinates": coordinates
-     }
-    send(json.dumps(data),"hshl/mqtt_exercise/user")
+
 #########
-def setToFree(): #seting the status to free
+
+    #methodenaufruf für Ambulance
+def orderambulance():
+    global id
+    global cartype
+    data2 = {
+        "type": "ambulance",
+        "id": id,
+        "coordinates": coordinates
+        }
+    cartype = "ambulance"
+    time.sleep(5)
+    send(json.dumps(data2),"hshl/mqtt_exercise/user/"+str(id))
+
+#########
+
+    #methodenaufruf für Firefighter
+def orderfire():
+    global id
+    global cartype
+    data2 = {
+        "type": "firefighter",
+        "id": id,
+        "coordinates": coordinates
+        }
+    cartype = "firefighter"
+    time.sleep(5)
+    send(json.dumps(data2),"hshl/mqtt_exercise/user/"+str(id))
+
+#########
+
+    #seting service vehicle status to free
+def setToFree():
     global id
     global idCar
     global cartype
@@ -104,13 +148,16 @@ def setToFree(): #seting the status to free
     }
     send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(id)+"/status/reset")
 
-#erst einmal testweise dinge mit den erhaltenen nachrichten machen
+#########
+
+    #provisorische verarbeitung der erhaltenen Nachrichten
 def processing(msg):
     global id
     global idCar
     global count
     data = ""
     Abfrage = 1
+
     #die erhaltene id verarbeiten
     js = json.loads(msg[1])
     if msg[0]=="hshl/mqtt_exercise/user/back" and js['name'] == "Peter":
@@ -118,7 +165,7 @@ def processing(msg):
         print(id)
     elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
         coordinates1 = str(2)+";"+str(4)
-        print("idCa"+str(js['id']))
+        print("idCar"+str(js['id']))
         idCar = js['id']
         data = {
         "id": id,
@@ -152,9 +199,11 @@ def userin(userinput):
         orderpolice()
         receive()
     elif userinput == "orderfire":
-        print("not implemented yet")
+        orderfire()
+        receive()
     elif userinput == "orderambulance":
-        print("not implemented yet")
+        orderambulance()
+        receive()
     elif userinput == "getout":
         setToFree()
         exit()
@@ -162,3 +211,5 @@ def userin(userinput):
 while 0==0:
     print("Enter Operation: ")
     userin(input())
+
+#########
