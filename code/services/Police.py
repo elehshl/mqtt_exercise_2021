@@ -71,5 +71,19 @@ def registration():
     }
     send("hshl/mqtt_exercise/services/police", json.dumps(data))
     receive()
+ 
+def receive_order_user():
+
+    if "hshl/mqtt_exercise/user" == msg[0] and str(js['coordinates']) == str(coordinates):
+        storePosition(js['coordinates'],js['coordinates_ziel'])
+    
+receive_order_user()
+
+def receive_server():
+    if msg[0] == "hshl/mqtt_exercise/server" and str(js['get_coordinates']):
+        new_coordinates = coordinates_ziel + zahly
+        send("hshl/mqtt_exercise/server/set_coordinates", json.dumps(new_coordinates))
+        receive()
+receive_server()
 
 registration()
