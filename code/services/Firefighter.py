@@ -13,7 +13,7 @@ class firefighter():
          self.coordinaten = coordinaten
 
     firefighters = []
-    
+
     def processing(msg):
         global id
         global idCar
@@ -68,7 +68,7 @@ class firefighter():
     client.on_message = on_message
 
     client.connect("test.mosquitto.org", 1883, 60)
-    
+
     zahly = randint(0, 4)
     zahlx = randint(0, 4)
     coordinates = str(zahly)+";"+str(zahlx)
@@ -76,7 +76,7 @@ class firefighter():
     data = {
      "ID": " ",
      "car_name": "firefighter",
-     "coordinaten": coordiantes,
+     "coordinaten": coordinates,
      "topic": "hshl/mqtt_exercise/services/firefighter"
     }
 
