@@ -11,9 +11,10 @@ taxi = []#[["1","TestTaxi","4;0","free"],["2","TestTaxi2","2;1","free"]]
 police = []
 firefighter = []
 ambulance = []
+testcar = []
 user =[]
 gpsUser = ""
-subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/services/police","hshl/mqtt_exercise/services/firefighter","hshl/mqtt_exercise/services/ambulance","hshl/mqtt_exercise/user/+/status/reset"]
+subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/services/police","hshl/mqtt_exercise/services/firefighter","hshl/mqtt_exercise/services/ambulance","hshl/mqtt_exercise/user/+/status/reset","hshl/mqtt_exercise/test/testcar"]
 
 #registration for user
 def registrationUser(data):
@@ -37,6 +38,8 @@ def registrationCar(data,type):
         car = firefighter
     elif type == 3:
          car = ambulance
+    elif type == 99:
+        car = testcar
     for i in range(0,len(car)):
         if str(data[0]) == str(car[i][0]):
             inliste = True
@@ -53,6 +56,9 @@ def registrationCar(data,type):
         elif type == 3:
             data.append("free")
             ambulance.append(data)
+        elif type == 99:
+            data.append("free")
+            testcar.append(data)
     elif inliste == True:
         print("fahrezug bereits hinzugefügt")
 #############################################
@@ -155,7 +161,8 @@ def statusReset(idCar,type):
         ambulance[idCar][3] = "free"
     elif type == "firefighter":
         firefighter[idCar][3] = "free"
-
+    elif type =="testcar":
+        testcar[idCar][3] = "free"
     #store received coordinates
 def storePosition(idCar,type,coordinates):
     if type == "taxi":
@@ -166,6 +173,8 @@ def storePosition(idCar,type,coordinates):
         ambulance[idCar][2] = coordinates
     elif type == "firefighter":
         firefighter[idCar][2] = coordinates
+    elif type == "testcar":
+        testcar[idCar][2] = coordinates
 ########################################
 
 
@@ -313,4 +322,17 @@ def messageprocessing(msg):
             }
             time.sleep(2) #delay is needed ??
             send(json.dumps(userdata),"hshl/mqtt_exercise/services/ambulance/back")
+    elif msg[0] == "hshl/mqtt_exercise/test/testcar" and str[js['id'] == "register"]:
+        data.append(findid(ambulance))
+        data.append(js['name'])
+        data.append(js['coordinates'])
+        registrationCar(data,3)
+        print("#Register Test_Car:"+str(js['name'])+"by"+str(data[0]))
+        subtopic.append("hshl/mqtt_exercise/test/testcar/"+ str(data[0]))
+        userdata = {            #and send this to the taxi
+        "id": data[0],
+        "name": data[1],
+        }
+        time.sleep(2) #delay is needed ??
+        send(json.dumps(userdata),"hshl/mqtt_exercise/test/testcar/back")
 receive()
