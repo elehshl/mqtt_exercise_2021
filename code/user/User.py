@@ -35,7 +35,7 @@ def send(object,topic):
         self.name = name
     print(" SEND Connected to MQTT Broker: " + BROKER_ADDRESS)
     msg = str(name)
-    print(msg)
+    print("Gesendete Nachricht:" + msg)
     client.publish(topic, msg)
     client.loop()
 
