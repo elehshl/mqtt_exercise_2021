@@ -323,10 +323,10 @@ def messageprocessing(msg):
             time.sleep(2) #delay is needed ??
             send(json.dumps(userdata),"hshl/mqtt_exercise/services/ambulance/back")
     elif msg[0] == "hshl/mqtt_exercise/test/testcar" and str[js['id'] == "register"]:
-        data.append(findid(ambulance))
+        data.append(findid(testcar))
         data.append(js['name'])
         data.append(js['coordinates'])
-        registrationCar(data,3)
+        registrationCar(data,99)
         print("#Register Test_Car:"+str(js['name'])+"by"+str(data[0]))
         subtopic.append("hshl/mqtt_exercise/test/testcar/"+ str(data[0]))
         userdata = {            #and send this to the taxi
