@@ -214,22 +214,25 @@ def messageprocessing(msg):
         tempcar = []
         if str(js['type']) == "taxi":
             car.append(findnextCar(js['coordinates'],taxi)) #search for the closest taxi
-            tempcar.append(taxi)
+            tempcar = taxi
         elif str(js['type']) == "police":
             car.append(findnextCar(js['coordinates'],police)) #search for the closest police
-            tempcar.append(police)
+            tempcar = police
         elif str(js['type']) == "firefighter":
             car.append(findnextCar(js['coordinates'],firefighter)) #search for the closest firefighter
-            tempcar.append(firefighter)
+            tempcar = firefighter
         elif str(js['type']) == "ambulance":
             car.append(findnextCar(js['coordinates'],ambulance)) #search for the closest ambulance
-            tempcar.append(ambulance)
+            tempcar = ambulance
+        elif str(js['type']) == "testcar":
+            car.append(findnextCar(js['coordinates'],testcar))
+            tempcar = testcar
         print("car"+str(car[0]))
     # find id in data
         temp1 = str(car[0][0])
         for i in range(0,len(tempcar)):
             temp2 = str(tempcar[i][0])
-            print(temp1+"=="+temp2)
+            print(temp1+"=!="+temp2)
     #set status to busy
             if temp1 == temp2:
                 if str(js['type']) == "taxi":
@@ -240,10 +243,12 @@ def messageprocessing(msg):
                     firefighter[i][3] = "busy"
                 elif str(js['type']) == "ambulance":
                     ambulance[i][3] = "busy"
+                elif str(js['type']) =="testcar":
+                    testcar[i][3] = "busy"
     #send the car to the user
                 print("# send ordered car")
                 data = {
-                "type":"taxi",
+                "type":js['type'],
                 "id": tempcar[i][0],
                 "name": tempcar[i][1],
                 "coordinates": tempcar[i][2],
@@ -322,7 +327,7 @@ def messageprocessing(msg):
             }
             time.sleep(2) #delay is needed ??
             send(json.dumps(userdata),"hshl/mqtt_exercise/services/ambulance/back")
-    elif msg[0] == "hshl/mqtt_exercise/test/testcar" and str[js['id'] == "register"]:
+    elif msg[0] == "hshl/mqtt_exercise/test/testcar" and str(js['id']) == "register":
         data.append(findid(testcar))
         data.append(js['name'])
         data.append(js['coordinates'])
