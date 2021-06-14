@@ -171,7 +171,6 @@ def processing(msg):
         "id": id,
         "name": "User",
         "coordinates1": coordinates1,
-        "topic": "hshl/mqtt_exercise/user"
         }
         send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+str(id)+"/back")
 
@@ -181,7 +180,7 @@ def processing(msg):
         "id": "2",
         "name": "User",
         "coordinates2": coordinates2,
-        "topic": "hshl/mqtt_exercise/user"
+        #"topic": "hshl/mqtt_exercise/user"
         }
         send(json.dumps(data),"hshl/mqtt_exercise/services")
     ###
