@@ -52,7 +52,7 @@ def receive():
     def on_message(client, userdata, message):
         msg = str(message.payload.decode("utf-8"))
         print("Received Informations: ", msg)
-        #print("message topic: ", message.topic)
+        print("message topic: ", message.topic)
         print(msg)
         temp =  [message.topic,msg]
         processing(temp)
@@ -63,7 +63,7 @@ def receive():
     def on_connect(client, userdata, flags, rc):
         print("Data Received by Server Addr: " + BROKER_ADDRESS)
         for i in range(0,len(subtopic)):
-            #print(str(subtopic[i]))
+            print(str(subtopic[i]))
             client.subscribe(subtopic[i], 2)
 
     client.on_connect = on_connect
