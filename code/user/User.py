@@ -182,18 +182,6 @@ def processing(msg):
         print(id)
         subtopic.append("hshl/mqtt_exercise/user/"+str(id)+"/order/back")
 
-    elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
-        coordinates1 = str(2)+";"+str(4)
-        print("idCar"+str(js['id']))
-        idCar = js['id']
-        data = {
-        "id": id,
-        "name": "User",
-        "coordinates1": coordinates1,
-        "topic": "hshl/mqtt_exercise/user"
-        }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(id)+"/order")
-
 
 #Feedback For Ordering Testcar
     elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "testcar":
