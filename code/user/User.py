@@ -173,8 +173,7 @@ def processing(msg):
     global destination
     global name
     data = ""
-    Abfrage = 1
-
+    
 #Processing Received ID
     js = json.loads(msg[1])
     if msg[0]=="hshl/mqtt_exercise/user/back" and js['name'] == str(name):
@@ -246,21 +245,6 @@ def processing(msg):
     elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(idCar)+"/call/destination/back" and str(js['msg']) == "Arrival at destination":
         print("Arrival at Destination: "+ destination)
         setToFree()
-
-###############################################################################
-
-
-###############################################################################
-
-    if Abfrage == 5:        #service fahrzeuge
-        coordinates2 = str(zahly)+";"+str(zahlx)
-        data = {
-        "id": "2",
-        "name": "User",
-        "coordinates2": coordinates2,
-        "topic": "hshl/mqtt_exercise/user"
-        }
-        send(json.dumps(data),"hshl/mqtt_exercise/services")
 
 ###############################################################################
 
