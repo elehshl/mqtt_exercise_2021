@@ -181,17 +181,6 @@ def processing(msg):
         id = js['id']
         print(id)
         subtopic.append("hshl/mqtt_exercise/user/"+str(id)+"/order/back")
-    elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
-        coordinates1 = str(2)+";"+str(4)
-        print("idCar"+str(js['id']))
-        idCar = js['id']
-        data = {
-        "id": id,
-        "name": "User",
-        "coordinates1": coordinates1,
-        "topic": "hshl/mqtt_exercise/user"
-        }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(id)+"/order")
 
 
 #Feedback For Ordering Testcar
@@ -228,7 +217,7 @@ def processing(msg):
 ###############################################################################
 
 #Feedback For Ordering Taxi
-    elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
+    elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and str(js['type']) == "taxi":
         coordinates = str(2)+";"+str(4)
         print("idCar"+str(js['id']))
         idCar = js['id']
@@ -237,13 +226,13 @@ def processing(msg):
         "name": name,
         "coordinates": coordinates,
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call")
-        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back")
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+str(idCar)+"/call")
+        subtopic.append("hshl/mqtt_exercise/taxi/"+str(idCar)+"/call/back")
         receive()
 
 
 #Taxi Feedack For Arrival At User And Arrival At Destination
-    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back" and str(js['msg']) == "ARRIVAL":
+    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(idCar)+"/call/back" and str(js['msg']) == "Arrival":
         destination = ""
         destination = str(randint(1,4))+  ";"+  str(randint(0,4))
         data = {
@@ -251,12 +240,15 @@ def processing(msg):
         "name": name,
         "destination": destination
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination")
-        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back")
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+str(idCar)+"/call/destination")
+        subtopic.append("hshl/mqtt_exercise/taxi/"+str(idCar)+"/call/destination/back")
         receive()
-    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back" and str(js['msg']) == "ARRIVAL AT DESTINATION":
+    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(idCar)+"/call/destination/back" and str(js['msg']) == "Arrival at destination":
         print("Arrival at Destination: "+ destination)
         setToFree()
+
+###############################################################################
+
 
 ###############################################################################
 

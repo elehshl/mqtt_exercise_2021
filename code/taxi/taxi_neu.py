@@ -62,7 +62,7 @@ def messageprocessing(msg):
     global id
     data = ""
 
-    if msg[0] == "hshl/mqtt_exercise/taxi/back/" and str(name) == js['name']:  # empfangen der id
+    if msg[0] == "hshl/mqtt_exercise/taxi/back" and str(name) == js['name']:  # empfangen der id
         id = str(js['id']) # speichern der erhaltenen id in die lokale(aber global) id
         subtopic.append("hshl/mqtt_exercise/taxi/"+str(id)+"/call")
         receive() #warte auf nachricht
