@@ -13,6 +13,7 @@ subtopic = [
 ]
 
 
+
 def send(topic, object): #senden
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
@@ -118,4 +119,3 @@ print("Gib einen Namen ein:")
 name = input()
 registration()
 receive()
-
