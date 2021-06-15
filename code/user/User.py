@@ -150,7 +150,7 @@ def orderfire():
 
 ###############################################################################
 
-#Seting Service Vehicle Status To Free
+#Seting Vehicle Status To Free
 def setToFree():
     global id
     global idCar
