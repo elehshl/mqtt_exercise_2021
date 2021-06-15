@@ -52,7 +52,7 @@ def receive():
     def on_message(client, userdata, message):
         msg = str(message.payload.decode("utf-8"))
         print("Received Informations: ", msg)
-        print("message topic: ", message.topic)
+        #print("message topic: ", message.topic)
         print(msg)
         temp =  [message.topic,msg]
         processing(temp)
@@ -63,7 +63,7 @@ def receive():
     def on_connect(client, userdata, flags, rc):
         print("Data Received by Server Addr: " + BROKER_ADDRESS)
         for i in range(0,len(subtopic)):
-            print(str(subtopic[i]))
+            #print(str(subtopic[i]))
             client.subscribe(subtopic[i], 2)
 
     client.on_connect = on_connect
@@ -155,7 +155,7 @@ def setToFree():
     global id
     global idCar
     global cartype
-    print("freeee")
+    print("SERVICE VEHICLE SET TO FREE")
     data = {
     "type": cartype,
     "id": id,
@@ -210,7 +210,7 @@ def processing(msg):
 
 
 #Testcar Feedack For Arrival At User And Arrival At Destination
-    elif msg[0] == "hshl/mqtt_exercise/test/testcar/"+str(idCar)+"/call/back" and str(js['msg']) == "Arrival": # antwort von dem testcar das ich angeschrieben habe
+    elif msg[0] == "hshl/mqtt_exercise/test/testcar/"+str(idCar)+"/call/back" and str(js['msg']) == "ARRIVAL": # antwort von dem testcar das ich angeschrieben habe
         destination = ""
         destination = str(randint(1,4))+  ";"+  str(randint(0,4)) # zufalls coordinaten als ziel
         data = {
@@ -221,7 +221,7 @@ def processing(msg):
         send(json.dumps(data),"hshl/mqtt_exercise/test/testcar/"+str(idCar)+"/call/destination") # dem testcar  mein ziel mitteilen
         subtopic.append("hshl/mqtt_exercise/test/testcar/"+str(idCar)+"/call/destination/back") # hinzufügen der des neuen topics
         receive() # warten auf antwort
-    elif msg[0] == "hshl/mqtt_exercise/test/testcar/"+str(idCar)+"/call/destination/back" and str(js['msg']) == "Arrival at destination": #wenn das fahrzeug angekommen ist ??
+    elif msg[0] == "hshl/mqtt_exercise/test/testcar/"+str(idCar)+"/call/destination/back" and str(js['msg']) == "ARRIVAL AT DESTINATION": #wenn das fahrzeug angekommen ist ??
         print("Arrival at Destination: "+ destination) #textausgabe
         setToFree() # staus des fahrzeuges beim server auf free setzen
 
@@ -229,34 +229,34 @@ def processing(msg):
 
 #Feedback For Ordering Taxi
     elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
-        coordinates = str(2)+";"+str(4) # festlegen der koordinaten  zu denen das taxi fahren soll
-        print("idCar"+str(js['id'])) # textausgabe
-        idCar = js['id']# zugewiesene id speichern
+        coordinates = str(2)+";"+str(4)
+        print("idCar"+str(js['id']))
+        idCar = js['id']
         data = {
         "id": id,
         "name": name,
         "coordinates": coordinates,
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call") #senden meiner korrdinaten an das mir zugeteilete testcar
-        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back") #hinzufügen des topics für das mir zugeteilte testcar
-        receive() # warten auf antwort
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call")
+        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back")
+        receive()
 
 
 #Taxi Feedack For Arrival At User And Arrival At Destination
-    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back" and str(js['msg']) == "Arrival": # antwort von dem testcar das ich angeschrieben habe
+    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back" and str(js['msg']) == "ARRIVAL":
         destination = ""
-        destination = str(randint(1,4))+  ";"+  str(randint(0,4)) # zufalls coordinaten als ziel
+        destination = str(randint(1,4))+  ";"+  str(randint(0,4))
         data = {
         "id": id,
         "name": name,
         "destination": destination
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination") # dem testcar  mein ziel mitteilen
-        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back") # hinzufügen der des neuen topics
-        receive() # warten auf antwort
-    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back" and str(js['msg']) == "Arrival at destination": #wenn das fahrzeug angekommen ist ??
-        print("Arrival at Destination: "+ destination) #textausgabe
-        setToFree() # staus des fahrzeuges beim server auf free setzen
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination")
+        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back")
+        receive()
+    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back" and str(js['msg']) == "ARRIVAL AT DESTINATION":
+        print("Arrival at Destination: "+ destination)
+        setToFree()
 
 ###############################################################################
 
