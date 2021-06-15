@@ -118,4 +118,3 @@ print("Gib einen Namen ein:")
 name = input()
 registration()
 receive()
-
