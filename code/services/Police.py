@@ -12,6 +12,12 @@ subtopic = [
 "hshl/mqtt_exercise/get_position"
 ]
 
+def dataVerification(msg): #prüfung der gesendeten daten ist die datei leer = false
+    if len(json.loads(str(msg))) > 0 :
+        return True
+    else:
+        return False
+        pass
 
 
 def send(topic, object): #senden
@@ -38,7 +44,10 @@ def receive(): #empfangen
         print("message topic: ", message.topic)
         print(msg)
         temp =  [message.topic,msg]
-        processing(temp)
+        if dataVerification(msg) == True:
+            processing(temp)
+        else:
+            print("Message = Leer!")
 
 
     def on_connect(client, userdata, flags, rc):
@@ -54,6 +63,7 @@ def receive(): #empfangen
 def processing(msg):
     global id
     global name
+    global idCar
     js = json.loads(msg[1])
     if "hshl/mqtt_exercise/services/police/back" == msg[0] and str(js['name']) == str(name):
         id = js['id']
