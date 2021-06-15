@@ -6,13 +6,14 @@ PORT = 1883
 import time
 id = ""
 name = ""
+coor = ""
+subtopic = [
+"hshl/mqtt_exercise/services/police/back",
+"hshl/mqtt_exercise/get_position"
+]
 
 
-
-print("gib einen namen ein:")
-name = input()
-
-def send(topic, object):
+def send(topic, object): #senden
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
     name = object
@@ -25,10 +26,10 @@ def send(topic, object):
     client.publish(topic, msg)
     client.loop()
 
-def receive():
+def receive(): #empfangen
     global id
     temp = []
-    client = mqtt.Client("user")
+    client = mqtt.Client("police")
     client.connect(BROKER_ADDRESS, PORT)
     def on_message(client, userdata, message):
         msg = str(message.payload.decode("utf-8"))
@@ -40,50 +41,81 @@ def receive():
 
 
     def on_connect(client, userdata, flags, rc):
-        print("receive Connected to MQTT Broker: " + BROKER_ADDRESS)
-        client.subscribe("hshl/mqtt_exercise/services/police/back",2)
-        client.subscribe("hshl/mqtt_exercise/services/police/"+str(id)+"/order/back", 2)
+        print("Server Connected to MQTT Broker: " + BROKER_ADDRESS)
+        for i in range(0,len(subtopic)):        # hier werden bei jedem lese befehl die neuen topics aufgenommen
+            print(str(subtopic[i]))
+            client.subscribe(subtopic[i], 2)
 
     client.on_connect = on_connect
     client.on_message = on_message
-    client.loop_start()
-    time.sleep(5)
-    client.loop_stop()
+    client.loop_forever()
 
-def processing(array):
+def processing(msg):
     global id
-    js = json.loads(array[1])
-    if "hshl/mqtt_exercise/services/police/back" == array[0] and str(js['name']) == str(name):
+    global name
+    js = json.loads(msg[1])
+    if "hshl/mqtt_exercise/services/police/back" == msg[0] and str(js['name']) == str(name):
         id = js['id']
+        print(id)
+    elif msg[0] == "hshl/mqtt_exercise/services/police/"+str(id)+"/call":                      #koordinaten des users
+        drivetoUser(js['coordinates'])    #aufruf der methode um zum user zu fahren dafür werden die koordinaten benötigt
+        data = {
+        "id":id,
+        "msg": "Arrival",
+        "coordinates": js['coordinates']
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/services/police/"+str(id)+"/call/back") # senden der nachricht
+        subtopic.append("hshl/mqtt_exercise/services/police/"+str(id)+"/call/destination") #aufnehmen des neuen topics in das topic array
+        receive() #warten auf antwort
+    elif msg[0] == "hshl/mqtt_exercise/services/police/"+str(id)+"/call/destination":      #zielkoordinaten
+        userDestination(js['destination'],js['name']) #fahren zum wunschzuiel des kunden benötigt werden die korrdinaten und name
+        data ={
+        "id":id,
+        "msg": "Arrival at destination",
+        "coordinates": js['destination']
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/services/police/"+id+"/call/destination/back") # senden der erreicht nachricht für das ziel
+        receive()#warten auf die nachricht des servers zum bekommen der position
+    elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id): #neue position für den server
+        data={
+        "id":id,
+        "name":name,
+        "coordinates":coor
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/set_position")
 
+def userDestination(destinationcoor, guestname):
+    print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
+    coor = destinationcoor #setzen der zielkoordinaten in den standort des fahrzeugs
+    time.sleep(1) #schlafen eine sekunde
+    print("Arrival at: "+destinationcoor)
 
-zahly = randint(0, 4)
-zahlx = randint(0, 4)
-coordinates = str(zahly)+";"+str(zahlx)
+def drivetoUser(usercoor):
+    print("New destination: "+usercoor) #textausgabe
+    coor = usercoor   #setzen der pickup koorindanten zu dem standkoordinaten
+    time.sleep(1)#warten
+    print("Arrival at: "+usercoor) #textausgabe
+
+def policecoor():
+    zahly = randint(0, 4)
+    zahlx = randint(0, 4)
+    return str(zahly)+";"+str(zahlx)
 
 
 def registration():
+    global coor
     global name
+    coor = policecoor()
+
     data = {
     "id": "register",
     "name": name,
-    "coordinates": coordinates
+    "coordinates": coor
     }
     send("hshl/mqtt_exercise/services/police", json.dumps(data))
-    receive()
- 
-def receive_order_user():
 
-    if "hshl/mqtt_exercise/user" == msg[0] and str(js['coordinates']) == str(coordinates):
-        storePosition(js['coordinates'],js['coordinates_ziel'])
-    
-receive_order_user()
-
-def receive_server():
-    if msg[0] == "hshl/mqtt_exercise/server" and str(js['get_coordinates']):
-        new_coordinates = coordinates_ziel + zahly
-        send("hshl/mqtt_exercise/server/set_coordinates", json.dumps(new_coordinates))
-        receive()
-receive_server()
-
+print("Gib einen Namen ein:")
+name = input()
 registration()
+receive()
+
