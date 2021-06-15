@@ -35,10 +35,10 @@ def send(object,topic):
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
     name = object
-    print("User Logged In")
+    print("User")
     def __init__(self, name):
         self.name = name
-    #print("Data Send To Server Addr: " + BROKER_ADDRESS)
+    print("Data Send To Server Addr: " + BROKER_ADDRESS)
     msg = str(name)
     print("Transmitted Informations: "+msg)
     client.publish(topic, msg)
@@ -51,9 +51,9 @@ def receive():
     client.connect(BROKER_ADDRESS, PORT)
     def on_message(client, userdata, message):
         msg = str(message.payload.decode("utf-8"))
-        print("Log In Informations: ", msg)
-        #print("message topic: ", message.topic)
-        #print(msg)
+        print("Received Informations: ", msg)
+        print("message topic: ", message.topic)
+        print(msg)
         temp =  [message.topic,msg]
         processing(temp)
 
@@ -61,9 +61,9 @@ def receive():
 
 
     def on_connect(client, userdata, flags, rc):
-        #print("Data Received by Server Addr: " + BROKER_ADDRESS)
+        print("Data Received by Server Addr: " + BROKER_ADDRESS)
         for i in range(0,len(subtopic)):
-            #print(str(subtopic[i]))
+            print(str(subtopic[i]))
             client.subscribe(subtopic[i], 2)
 
     client.on_connect = on_connect
@@ -224,6 +224,41 @@ def processing(msg):
     elif msg[0] == "hshl/mqtt_exercise/test/testcar/"+str(idCar)+"/call/destination/back" and str(js['msg']) == "Arrival at destination": #wenn das fahrzeug angekommen ist ??
         print("Arrival at Destination: "+ destination) #textausgabe
         setToFree() # staus des fahrzeuges beim server auf free setzen
+
+###############################################################################
+
+#Feedback For Ordering Taxi
+    elif msg[0] == "hshl/mqtt_exercise/user/"+str(id)+"/order/back" and js['type'] == "taxi":
+        coordinates = str(2)+";"+str(4) # festlegen der koordinaten  zu denen das taxi fahren soll
+        print("idCar"+str(js['id'])) # textausgabe
+        idCar = js['id']# zugewiesene id speichern
+        data = {
+        "id": id,
+        "name": name,
+        "coordinates": coordinates,
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call") #senden meiner korrdinaten an das mir zugeteilete testcar
+        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back") #hinzufügen des topics für das mir zugeteilte testcar
+        receive() # warten auf antwort
+
+
+#Taxi Feedack For Arrival At User And Arrival At Destination
+    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/back" and str(js['msg']) == "Arrival": # antwort von dem testcar das ich angeschrieben habe
+        destination = ""
+        destination = str(randint(1,4))+  ";"+  str(randint(0,4)) # zufalls coordinaten als ziel
+        data = {
+        "id": id,
+        "name": name,
+        "destination": destination
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination") # dem testcar  mein ziel mitteilen
+        subtopic.append("hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back") # hinzufügen der des neuen topics
+        receive() # warten auf antwort
+    elif msg[0] == "hshl/mqtt_exercise/taxi"+str(idCar)+"/call/destination/back" and str(js['msg']) == "Arrival at destination": #wenn das fahrzeug angekommen ist ??
+        print("Arrival at Destination: "+ destination) #textausgabe
+        setToFree() # staus des fahrzeuges beim server auf free setzen
+
+###############################################################################
 
     if Abfrage == 5:        #service fahrzeuge
         coordinates2 = str(zahly)+";"+str(zahlx)
