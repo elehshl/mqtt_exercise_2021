@@ -174,7 +174,7 @@ def processing(msg):
     global name
     data = ""
 
-    if cartype == "taxi":
+    if cartype == "taxi": #js['type']
         topictype = str("taxi/")
     elif cartype == "police":
         topictype = str("services/")
@@ -209,7 +209,7 @@ def processing(msg):
 
 
 #ServiceCar Feedack For Arrival At User And Arrival At Destination
-    elif msg[0] == "hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/back" and str(js['msg']).lower() == "arrival".lower(): # antwort vom servicefahrzeug das angeschrieben wurde
+    elif msg[0] == "hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/back" and str(js['msg']).lower() == "ArRival".lower(): # antwort vom servicefahrzeug das angeschrieben wurde
         destination = ""
         destination = str(randint(1,4))+  ";"+  str(randint(0,4)) # zufalls coordinaten als ziel
         data = {
