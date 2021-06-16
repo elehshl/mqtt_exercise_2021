@@ -209,7 +209,7 @@ def processing(msg):
 
 
 #ServiceCar Feedack For Arrival At User And Arrival At Destination
-    elif msg[0] == "hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/back" and str(js['msg']).lower() == "ArRival".lower(): # antwort vom servicefahrzeug das angeschrieben wurde
+    elif msg[0] == "hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/back" and str(js['msg']).lower() == "Arrival".lower(): # antwort vom servicefahrzeug das angeschrieben wurde
         destination = ""
         destination = str(randint(1,4))+  ";"+  str(randint(0,4)) # zufalls coordinaten als ziel
         data = {
@@ -220,7 +220,7 @@ def processing(msg):
         send(json.dumps(data),"hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/destination") # dem servicefahrzeug mein ziel übergeben
         subtopic.append("hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/destination/back") # hinzufügen des neuen topics
         receive() # warten auf antwort
-    elif msg[0] == "hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/destination/back" and str(js['msg']).lower() == "arrival at destination".lower(): #rückmeldung über ankunft am ziel
+    elif msg[0] == "hshl/mqtt_exercise/"+topictype+str(idCar)+"/call/destination/back" and str(js['msg']).lower() == "Arrival at destination".lower(): #rückmeldung über ankunft am ziel
         print("Arrival at Destination: "+ destination) #textausgabe
         setToFree() # staus des servicefahrzeuges beim server auf free setzen
 
