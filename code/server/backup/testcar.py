@@ -13,15 +13,22 @@ subtopic = [
 "hshl/mqtt_exercise/get_position"
 ] # da die topics spezifisch zur id passen müssen geht das ganze nur über dynamsiche aufnahme der neuen topics .... deswegen array
 def dataVerification(msg): #prüfung der gesendeten daten ist die datei lweer = false
-    if len(json.loads(str(msg))) > 0 :
-        return True
-    else:
+    try:
+        if len(json.loads(str(msg))) > 0 :
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(str(e))
         return False
-        pass
-def send(object,topic): #senden
+
+def send(object,topic): #senden#
+    try:
+        client = mqtt.Client("master")
+        client.connect(BROKER_ADDRESS, PORT)
+    except Exception as e:
+        print("Fehler: "+ str(e)+"Die nachricht wurde nicht Versendet!")
     time.sleep(2)
-    client = mqtt.Client("master")
-    client.connect(BROKER_ADDRESS, PORT)
     name = object
     print("test")
     def __init__(self, name):
@@ -95,7 +102,7 @@ def messageprocessing(msg):
 def driveDestination(destinationcoor,guestname):                        #die fahrt zum ziel des kunden
     print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
     coor = destinationcoor #setzen der zielkoordinaten in den standort des fahrzeugs
-    time.sleep(1) #schlafen eine sekunde
+    time.sleep(1)#schlafen eine sekunde
     print("Arrival at: "+destinationcoor)
 def rndCoordinates():   #random koordinaten  y;x
     x = randint(0,4)    # random koordinate von x

@@ -3,6 +3,8 @@ import time
 import paho.mqtt.client as mqtt
 from random import *
 import json
+import threading
+
 TOPIC = "hshl/mqtt_exercise/services"
 BROKER_ADDRESS = "test.mosquitto.org"
 PORT = 1883
@@ -15,6 +17,65 @@ testcar = []
 user =[]
 gpsUser = ""
 subtopic = ["hshl/mqtt_exercise/user","hshl/mqtt_exercise/taxi","hshl/mqtt_exercise/services/police","hshl/mqtt_exercise/services/firefighter","hshl/mqtt_exercise/services/ambulance","hshl/mqtt_exercise/user/+/status/reset","hshl/mqtt_exercise/test/testcar"]
+def findcarname(id,type):
+    if type == "taxi":
+        return taxi[findindex(id,type)][1]
+    if type == "testcar":
+        return testcar[findindex(id,type)][1]
+    if type == "ambulance":
+        return ambulance[findindex(id,type)][1]
+    if type == "police":
+        return police[findindex(id,type)][1]
+    if type == "firefighter":
+        return firefighter[findindex(id,type)][1]
+def findindex(idCar,type):
+    if type == "taxi":
+        for i in range(0,len(taxi)):
+            if taxi[i][0]==idCar:
+                return i
+    elif type == "police":
+        for i in range(0,len(police)):
+            if police[i][0]==idCar:
+                return i
+    elif type == "ambulance":
+        for i in range(0,len(ambulance)):
+            if ambulance[i][0]==idCar:
+                return i
+    elif type == "firefighter":
+        for i in range(0,len(firefighter)):
+            if firefighter[i][0]==idCar:
+                return i
+    elif type =="testcar":
+        for i in range(0,len(testcar)):
+            if testcar[i][0]==idCar:
+                return i
+
+
+def periodicPosition():
+    while 0==0:
+        print("Prüfe Fahrzeugposition:")
+        print("     Firefighter: "+str(len(firefighter)))
+        print("     ambulance: "+str(len(ambulance)))
+        print("     taxi: "+str(len(taxi)))
+        print("     testcar: "+str(len(testcar)))
+        print("     police: "+str(len(police)))
+        for i in range(0,len(firefighter)):
+            requestPosition(firefighter[i][0],"firefighter",firefighter[i][0]);
+            pass
+        for i in range(0,len(ambulance)):
+            requestPosition(ambulance[i][0],"ambulance",ambulance[i][1]);
+            passe
+        for i in range(0,len(taxi)):
+            requestPosition(taxi[i][0],"taxi",taxi[i][1]);
+            pass
+        for i in range(0,len(testcar)):
+            requestPosition(testcar[i][0],"testcar",testcar[i][1]);
+            pass
+        for i in range(0,len(police)):
+            requestPosition(police[i][0],"police",police[i][1]);
+            pass
+        time.sleep(5)
+    t2.stop()
 
 #registration for user
 def registrationUser(data):
@@ -41,7 +102,7 @@ def registrationCar(data,type):
     elif type == 99:
         car = testcar
     for i in range(0,len(car)):
-        if str(data[0]) == str(car[i][0]):
+        if str(data[1]) == str(car[i][1]):
             inliste = True
     if inliste == False:
         if type == 0:
@@ -64,9 +125,14 @@ def registrationCar(data,type):
 #############################################
 
 def send(object,topic):
+    canpub = True
     time.sleep(2)
-    client = mqtt.Client("master")
-    client.connect(BROKER_ADDRESS, PORT)
+    try:
+        client = mqtt.Client("master")
+        client.connect(BROKER_ADDRESS, PORT)
+    except Exception as e:
+        print("Fehler: "+ str(e)+"Die nachricht wurde nicht Versendet!")
+        canpub = False
     name = object
     print("test")
     def __init__(self, name):
@@ -74,8 +140,9 @@ def send(object,topic):
     print("Send: " + topic)
     msg = str(name)
     print(msg)
-    client.publish(topic, msg)
-    client.loop()
+    if canpub == True:
+        client.publish(topic, msg)
+        client.loop()
 
 def receive():
     temp = []
@@ -128,9 +195,12 @@ def findnextCar(gpsUser,car): # find closest car
 def findid(object):
     highid = 0
     for i in range(0,len(object)):
+        print(str(object[i]))
         if highid < int(object[i][0]):
             highid = object[i][0]
-    return highid
+            print("new ID is: "+ str(highid))
+    print("hello")
+    return highid + 1
 #######
  #check for empty message
 def dataVerification(msg):
@@ -142,27 +212,27 @@ def dataVerification(msg):
 ##############################
 
  #call for new position
-def requestPosition(idCar,type):
-    name =""
+def requestPosition(idCar,type,name):
     for i in range(0,len(type)):
         pass
     data ={
     "id":idCar,
-    "name": name
+    "name": str(name)
     }
-    send(data,"hshl/mqtt_exercise/get_position")
+    send(json.dumps(data),"hshl/mqtt_exercise/get_position")
 ########################
 def statusReset(idCar,type):
+    print("id CAR: "+str(idCar))
     if type == "taxi":
-        taxi[idCar][3] = "free"
+        taxi[findindex(idCar,type)][3] = "free"
     elif type == "police":
-        police[idCar][3] = "free"
+        police[findindex(idCar,type)][3] = "free"
     elif type == "ambulance":
-        ambulance[idCar][3] = "free"
+        ambulance[findindex(idCar,type)][3] = "free"
     elif type == "firefighter":
-        firefighter[idCar][3] = "free"
+        firefighter[findindex(idCar,type)][3] = "free"
     elif type =="testcar":
-        testcar[idCar][3] = "free"
+        testcar[findindex(idCar,type)][3] = "free"
     #store received coordinates
 def storePosition(idCar,type,coordinates):
     if type == "taxi":
@@ -259,8 +329,8 @@ def messageprocessing(msg):
 ########################################################################################################
     #Reset status of cars
     elif msg[0] == "hshl/mqtt_exercise/user/"+str(js["id"])+"/status/reset":
-        statusReset(js["idCar"],js["type"])
-        requestPosition(js["idCar"],js["type"])
+        statusReset(int(js["idCar"]),str(js["type"]))
+        requestPosition(js["idCar"],js["type"],str(findcarname(js["idCar"],str(js['type']))))
         print("#Status Reset to Free by"+str(js['id']))
 #########################################################################################################
     #registration taxi
@@ -328,7 +398,8 @@ def messageprocessing(msg):
             time.sleep(2) #delay is needed ??
             send(json.dumps(userdata),"hshl/mqtt_exercise/services/ambulance/back")
     elif msg[0] == "hshl/mqtt_exercise/test/testcar" and str(js['id']) == "register":
-        data.append(findid(testcar))
+        tempid = findid(testcar)
+        data.append(tempid)
         data.append(js['name'])
         data.append(js['coordinates'])
         registrationCar(data,99)
@@ -340,4 +411,7 @@ def messageprocessing(msg):
         }
         time.sleep(2) #delay is needed ??
         send(json.dumps(userdata),"hshl/mqtt_exercise/test/testcar/back")
-receive()
+t1 = threading.Thread(target=periodicPosition)
+t2 = threading.Thread(target=receive)
+t1.start()
+t2.start()
