@@ -64,7 +64,7 @@ def periodicPosition():
             pass
         for i in range(0,len(ambulance)):
             requestPosition(ambulance[i][0],"ambulance",ambulance[i][1]);
-            passe
+            pass
         for i in range(0,len(taxi)):
             requestPosition(taxi[i][0],"taxi",taxi[i][1]);
             pass
