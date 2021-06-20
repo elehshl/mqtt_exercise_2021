@@ -60,12 +60,12 @@ def receive(): #empfangen
     client.on_message = on_message
     client.loop_forever()
 
-def processing(msg):
+def processing(msg): #verarbeiten der eingehenden Nachrichten
     global id
     global name
     global idCar
     js = json.loads(msg[1])
-    if "hshl/mqtt_exercise/services/police/back" == msg[0] and str(js['name']) == str(name):
+    if "hshl/mqtt_exercise/services/police/back" == msg[0] and str(js['name']) == str(name): #id vom server empfangen
         id = js['id']
         print(id)
     elif msg[0] == "hshl/mqtt_exercise/services/police/"+str(id)+"/call":                      #koordinaten des users
@@ -79,7 +79,7 @@ def processing(msg):
         subtopic.append("hshl/mqtt_exercise/services/police/"+str(id)+"/call/destination") #aufnehmen des neuen topics in das topic array
         receive() #warten auf antwort
     elif msg[0] == "hshl/mqtt_exercise/services/police/"+str(id)+"/call/destination":      #zielkoordinaten
-        userDestination(js['destination'],js['name']) #fahren zum wunschzuiel des kunden benötigt werden die korrdinaten und name
+        userDestination(js['destination'],js['name']) #fahren zum wunschziel des kunden benötigt werden die korrdinaten und name
         data ={
         "id":id,
         "msg": "Arrival at destination",
@@ -107,7 +107,7 @@ def drivetoUser(usercoor):
     time.sleep(1)#warten
     print("Arrival at: "+usercoor) #textausgabe
 
-def policecoor():
+def policecoor(): #Zufällige startkoordinaten generieren
     zahly = randint(0, 4)
     zahlx = randint(0, 4)
     return str(zahly)+";"+str(zahlx)
