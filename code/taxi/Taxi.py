@@ -33,7 +33,7 @@ def send(object,topic): #Senden & Registrieren
     client.publish(topic, msg)
     client.loop()
 
-def receive(): #Empfangen & Rückatwort
+def receive(): #Empfangen & Rückantwort
     temp = []
     client = mqtt.Client()
     client.connect(SERVER_ADDRESS, PORT)
