@@ -12,14 +12,14 @@ id = ""
 
 subtopic = ["hshl/mqtt_exercise/taxi/back","hshl/mqtt_exercise/get_position"]
 
-def dataVerification(msg): #prüfung der gesendeten daten ist die datei leer = false
+def dataVerification(msg): #Prüfung der gesendeten Daten, ist die Datei empty = false
     if len(json.loads(str(msg))) > 0 :
         return True
     else:
         return False
         pass
 
-def send(object,topic): #senden
+def send(object,topic): #Senden & Registrieren
     time.sleep(2)
     client = mqtt.Client("client")
     client.connect(SERVER_ADDRESS, PORT)
@@ -33,7 +33,7 @@ def send(object,topic): #senden
     client.publish(topic, msg)
     client.loop()
 
-def receive(): #empfangen
+def receive(): #Empfangen & Rückantwort
     temp = []
     client = mqtt.Client()
     client.connect(SERVER_ADDRESS, PORT)
@@ -49,7 +49,7 @@ def receive(): #empfangen
 
     def on_connect(client, userdata, flags, rc):
         print("Server Connected to MQTT Broker: " + SERVER_ADDRESS)
-        for i in range(0,len(subtopic)): # neue topics
+        for i in range(0,len(subtopic)): # Um mehrere Adressen (subtopics) zu registrieren           
             print(str(subtopic[i]))
             client.subscribe(subtopic[i], 2)
     client.on_connect = on_connect
@@ -57,17 +57,17 @@ def receive(): #empfangen
     client.loop_forever()
 
 
-def messageprocessing(msg):
+def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
     global name
     global id
     data = ""
 
-    if msg[0] == "hshl/mqtt_exercise/taxi/back/" and str(name) == js['name']:  # empfangen der id
-        id = str(js['id']) # speichern der erhaltenen id in die lokale(aber global) id
+    if msg[0] == "hshl/mqtt_exercise/taxi/back/" and str(name) == js['name']:  # Empfangen der ID
+        id = str(js['id']) # Speichern der erhaltenen ID in die Lokale(Global) ID
         subtopic.append("hshl/mqtt_exercise/taxi/"+str(id)+"/call")
-        receive() #warte auf nachricht
+        receive() #warte auf eine Nachricht
     elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call":
-        pickUpCoordinates(js['coordinates'])
+        pickUpCoordinates(js['coordinates'])   
         data = {
         "id":id,
         "msg": "Arrival",
@@ -75,7 +75,7 @@ def messageprocessing(msg):
         }
         send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+str(id)+"/call/back")
         subtopic.append("hshl/mqtt_exercise/taxi/"+str(id)+"/call/destination")
-        receive() #warten auf antwort
+        receive() #warten auf eine Antwort
     elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call/destination":
         driveDestination(js['destination'],js['name'])
         data ={
@@ -83,23 +83,23 @@ def messageprocessing(msg):
         "msg": "Arrival at destination",
         "coordinates": js['destination']
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+id+"/call/destination/back")
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+id+"/call/destination/back")  #Senden des Zieles
         receive()
-    elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id):
+    elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id): 
         data={
         "id":id,
         "name":name,
         "coordinates":coor
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/set_position")
+        send(json.dumps(data),"hshl/mqtt_exercise/set_position") #Senden der neuen Position
 
-def driveDestination(destinationcoor,guestname):
+def driveDestination(destinationcoor,guestname): # User Ziel 
     print("New destination, drive "+guestname+" to: "+destinationcoor)
     coor = destinationcoor
     time.sleep(1)
     print("Arrival at: "+destinationcoor)
 
-def rndCoordinates():
+def rndCoordinates(): #Berechnungen der Coordinaten
     x = randint(0,4)
     y = randint(1,4)
     return str(y)+";"+str(x)
@@ -112,13 +112,16 @@ def register():
     "name": name,
     "coordinates":coor
     }
-    send(json.dumps(data), "hshl/mqtt_exercise/taxi")
+    send(json.dumps(data), "hshl/mqtt_exercise/taxi")  # Senden der brechneten Coordinaten
 
 def pickUpCoordinates(pickupcoor):
     print("New destination: "+pickupcoor)
     coor = pickupcoor
     time.sleep(1)
     print("Arrival at: "+pickupcoor)
-name = input()
+    
+print("Reg. Name:")    
+name = input() #Eingabe vom Name
+
 register()
 receive()
