@@ -83,7 +83,7 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
         "msg": "Arrival at destination",
         "coordinates": js['destination']
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+id+"/call/destination/back")
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+id+"/call/destination/back")  #Senden des Zieles
         receive()
     elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id): 
         data={
@@ -93,7 +93,7 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
         }
         send(json.dumps(data),"hshl/mqtt_exercise/set_position") #Senden der neuen Position
 
-def driveDestination(destinationcoor,guestname):
+def driveDestination(destinationcoor,guestname): # User Ziel 
     print("New destination, drive "+guestname+" to: "+destinationcoor)
     coor = destinationcoor
     time.sleep(1)
