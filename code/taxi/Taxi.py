@@ -57,7 +57,7 @@ def receive(): #Empfangen & Rückantwort
     client.loop_forever()
 
 
-def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
+def messageprocessing(msg): #Verarbeitung der eingehenden Nachrichten
     global name
     global id
     data = ""
@@ -66,7 +66,7 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
         id = str(js['id']) # Speichern der erhaltenen ID in die Lokale(Global) ID
         subtopic.append("hshl/mqtt_exercise/taxi/"+str(id)+"/call")
         receive() #warte auf eine Nachricht
-    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call":
+    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call": #(pickUpCoordinates)
         pickUpCoordinates(js['coordinates'])   
         data = {
         "id":id,
@@ -76,7 +76,7 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
         send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+str(id)+"/call/back")
         subtopic.append("hshl/mqtt_exercise/taxi/"+str(id)+"/call/destination")
         receive() #warten auf eine Antwort
-    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call/destination":
+    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call/destination":  #(driveDestination)
         driveDestination(js['destination'],js['name'])
         data ={
         "id":id,
@@ -92,8 +92,14 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
         "coordinates":coor
         }
         send(json.dumps(data),"hshl/mqtt_exercise/set_position") #Senden der neuen Position
+      
+def pickUpCoordinates(pickupcoor): # Datenübergabe
+    print("New destination: "+pickupcoor)
+    coor = pickupcoor
+    time.sleep(1)
+    print("Arrival at: "+pickupcoor)    
 
-def driveDestination(destinationcoor,guestname): # User Ziel 
+def driveDestination(destinationcoor,guestname): # User Ziel
     print("New destination, drive "+guestname+" to: "+destinationcoor)
     coor = destinationcoor
     time.sleep(1)
@@ -103,7 +109,8 @@ def rndCoordinates(): #Berechnungen der Coordinaten
     x = randint(0,4)
     y = randint(1,4)
     return str(y)+";"+str(x)
-def register():
+
+ def register():
     global coor
     global name
     coor = rndCoordinates()
@@ -112,13 +119,7 @@ def register():
     "name": name,
     "coordinates":coor
     }
-    send(json.dumps(data), "hshl/mqtt_exercise/taxi")  # Senden der brechneten Coordinaten
-
-def pickUpCoordinates(pickupcoor):
-    print("New destination: "+pickupcoor)
-    coor = pickupcoor
-    time.sleep(1)
-    print("Arrival at: "+pickupcoor)
+    send(json.dumps(data), "hshl/mqtt_exercise/taxi")  # Senden der brechneten Coordinaten   
     
 print("Reg. Name:")    
 name = input() #Eingabe vom Name
