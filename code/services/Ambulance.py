@@ -94,23 +94,10 @@ def processing(msg):
         }
         send(json.dumps(data),"hshl/mqtt_exercise/set_position")
 
-def userDestination(destinationcoor, guestname):
-    print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
-    coor = destinationcoor #setzen der zielkoordinaten in den standort des fahrzeugs
-    time.sleep(1) #schlafen eine sekunde
-    print("Arrival at: "+destinationcoor)
-
-def drivetoUser(usercoor):
-    print("New destination: "+usercoor) #textausgabe
-    coor = usercoor   #setzen der pickup koorindanten zu dem standkoordinaten
-    time.sleep(1)#warten
-    print("Arrival at: "+usercoor) #textausgabe
-
 def ambulancecoor():
     zahly = randint(0, 4)
     zahlx = randint(0, 4)
     return str(zahly)+";"+str(zahlx)
-
 
 def registration():
     global coor
@@ -123,6 +110,18 @@ def registration():
     "coordinates": coor
     }
     send("hshl/mqtt_exercise/services/ambulance", json.dumps(data))
+
+def userDestination(destinationcoor, guestname):
+    print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
+    coor = destinationcoor #setzen der zielkoordinaten in den standort des fahrzeugs
+    time.sleep(1) #schlafen eine sekunde
+    print("Arrival at: "+destinationcoor)
+
+def drivetoUser(usercoor):
+    print("New destination: "+usercoor) #textausgabe
+    coor = usercoor   #setzen der pickup koorindanten zu dem standkoordinaten
+    time.sleep(1)#warten
+    print("Arrival at: "+usercoor) #textausgabe
 
 print("Gib einen Namen ein:")
 name = input()
