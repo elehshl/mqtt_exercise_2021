@@ -57,7 +57,7 @@ def receive(): #Empfangen & Rückantwort
     client.loop_forever()
 
 
-def messageprocessing(msg): #Verarbeitung der eingehenden Narrichten
+def messageprocessing(msg): #Verarbeitung der eingehenden Nachrichten
     global name
     global id
     data = ""
