@@ -60,7 +60,7 @@ def periodicPosition():
         print("     #testcar: "+str(len(testcar)))
         print("     #police: "+str(len(police)))
         for i in range(0,len(firefighter)):
-            requestPosition(firefighter[i][0],"firefighter",firefighter[i][0]);
+            requestPosition(firefighter[i][0],"firefighter",firefighter[i][1]);
             pass
         for i in range(0,len(ambulance)):
             requestPosition(ambulance[i][0],"ambulance",ambulance[i][1]);
