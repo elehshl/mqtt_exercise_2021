@@ -12,7 +12,7 @@
 | Aufgabe                                                                                                                                | Zuständigkeit | 
 | ------------- | -------- |
 | [Taxi](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/requirements/taxi_requirements.md)                | Justin        | 
-| [Services](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/requirements/Requirements_IK_Services.xlsx)   | Jonas         | 
+| [Services](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/requirements/Requirements_Services)           | Jonas         | 
 | [Server](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/requirements/Requirements.xlsx)                 | Benedikt      | 
 | [User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/requirements/Requirements_User.xlsx)              | Philipp       | 
 
