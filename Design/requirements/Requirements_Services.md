@@ -7,7 +7,6 @@
 | FA | **4**  | Die Fahrzeuge sollen ihre akktuellen GPS Koordinaten an den senden. |✅|
 | FA | **5**  | Die Fahrzeuge sollen Informationen vom Server erhalten. |✅|
 | FA | **5.1**  | Die Fahrzeuge sollen vom Server erhaltene Informationen bestätigen.|✅|
-
 | NF | **1**  | Die Bestätigung der erhaltenen Informationen soll nicht länger wie 5 Sekunden dauern. |✅|
 | NF | **2**  | Das Versenden von Informationen sollte nicht länger wie 5s dauern. |✅|                                   
 | NF | **3**  | Das erhalten von Informationen sollte nicht länger wie 5s dauern. |✅|
