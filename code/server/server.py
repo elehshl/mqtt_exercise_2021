@@ -1,4 +1,4 @@
-
+#Requirement: NF-S03
 import time
 import paho.mqtt.client as mqtt
 from random import *
@@ -51,7 +51,7 @@ def findindex(idCar,type):
                 return i
 
 
-def periodicPosition():
+def periodicPosition(): #Requirement: NF-S01
     while 0==0:
         print("#Prüfe Fahrzeugposition:")
         print("     #Firefighter: "+str(len(firefighter)))
@@ -74,7 +74,7 @@ def periodicPosition():
         for i in range(0,len(police)):
             requestPosition(police[i][0],"police",police[i][1]);
             pass
-        time.sleep(5)
+        time.sleep(5) #Requirement: NF-S02
     t2.stop()
 
 #registration for user
@@ -120,7 +120,7 @@ def registrationCar(data,type):
         elif type == 99:
             data.append("free")
             testcar.append(data)
-    elif inliste == True:
+    elif inliste == True: #Requirements: F-S12
         print("#Car already registered")
 #############################################
 
