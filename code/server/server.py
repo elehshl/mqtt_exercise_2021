@@ -234,6 +234,7 @@ def requestPosition(idCar,type,name):
     "name": str(name)
     }
     send(json.dumps(data),"hshl/mqtt_exercise/get_position")
+    t2.start()
 ########################
 def statusReset(idCar,type):
     if type == "taxi":
@@ -293,6 +294,7 @@ def messageprocessing(msg):
 
 #wait for order Requirement: F-S02
     elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']):
+        t2.stop()
         car = []
         tempcar = []
         if str(js['type']) == "taxi":
