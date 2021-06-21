@@ -9,7 +9,7 @@
 - [Philipp Wagner](https://github.com/VisioNyrix)
 - [Justin Frommberger](https://github.com/JustinF97)
 
-## 1. Meilenstein (05.05.2021)
+## 1. Meilenstein Requirements (05.05.2021)
 
 | Aufgabe                                                                                                                                | Zuständigkeit | 
 | ------------- | -------- |
@@ -18,11 +18,28 @@
 | [Requirements Server](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/requirements/Requirements.xlsx)                 | Benedikt      | 
 | [Requirements User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/requirements/Requirements_User.xlsx)              | Philipp       | 
 
-## 2. Meilenstein (12.05.2021)
+## 2. Meilenstein Use-Case (12.05.2021)
 
 | Aufgabe                                                                                                                                | Zuständigkeit | 
 | ------------- | -------- |
-| [UseCase Taxi](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/UseCase/Car_UseCase.png)                               | Justin        | 
-| [UseCase Services](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/UseCase/Service.png)                               | Jonas         | 
-| [UseCase Server](https://github.com/elehshl/mqtt_exercise_2021/tree/master/Design/UseCase/Server_order_car)                            | Benedikt      | 
-| [UseCase User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/UseCase/User/UseCase_User.PNG)                         | Philipp       | 
+| [Use-Case Taxi](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/UseCase/Car_UseCase.png)                               | Justin        | 
+| [Use-Case Services](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/UseCase/Service.png)                               | Jonas         | 
+| [Use-Case Server](https://github.com/elehshl/mqtt_exercise_2021/tree/master/Design/UseCase/Server_order_car)                            | Benedikt      | 
+| [Use-Case User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/Design/UseCase/User/UseCase_User.PNG)                         | Philipp       | 
+
+## 3. Meilenstein Implementation (09.06.2021)
+
+| Aufgabe                                                                                                                                | Zuständigkeit | 
+| ------------- | -------- |
+| [Use-Case Taxi](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/taxi/taxi.py)                                           | Justin        | 
+| [Use-Case Services](https://github.com/elehshl/mqtt_exercise_2021/tree/master/code/services)                                           | Jonas         | 
+| [Use-Case Server](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/server/server.py)                                     | Benedikt      | 
+| [Use-Case User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/user/User.py)                                           | Philipp       | 
+ 
+
+
+
+
+
+
+
