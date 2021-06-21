@@ -36,6 +36,13 @@
 | [Server](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/server/server.py)                                     | Benedikt      | 
 | [User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/user/User.py)                                           | Philipp       | 
  
+## 3. Meilenstein Integration of all parts (16.06.2021)
+
+| Code                                                                                                                      
+| ------------- |
+| [Alle](https://github.com/elehshl/mqtt_exercise_2021/tree/master/code)                                          
+
+
 
 
 
