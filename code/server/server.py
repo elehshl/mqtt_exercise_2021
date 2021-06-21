@@ -293,7 +293,6 @@ def messageprocessing(msg):
 
 #wait for order Requirement: F-S02
     elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']):
-        t2.do_run = False
         car = []
         tempcar = []
         if str(js['type']) == "taxi":
@@ -345,7 +344,6 @@ def messageprocessing(msg):
         statusReset(int(js["idCar"]),str(js["type"]))
         requestPosition(js["idCar"],js["type"],str(findcarname(js["idCar"],str(js['type']))))
         print("#Status Reset to Free by"+str(js['id']))
-        t2.join()
 #########################################################################################################
     #registration taxi Requirement: F-S10
     elif msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
