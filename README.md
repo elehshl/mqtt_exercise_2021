@@ -29,12 +29,12 @@
 
 ## 3. Meilenstein Implementation (09.06.2021)
 
-| Aufgabe                                                                                                                                | Zuständigkeit | 
+| Aufgabe                                                                                                                       | Zuständigkeit | 
 | ------------- | -------- |
-| [Use-Case Taxi](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/taxi/taxi.py)                                           | Justin        | 
-| [Use-Case Services](https://github.com/elehshl/mqtt_exercise_2021/tree/master/code/services)                                           | Jonas         | 
-| [Use-Case Server](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/server/server.py)                                     | Benedikt      | 
-| [Use-Case User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/user/User.py)                                           | Philipp       | 
+| [Taxi](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/taxi/taxi.py)                                           | Justin        | 
+| [Services](https://github.com/elehshl/mqtt_exercise_2021/tree/master/code/services)                                           | Jonas         | 
+| [Server](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/server/server.py)                                     | Benedikt      | 
+| [User](https://github.com/elehshl/mqtt_exercise_2021/blob/master/code/user/User.py)                                           | Philipp       | 
  
 
 
