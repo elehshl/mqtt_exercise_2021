@@ -19,7 +19,7 @@ def dataVerification(msg): #Prüfung der gesendeten Daten, ist die Datei empty =
         return False
         pass
 
-def send(object,topic): #Senden & Registrieren      #Requirement: F2 
+def send(object,topic): #Senden & Registrieren      #Requirement: F2
     time.sleep(2)
     client = mqtt.Client("client")
     client.connect(SERVER_ADDRESS, PORT)
@@ -33,7 +33,7 @@ def send(object,topic): #Senden & Registrieren      #Requirement: F2
     client.publish(topic, msg)
     client.loop()
 
-def receive(): #Empfangen & Rückantwort             #Requirement: F1 
+def receive(): #Empfangen & Rückantwort             #Requirement: F1
     temp = []
     client = mqtt.Client()
     client.connect(SERVER_ADDRESS, PORT)
@@ -49,7 +49,7 @@ def receive(): #Empfangen & Rückantwort             #Requirement: F1
 
     def on_connect(client, userdata, flags, rc):
         print("Server Connected to MQTT Broker: " + SERVER_ADDRESS)
-        for i in range(0,len(subtopic)): # Um mehrere Adressen (subtopics) zu registrieren           
+        for i in range(0,len(subtopic)): # Um mehrere Adressen (subtopics) zu registrieren
             print(str(subtopic[i]))
             client.subscribe(subtopic[i], 2)
     client.on_connect = on_connect
@@ -67,7 +67,7 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Nachrichten
         subtopic.append("hshl/mqtt_exercise/taxi/"+str(id)+"/call")
         receive() #warte auf eine Nachricht
     elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call": #(pickUpCoordinates)     #Requirement: F4
-        pickUpCoordinates(js['coordinates'])   
+        pickUpCoordinates(js['coordinates'])
         data = {
         "id":id,
         "msg": "Arrival",
@@ -85,19 +85,19 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Nachrichten
         }
         send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+id+"/call/destination/back")  #Senden des Zieles      #Requirement: F5
         receive()
-    elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id): 
+    elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id):
         data={
         "id":id,
         "name":name,
         "coordinates":coor
         }
         send(json.dumps(data),"hshl/mqtt_exercise/set_position") #Senden der neuen Position
-      
+
 def pickUpCoordinates(pickupcoor): # Datenübergabe
     print("New destination: "+pickupcoor)
     coor = pickupcoor
     time.sleep(1)
-    print("Arrival at: "+pickupcoor)    
+    print("Arrival at: "+pickupcoor)
 
 def driveDestination(destinationcoor,guestname): # User Ziel
     print("New destination, drive "+guestname+" to: "+destinationcoor)
@@ -110,7 +110,7 @@ def rndCoordinates(): #Berechnungen der Coordinaten
     y = randint(1,4)
     return str(y)+";"+str(x)
 
- def register():  #Registierung        #Requirement: F3
+def register():  #Registierung        #Requirement: F3
     global coor
     global name
     coor = rndCoordinates()
@@ -119,9 +119,9 @@ def rndCoordinates(): #Berechnungen der Coordinaten
     "name": name,
     "coordinates":coor
     }
-    send(json.dumps(data), "hshl/mqtt_exercise/taxi")  # Senden der brechneten Coordinaten   
-    
-print("Reg. Name:")    
+    send(json.dumps(data), "hshl/mqtt_exercise/taxi")  # Senden der brechneten Coordinaten
+
+print("Reg. Name:")
 name = input() #Eingabe vom Name
 
 register()
