@@ -1,4 +1,4 @@
-
+#Requirement: NF-S03
 import time
 import paho.mqtt.client as mqtt
 from random import *
@@ -51,7 +51,7 @@ def findindex(idCar,type):
                 return i
 
 
-def periodicPosition():
+def periodicPosition(): #Requirement: NF-S01
     while 0==0:
         print("#Prüfe Fahrzeugposition:")
         print("     #Firefighter: "+str(len(firefighter)))
@@ -74,20 +74,20 @@ def periodicPosition():
         for i in range(0,len(police)):
             requestPosition(police[i][0],"police",police[i][1]);
             pass
-        time.sleep(5)
+        time.sleep(5) #Requirement: NF-S02
     t2.stop()
 
 #registration for user
 def registrationUser(data):
     inliste = False
-    for i in range(0,len(user)):    #alredy exists ?
+    for i in range(0,len(user)):    #alredy exists Requirement: F-S04
         if str(data[0]) == str(user[i][0]):
             inliste = True
-    if inliste == False:    # no ? add!
+    if inliste == False:    # no ? add! Requirement: F-S05
         user.append(data)
     elif inliste == True:   #yes ? print(user exists alredy !)
         print("#user bereits vorhanden")
-# same but seperated for each car type
+# same but seperated for each car type  Requirement: F-S01
 def registrationCar(data,type):
     car = []
     inliste = False
@@ -101,7 +101,7 @@ def registrationCar(data,type):
          car = ambulance
     elif type == 99:
         car = testcar
-    for i in range(0,len(car)):
+    for i in range(0,len(car)):# Requirement: F-S07
         if str(data[1]) == str(car[i][1]):
             inliste = True
     if inliste == False:
@@ -120,7 +120,7 @@ def registrationCar(data,type):
         elif type == 99:
             data.append("free")
             testcar.append(data)
-    elif inliste == True:
+    elif inliste == True: #Requirements: F-S12
         print("#Car already registered")
 #############################################
 
@@ -162,8 +162,9 @@ def receive():
     client.on_connect = on_connect
     client.on_message = on_message
     client.loop_forever()
-
-def findnextCar(gpsUser,car): # find closest car
+# find closest car Requirements: F-S03
+def findnextCar(gpsUser,car):
+    cancle = 0
     for k in range(int(gpsUser.split(";")[0]),5):
         for i in range((k-1)*(-1), k+1):
             print("i ist:"+str(i))
@@ -173,15 +174,38 @@ def findnextCar(gpsUser,car): # find closest car
                 for c in range(0,len(car)):
                     print("search for car: "+ str(car[c]))
                     if car[c][2] == gpsUser:
-                        return car[c]
+                        if car[c][3]== "free":#Requirements: F-S11
+                            return car[c]
+                        else:
+                            c=c-1
+                            cancle = cancle + 1
                     elif int(car[c][2].split(";")[0]) == -i and int(car[c][2].split(";")[1]) == j:
-                        return car[c]
+                        if car[c][3]== "free":#Requirements: F-S11
+                            return car[c]
+                        else:
+                            c=c-1
+                            cancle = cancle+1
                     elif int(car[c][2].split(';')[0]) == j and int(car[c][2].split(';')[0]) == -i:
-                        return car[c]
+                        if car[c][3]== "free":#Requirements: F-S11
+                            return car[c]
+                        else:
+                            c=c-1
+                            cancle = cancle+1
                     elif int(car[c][2].split(';')[0]) == j and int(car[c][2].split(';')[0]) == i:
-                        return car[c]
+                        if car[c][3]== "free":#Requirements: F-S11
+                            return car[c]
+                        else:
+                            c=c-1
+                            cancle = cancle+1
                     elif int(car[c][2].split(';')[0]) == i and int(car[c][2].split(';')[0]) == j:
-                        return car[c]
+                        if car[c][3]== "free":#Requirements: F-S11
+                            return car[c]
+                        else:
+                            c=c-1
+                            cancle = cancle+1
+                    if cancle == 3:
+                        return None
+                        pass
 # find next id #
 def findid(object):
     highid = 0
@@ -210,6 +234,7 @@ def requestPosition(idCar,type,name):
     "name": str(name)
     }
     send(json.dumps(data),"hshl/mqtt_exercise/get_position")
+    t2.start()
 ########################
 def statusReset(idCar,type):
     if type == "taxi":
@@ -267,8 +292,9 @@ def messageprocessing(msg):
 #####################
 
 
-#wait for order
+#wait for order Requirement: F-S02
     elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']):
+        t2.stop()
         car = []
         tempcar = []
         if str(js['type']) == "taxi":
@@ -290,7 +316,7 @@ def messageprocessing(msg):
         temp1 = str(car[0][0])
         for i in range(0,len(tempcar)):
             temp2 = str(tempcar[i][0])
-    #set status to busy
+    #set status to busy Requirement: F-S08
             if temp1 == temp2:
                 if str(js['type']) == "taxi":
                     taxi[i][3] = "busy"
@@ -311,6 +337,7 @@ def messageprocessing(msg):
                 "coordinates": tempcar[i][2],
                 "status": tempcar[i][3]
                 }
+                #Requirement: F-S06
                 send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(js['id'])+"/order/back")
                 print("# Ordered car sent")
 ########################################################################################################
@@ -320,7 +347,7 @@ def messageprocessing(msg):
         requestPosition(js["idCar"],js["type"],str(findcarname(js["idCar"],str(js['type']))))
         print("#Status Reset to Free by"+str(js['id']))
 #########################################################################################################
-    #registration taxi
+    #registration taxi Requirement: F-S10
     elif msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
         data.append(findid(taxi))
         data.append(js['name'])
@@ -338,7 +365,7 @@ def messageprocessing(msg):
         time.sleep(2) #delay is needed ??
         send(json.dumps(userdata),"hshl/mqtt_exercise/taxi/back")
 ################################################################################################################
-        #wait for service registration
+        #wait for service registration Requirement:  F-S09 & F-S10
     elif msg[0] == "hshl/mqtt_exercise/services/police" or msg[0] == "hshl/mqtt_exercise/services/firefighter" or msg[0] == "hshl/mqtt_exercise/services/ambulance":
 #register Police
         if msg[0] == "hshl/mqtt_exercise/services/police" and str(js["id"]) == "register": #checlk for message {"id":"register", "name": "[irgend_ein_name]","coordinates": "irgend_welche koordinaten"} on adress "hshl/mqtt_exercise/services/police"
