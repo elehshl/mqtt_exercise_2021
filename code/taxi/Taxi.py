@@ -19,7 +19,7 @@ def dataVerification(msg): #Prüfung der gesendeten Daten, ist die Datei empty =
         return False
         pass
 
-def send(object,topic): #Senden & Registrieren
+def send(object,topic): #Senden & Registrieren      #Requirement: F2 
     time.sleep(2)
     client = mqtt.Client("client")
     client.connect(SERVER_ADDRESS, PORT)
@@ -33,7 +33,7 @@ def send(object,topic): #Senden & Registrieren
     client.publish(topic, msg)
     client.loop()
 
-def receive(): #Empfangen & Rückantwort
+def receive(): #Empfangen & Rückantwort             #Requirement: F1 
     temp = []
     client = mqtt.Client()
     client.connect(SERVER_ADDRESS, PORT)
@@ -62,11 +62,11 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Nachrichten
     global id
     data = ""
 
-    if msg[0] == "hshl/mqtt_exercise/taxi/back/" and str(name) == js['name']:  # Empfangen der ID
+    if msg[0] == "hshl/mqtt_exercise/taxi/back/" and str(name) == js['name']:  # Empfangen der ID      #Requirement: F1
         id = str(js['id']) # Speichern der erhaltenen ID in die Lokale(Global) ID
         subtopic.append("hshl/mqtt_exercise/taxi/"+str(id)+"/call")
         receive() #warte auf eine Nachricht
-    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call": #(pickUpCoordinates)
+    elif msg[0] == "hshl/mqtt_exercise/taxi/"+str(id)+"/call": #(pickUpCoordinates)     #Requirement: F4
         pickUpCoordinates(js['coordinates'])   
         data = {
         "id":id,
@@ -83,7 +83,7 @@ def messageprocessing(msg): #Verarbeitung der eingehenden Nachrichten
         "msg": "Arrival at destination",
         "coordinates": js['destination']
         }
-        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+id+"/call/destination/back")  #Senden des Zieles
+        send(json.dumps(data),"hshl/mqtt_exercise/taxi/"+id+"/call/destination/back")  #Senden des Zieles      #Requirement: F5
         receive()
     elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id): 
         data={
@@ -110,7 +110,7 @@ def rndCoordinates(): #Berechnungen der Coordinaten
     y = randint(1,4)
     return str(y)+";"+str(x)
 
- def register():
+ def register():  #Registierung        #Requirement: F3
     global coor
     global name
     coor = rndCoordinates()
