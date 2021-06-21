@@ -75,7 +75,7 @@ def periodicPosition(): #Requirement: NF-S01
             requestPosition(police[i][0],"police",police[i][1]);
             pass
         time.sleep(5) #Requirement: NF-S02
-    t2.stop()
+    t2.do_run = False
 
 #registration for user
 def registrationUser(data):
@@ -234,7 +234,6 @@ def requestPosition(idCar,type,name):
     "name": str(name)
     }
     send(json.dumps(data),"hshl/mqtt_exercise/get_position")
-    t2.start()
 ########################
 def statusReset(idCar,type):
     if type == "taxi":
@@ -294,7 +293,7 @@ def messageprocessing(msg):
 
 #wait for order Requirement: F-S02
     elif msg[0] == "hshl/mqtt_exercise/user/"+ str(js['id']):
-        t2.stop()
+        t2.do_run = False
         car = []
         tempcar = []
         if str(js['type']) == "taxi":
@@ -346,6 +345,7 @@ def messageprocessing(msg):
         statusReset(int(js["idCar"]),str(js["type"]))
         requestPosition(js["idCar"],js["type"],str(findcarname(js["idCar"],str(js['type']))))
         print("#Status Reset to Free by"+str(js['id']))
+        t2.join()
 #########################################################################################################
     #registration taxi Requirement: F-S10
     elif msg[0] == "hshl/mqtt_exercise/taxi" and str(js["id"]) == "register": #Taxi
