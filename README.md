@@ -1,7 +1,5 @@
 #  LV-Interaktionskonzept
 
-[![N|Power Point](Link einfügen)
-
 ## Team member:
 
 - [Jonas Gerken](https://github.com/JonasGerken )
@@ -50,9 +48,7 @@
 
 ## 6. Meilenstein Slides (??.??.2021)
 
-| Slides                                                                                                                      
-| ------------- |
-| [Alle](https://github.com/elehshl/mqtt_exercise_2021/tree/master/Ausarbeitung)  
+[![N|Power Point](Link einfügen) 
 
 
 
