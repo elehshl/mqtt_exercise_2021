@@ -1,5 +1,5 @@
 # Requirements
-| Typ| ID.     | Description  |                                                                                                          
+| Typ| ID.     | Description  | Erfüllt |                                                                                                  
 |:---|:--------|:-------------|:----------------------------|--|
 | FA | **01**  | Das Car muss eine eindeutige ID besitzen. |✅|
 | FA | **02**  | Das Car soll mit dem Server vebunden sein. |✅|
