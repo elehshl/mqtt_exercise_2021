@@ -36,7 +36,7 @@ def send(topic, object): #senden
 def receive(): #empfangen; Requirement: FA1
     global id
     temp = []
-    client = mqtt.Client("police")
+    client = mqtt.Client("police") #Requirement: FA3
     client.connect(BROKER_ADDRESS, PORT)
     def on_message(client, userdata, message):
         msg = str(message.payload.decode("utf-8"))
@@ -110,7 +110,7 @@ def registration():
     "name": name,
     "coordinates": coor #Requirement: FA4
     }
-    send("hshl/mqtt_exercise/services/police", json.dumps(data)) #Requirement: FA2
+    send("hshl/mqtt_exercise/services/police", json.dumps(data)) #Requirement: FA2; Requirement: FA3
 
 def userDestination(destinationcoor, guestname):
     print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
