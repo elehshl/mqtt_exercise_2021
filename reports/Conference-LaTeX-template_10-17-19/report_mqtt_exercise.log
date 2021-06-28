@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  28 JUN 2021 20:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  28 JUN 2021 22:08
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -258,45 +258,77 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
+sty"
+\lst@mode=\count198
+\lst@gtempboxa=\box49
+\lst@token=\toks22
+\lst@length=\count199
+\lst@currlwidth=\dimen169
+\lst@column=\count266
+\lst@pos=\count267
+\lst@lostspace=\dimen170
+\lst@width=\dimen171
+\lst@newlines=\count268
+\lst@lineno=\count269
+\lst@maxwidth=\dimen172
+
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.s
+ty"
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count270
+\lst@skipnumbers=\count271
+\lst@framebox=\box50
+)
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings.
+cfg"
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backen
 d-pdfmode.def"
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count198
-\l__pdf_internal_box=\box49
-) (report_mqtt_exercise.aux)
+\l__kernel_color_stack_int=\count272
+\l__pdf_internal_box=\box51
+) (report_mqtt_exercise.aux
+
+LaTeX Warning: Label `lst:code_direct' multiply defined.
+
+)
 \openout1 = `report_mqtt_exercise.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 -- Lines per column: 56 (exact).
 
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-p
 df.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count199
-\scratchdimen=\dimen169
-\scratchbox=\box50
-\nofMPsegments=\count266
-\nofMParguments=\count267
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count268
-\MPscratchDim=\dimen170
-\MPnumerator=\count269
-\makeMPintoPDFobject=\count270
-\everyMPtoPDFconversion=\toks23
+\scratchcounter=\count273
+\scratchdimen=\dimen173
+\scratchbox=\box52
+\nofMPsegments=\count274
+\nofMParguments=\count275
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count276
+\MPscratchDim=\dimen174
+\MPnumerator=\count277
+\makeMPintoPDFobject=\count278
+\everyMPtoPDFconversion=\toks24
 )
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\epsto
 pdf-base.sty"
@@ -308,18 +340,47 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 sys.cfg"
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
+\c@lstlisting=\count279
+
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.
+sty"
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 73.
 
 
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 73.
 
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 45.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 73.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+06.
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
+[][][][][][][][][][][][][][][][][][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
+[][][][][][][][][][][][][][][][][][][]
+ []
+
+[1{C:/Users/bened/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+
+]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -331,28 +392,30 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[1{C:/Users/bened/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+[2
 
+] (report_mqtt_exercise.aux)
 
-]
-(report_mqtt_exercise.aux) ) 
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3861 strings out of 480932
- 56851 string characters out of 2899905
- 299693 words of memory out of 3000000
- 19698 multiletter control sequences out of 15000+200000
- 574626 words of font info for 111 fonts, out of 3000000 for 9000
+ 5593 strings out of 480932
+ 79699 string characters out of 2899905
+ 546887 words of memory out of 3000000
+ 21410 multiletter control sequences out of 15000+200000
+ 574940 words of font info for 112 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,11n,37p,410b,292s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/f
-onts/enc/dvips/base/8r.enc}<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fo
-nts/type1/urw/times/utmb8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKT
-eX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/bened/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report_mqtt_exercise.pdf (1 page, 54527 bytes).
+ 30i,11n,40p,533b,1646s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
+}<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a
+.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
+mbi8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/tim
+es/utmr8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw
+/times/utmri8a.pfb>
+Output written on report_mqtt_exercise.pdf (2 pages, 60210 bytes).
 PDF statistics:
- 23 PDF objects out of 1000 (max. 8388607)
+ 26 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
