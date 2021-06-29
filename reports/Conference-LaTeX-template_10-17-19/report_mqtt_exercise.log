@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  28 JUN 2021 22:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  29 JUN 2021 16:43
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -295,6 +295,9 @@ File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
 
 LaTeX Warning: Label `lst:code_direct' multiply defined.
 
+
+LaTeX Warning: Label `lst:code_direct' multiply defined.
+
 )
 \openout1 = `report_mqtt_exercise.aux'.
 
@@ -358,29 +361,46 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 73.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 73.
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-06.
-("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
- []
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 1
+00.
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1phv.fd"
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--110
-[][][][][][][][][][][][][][][][][][][]
- []
+LaTeX Warning: Font shape declaration has incorrect series value `mc'.
+               It should not contain an `m'! Please correct it.
+               Found on input line 21.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 111--112
-[][][][][][][][][][][][][][][][][][][]
- []
+LaTeX Warning: Font shape declaration has incorrect series value `mc'.
+               It should not contain an `m'! Please correct it.
+               Found on input line 24.
 
-[1{C:/Users/bened/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+LaTeX Warning: Font shape declaration has incorrect series value `mc'.
+               It should not contain an `m'! Please correct it.
+               Found on input line 27.
+
+
+LaTeX Warning: Font shape declaration has incorrect series value `mc'.
+               It should not contain an `m'! Please correct it.
+               Found on input line 47.
+
+) [1{C:/Users/bened/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 113--115
+\OT1/ptm/m/n/10 Zur besseren Iden-ti-fizierung und klas-si-fizierung als
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
+16.
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsptm.fd"
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 116.
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -392,30 +412,30 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[2
-
-] (report_mqtt_exercise.aux)
+[2] (report_mqtt_exercise.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5593 strings out of 480932
- 79699 string characters out of 2899905
- 546887 words of memory out of 3000000
- 21410 multiletter control sequences out of 15000+200000
- 574940 words of font info for 112 fonts, out of 3000000 for 9000
+ 5634 strings out of 480932
+ 80345 string characters out of 2899905
+ 522887 words of memory out of 3000000
+ 21447 multiletter control sequences out of 15000+200000
+ 576386 words of font info for 113 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,11n,40p,533b,1646s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,11n,40p,613b,1644s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
-}<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a
-.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
-mbi8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/tim
-es/utmr8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw
-/times/utmri8a.pfb>
-Output written on report_mqtt_exercise.pdf (2 pages, 60210 bytes).
+}<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy8.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/
+helvetic/uhvr8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/urw/times/utmb8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts
+/type1/urw/times/utmbi8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/urw/times/utmr8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 
+2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report_mqtt_exercise.pdf (2 pages, 77843 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
+ 34 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -21,7 +21,7 @@
         basicstyle=\ttfamily\small, 
         keywordstyle=\color{keywords},
         commentstyle=\color{comments},
-        stringstyle=\color{red},
+                stringstyle=\color{red},
         showstringspaces=false,
         identifierstyle=\color{green},
         keywords=[2]{pow},
@@ -96,60 +96,33 @@ Interne verarbeitung einer fahrzeug bestellung\\
 \end{tabular}
 \end{table}
 \subsection{Anmedlung von Clients}
-Aufgabe des Servers war es eine Anmeldung von clients zu ermöglichen um  einerseits nur aus dem pool der aktuell aktiven,freie fahrzeuge  auszuwählen und andererseits einer unbekannten menge an Fahrzeugen und kunden die Möglichkeit zu bieten am angebot teilzuhaben. Zu den Clients gehören sowohl die Kunden (User), wie auch alle Fahrzeug typen , damit sind alle Servicefahrzeuge mit den unterkategorien: Police, Firefighter, ambulance gemeint und zuletzt auch Fahrzeuge der Kategorie Taxi.\\ 
-Umgesetzt wurde die anmeldung der Clients in den Funktionen
-\textit{regestrierunUser}
+Aufgabe des Servers ist es eine Anmeldung von clients zu ermöglichen um  einerseits nur aus dem pool der aktuell aktiven,freie fahrzeuge  auszuwählen und andererseits einer unbekannten menge an Fahrzeugen und kunden die Möglichkeit zu bieten am angebot teilzuhaben. Zu den Clients gehören sowohl die Kunden (User), wie auch alle Fahrzeug typen , damit sind alle Servicefahrzeuge mit den unterkategorien: Police, Firefighter, ambulance gemeint und zuletzt auch Fahrzeuge der Kategorie Taxi.\\ 
+Um auf eine Unbekannte Anzahl an sich zu regestrierenden clients reagieren zu können, muss der initiative schritt durch den Client erfolgen. Zur Regestrierung sendet der Client eine nachricht mittels mqtt Protokoll über die adressen des Users oder der Fahrzeug typen mit dem ersten teil \textsf{"adresse = hshl/mqtt\_exercise/"} und der endung des jeweiligen fahrzeug typen, also: \textsf{"user,taxi,police,firefighter,ambulance"} an den Server. Dieser verarbeitet die nachricht bei erhalt in der Funktion  
 \begin{lstlisting}
-#registration for user
-def registrationUser(data):
-    inliste = False
-    for i in range(0,len(user)):    #alredy exists Requirement: F-S04
-        if str(data[0]) == str(user[i][0]):
-            inliste = True
-    if inliste == False:    # no ? add! Requirement: F-S05
-        user.append(data)
-    elif inliste == True:   #yes ? print(user exists alredy !)
-        print("#user bereits vorhanden")
+def receive()
+	....
+	messageprocessing(temp)
+	....
 \end{lstlisting}
-und für die Fahrzeuge wurde eine Regestrierung in der Funktion \textit{registrationCar} umgesetzt.
+ wobei die aufgabe der Funktion  \textit{receive()} eher die generelle verarbeitung der mqtt nachricht darstellt und nicht die zuordnung der nachricht zu einem bestimmten anwendungszweck. 
+Dieser wird anschließend durch den aufruf der Funktion \textit{messageprocessing} und einer teilung des übergebenen Arrays in die informationen zu inhalt und Adresse der nachricht erreicht.
+um ein auslesen der nachricht überhaupt zu ermöglichen, ist es notwending die Empfangenen nachricht erst in das Json format zu codieren um anschließen die vorteile einer verarbeitung mit Json datasets zu nutzen. dies wird mit der textzeitle \begin{lstlisting}
+def messageprocessing(msg)
+	json.loads(str(msg[1]))
+\end{lstlisting}
+ erreicht.\\
+ Zur besseren Identifizierung und klassifizierung als Regestierungsnachricht, wird in dieser die ID des clients durch das wort "register" ersetzt. Dies dient wie schon erwähnt einerseits der besseren einordnung, anderer seits half das menschen lesbarhalten von nachrichten bei der entwicklung ungemein. Einen negativen einfluss auf den erfolgreichen ablauf der regestrierung des clients hat dies nicht, da eine ID erst mit antwort des servers an den client vergeben wird. Die nachricht, die ein Client zur Regestrierung/Anmeldung senden muss sieht wie folgt aus:
 \begin{lstlisting}
-def registrationCar(data,type):
-    car = []
-    inliste = False
-    if type == 0:
-        car = taxi
-    elif type == 1:
-        car = police
-    elif type == 2:
-        car = firefighter
-    elif type == 3:
-         car = ambulance
-    elif type == 99:
-        car = testcar
-    for i in range(0,len(car)):# Requirement: F-S07
-        if str(data[1]) == str(car[i][1]):
-            inliste = True
-    if inliste == False:
-        if type == 0:
-            data.append("free")
-            taxi.append(data)
-        elif type == 1:
-            data.append("free")
-            police.append(data)
-        elif type == 2:
-            data.append("free")
-            firefighter.append(data)
-        elif type == 3:
-            data.append("free")
-            ambulance.append(data)
-        elif type == 99:
-            data.append("free")
-            testcar.append(data)
-    elif inliste == True: #Requirements: F-S12
-        print("#Car already registered")
-#############################################
+    data={
+    "id": "register",
+    "name": name,
+    "coordinates":coor
+    }	
 \end{lstlisting}
-
+Zudem wird in der Internen verarbeitung ein neuer kanal für die weitere kommunikation mit dem Client geschaffen, so dass eine direkte kommunikation mit diesem möglich ist ohne das andere clients hierdurch beeinträchtigt werden. Die adresse des neuen kanal wird unter zuhilfe nahme der druch den server in den funktionen \textit{regestrationUser(data)} und \textit{registrationCar(data, type)} vergebenen ID geöffnen und mittels einer nachricht auf dem kanal \textsf{"hshl/mqtt\_exercise/user/back"} an diesen zurück gesendet. \\
+Anhand des Quellscodes für das regestrieren des users wird gezeigt, wie die vergabe einer Neuen ID und das einspeichern des clients in den server funktioniert, dies ist ganz ähnlich für das vorgenen bei der regestrierung von fahrzeugen, mit dem einzigen unterschied, das in diesem fall mittels einer separierung durch den übergabe wert "type" die einzelnen fahrzeuge unterschieden werden können. Desweiteren wird bei der registrierung der fahrzeuge noch der status "free" vergeben.\\
+zuerst wird durch den aufruf der Funktion \textit{findid(user)} die kleinste noch freie ID aus der liste der angemeldeten fahrzeuge gesucht, indem die höchste vergebene ID gesucht wird und um einen zähler höher zurück gegeben wird. Anschliessend wird in der methode \textit{registrationUser(data)} durch ein weiteres durchlaufen der liste geprüft ob bereits ein user mit dem selben namen vorhanden ist und bei negativem ergebnis in  die liste aller user eingetragen.\\ der user bekommt abschliessend auf dem rückkanal eine nachricht mit seiner eindeutigen ID. 
+\subsection{Bestellen eines Fahrzeugs}
 
 \begin{thebibliography}{00}
 \bibitem{b1} 
