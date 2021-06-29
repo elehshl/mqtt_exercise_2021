@@ -33,10 +33,10 @@ def send(topic, object): #senden
     client.publish(topic, msg)
     client.loop()
 
-def receive(): #empfangen
+def receive(): #empfangen; Requirement: FA1
     global id
     temp = []
-    client = mqtt.Client("police")
+    client = mqtt.Client("police") #Requirement: FA3
     client.connect(BROKER_ADDRESS, PORT)
     def on_message(client, userdata, message):
         msg = str(message.payload.decode("utf-8"))
@@ -65,7 +65,7 @@ def processing(msg): #verarbeiten der eingehenden Nachrichten
     global name
     global idCar
     js = json.loads(msg[1])
-    if "hshl/mqtt_exercise/services/police/back" == msg[0] and str(js['name']) == str(name): #id vom server empfangen
+    if "hshl/mqtt_exercise/services/police/back" == msg[0] and str(js['name']) == str(name): #id vom server empfangen; Requirement: FA1; Requirement: FA3; Requirement: FA5
         id = js['id']
         print(id)
     elif msg[0] == "hshl/mqtt_exercise/services/police/"+str(id)+"/call":                      #koordinaten des users
@@ -86,7 +86,7 @@ def processing(msg): #verarbeiten der eingehenden Nachrichten
         "coordinates": js['destination']
         }
         send(json.dumps(data),"hshl/mqtt_exercise/services/police/"+id+"/call/destination/back") # senden der erreicht nachricht für das ziel
-        receive()#warten auf die nachricht des servers zum bekommen der position
+        receive() #warten auf die nachricht des servers zum bekommen der position
     elif msg[0] == "hshl/mqtt_exercise/get_position" and str(js['id']) == str(id): #neue position für den server
         data={
         "id":id,
@@ -108,9 +108,9 @@ def registration():
     data = {
     "id": "register",
     "name": name,
-    "coordinates": coor
+    "coordinates": coor #Requirement: FA4
     }
-    send("hshl/mqtt_exercise/services/police", json.dumps(data))
+    send("hshl/mqtt_exercise/services/police", json.dumps(data)) #Requirement: FA2; Requirement: FA3
 
 def userDestination(destinationcoor, guestname):
     print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
