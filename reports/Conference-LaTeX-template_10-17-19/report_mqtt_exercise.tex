@@ -95,23 +95,23 @@ Jedem client eine eindeutige ID zuordnen \\
 Interne verarbeitung einer fahrzeug bestellung\\
 \end{tabular}
 \end{table}
-\subsection{Anmedlung von Clients}
-Aufgabe des Servers ist es eine Anmeldung von clients zu ermöglichen um  einerseits nur aus dem pool der aktuell aktiven,freie fahrzeuge  auszuwählen und andererseits einer unbekannten menge an Fahrzeugen und kunden die Möglichkeit zu bieten am angebot teilzuhaben. Zu den Clients gehören sowohl die Kunden (User), wie auch alle Fahrzeug typen , damit sind alle Servicefahrzeuge mit den unterkategorien: Police, Firefighter, ambulance gemeint und zuletzt auch Fahrzeuge der Kategorie Taxi.\\ 
-Um auf eine Unbekannte Anzahl an sich zu regestrierenden clients reagieren zu können, muss der initiative schritt durch den Client erfolgen. Zur Regestrierung sendet der Client eine nachricht mittels mqtt Protokoll über die adressen des Users oder der Fahrzeug typen mit dem ersten teil \textsf{"adresse = hshl/mqtt\_exercise/"} und der endung des jeweiligen fahrzeug typen, also: \textsf{"user,taxi,police,firefighter,ambulance"} an den Server. Dieser verarbeitet die nachricht bei erhalt in der Funktion  
+\subsection{Anmeldung von Clients}
+Aufgabe des Servers ist es eine Anmeldung von Clients zu ermöglichen um  einerseits nur aus dem pool der aktuell aktiven,freie Fahrzeuge  auszuwählen und andererseits einer unbekannten menge an Fahrzeugen und Kunden die Möglichkeit zu bieten am Angebot teilzuhaben. Zu den Clients gehören sowohl die Kunden (User), wie auch alle Fahrzeug typen , damit sind alle Servicefahrzeuge mit den Unterkategorien: Police, Firefighter, ambulance gemeint und zuletzt auch Fahrzeuge der Kategorie Taxi.\\ 
+Um auf eine Unbekannte Anzahl an sich zu registrierenden Clients reagieren zu können, muss der Initiative schritt durch den Client erfolgen. Zur Registrierung sendet der Client eine Nachricht mittels MQTT Protokoll über die Adressen des Users oder der Fahrzeug Typen mit dem ersten teil \textsf{"adresse = hshl/mqtt\_exercise/"} und der Endung des jeweiligen Fahrzeug Typen, also: \textsf{"user,taxi,police,firefighter,ambulance"} an den Server. Dieser verarbeitet die Nachricht bei Erhalt in der Funktion  
 \begin{lstlisting}
 def receive()
 	....
 	messageprocessing(temp)
 	....
 \end{lstlisting}
- wobei die aufgabe der Funktion  \textit{receive()} eher die generelle verarbeitung der mqtt nachricht darstellt und nicht die zuordnung der nachricht zu einem bestimmten anwendungszweck. 
-Dieser wird anschließend durch den aufruf der Funktion \textit{messageprocessing} und einer teilung des übergebenen Arrays in die informationen zu inhalt und Adresse der nachricht erreicht.
+ wobei die Aufgabe der Funktion  \textit{receive()} eher die generelle Verarbeitung der MQTT Nachricht darstellt und nicht die Zuordnung der Nachricht zu einem bestimmten Anwendungszweck. 
+Dieser wird anschließend durch den Aufruf der Funktion \textit{messageprocessing} und einer Teilung des übergebenen Arrays in die Informationen zu Inhalt und Adresse der Nachricht erreicht.
 um ein auslesen der nachricht überhaupt zu ermöglichen, ist es notwending die Empfangenen nachricht erst in das Json format zu codieren um anschließen die vorteile einer verarbeitung mit Json datasets zu nutzen. dies wird mit der textzeitle \begin{lstlisting}
 def messageprocessing(msg)
 	json.loads(str(msg[1]))
 \end{lstlisting}
  erreicht.\\
- Zur besseren Identifizierung und klassifizierung als Regestierungsnachricht, wird in dieser die ID des clients durch das wort "register" ersetzt. Dies dient wie schon erwähnt einerseits der besseren einordnung, anderer seits half das menschen lesbarhalten von nachrichten bei der entwicklung ungemein. Einen negativen einfluss auf den erfolgreichen ablauf der regestrierung des clients hat dies nicht, da eine ID erst mit antwort des servers an den client vergeben wird. Die nachricht, die ein Client zur Regestrierung/Anmeldung senden muss sieht wie folgt aus:
+ Zur besseren Identifizierung und Klassifizierung als Registrierungs-Nachricht, wird in dieser die ID des Clients durch das Wort "register" ersetzt. Dies dient wie schon erwähnt einerseits der besseren Einordnung, anderer seits half das Menschen lesbar halten von Nachrichten bei der Entwicklung ungemein. Einen negativen Einfluss auf den erfolgreichen Ablauf der Registrierung des Clients hat dies nicht, da eine ID erst mit Antwort des Servers an den client vergeben wird. Die Nachricht, die ein Client zur Registrierung/Anmeldung senden muss sieht wie folgt aus:
 \begin{lstlisting}
     data={
     "id": "register",
@@ -119,10 +119,20 @@ def messageprocessing(msg)
     "coordinates":coor
     }	
 \end{lstlisting}
-Zudem wird in der Internen verarbeitung ein neuer kanal für die weitere kommunikation mit dem Client geschaffen, so dass eine direkte kommunikation mit diesem möglich ist ohne das andere clients hierdurch beeinträchtigt werden. Die adresse des neuen kanal wird unter zuhilfe nahme der druch den server in den funktionen \textit{regestrationUser(data)} und \textit{registrationCar(data, type)} vergebenen ID geöffnen und mittels einer nachricht auf dem kanal \textsf{"hshl/mqtt\_exercise/user/back"} an diesen zurück gesendet. \\
-Anhand des Quellscodes für das regestrieren des users wird gezeigt, wie die vergabe einer Neuen ID und das einspeichern des clients in den server funktioniert, dies ist ganz ähnlich für das vorgenen bei der regestrierung von fahrzeugen, mit dem einzigen unterschied, das in diesem fall mittels einer separierung durch den übergabe wert "type" die einzelnen fahrzeuge unterschieden werden können. Desweiteren wird bei der registrierung der fahrzeuge noch der status "free" vergeben.\\
-zuerst wird durch den aufruf der Funktion \textit{findid(user)} die kleinste noch freie ID aus der liste der angemeldeten fahrzeuge gesucht, indem die höchste vergebene ID gesucht wird und um einen zähler höher zurück gegeben wird. Anschliessend wird in der methode \textit{registrationUser(data)} durch ein weiteres durchlaufen der liste geprüft ob bereits ein user mit dem selben namen vorhanden ist und bei negativem ergebnis in  die liste aller user eingetragen.\\ der user bekommt abschliessend auf dem rückkanal eine nachricht mit seiner eindeutigen ID. 
+Zudem wird in der Internen Verarbeitung ein neuer Kanal für die weitere Kommunikation mit dem Client geschaffen, so dass eine direkte Kommunikation mit diesem möglich ist ohne das andere Clients hierdurch beeinträchtigt werden. Die Adresse des neuen Kanal wird unter Zuhilfenahme  der durch den Server in den Funktionen \textit{regestrationUser(data)} und \textit{registrationCar(data, type)} vergebenen ID geöffnet und mittels einer Nachricht auf dem Kanal \textsf{"hshl/mqtt\_exercise/user/back"} an diesen zurück gesendet. \\
+Anhand des Quellcodes für das Registrieren des Users wird gezeigt, wie die Vergabe einer Neuen ID und das einspeichern des Clients in den Server funktioniert, dies ist ganz ähnlich für das vorgeben bei der Registrierung von Fahrzeugen, mit dem einzigen unterschied, das in diesem Fall mittels einer Separierung durch den übergabe wert "type" die einzelnen Fahrzeuge unterschieden werden können. Des weiteren wird bei der Registrierung der Fahrzeuge noch der Status "free" vergeben.\\
+zuerst wird durch den aufruf der Funktion \textit{findid(user)} die kleinste noch freie ID aus der liste der angemeldeten Fahrzeuge gesucht, indem die höchste vergebene ID gesucht wird und um einen Zähler höher zurück gegeben wird. Anschließend wird in der Methode \textit{registrationUser(data)} durch ein weiteres durchlaufen der liste geprüft ob bereits ein user mit dem selben Namen vorhanden ist und bei negativem Ergebnis in  die liste aller User eingetragen.\\ der user bekommt abschließend auf dem Rückkanal eine Nachricht mit seiner eindeutigen ID. 
 \subsection{Bestellen eines Fahrzeugs}
+Nach erfolgreicher Registrierung ist es für den Kunden möglich Fahrzeuge zu bestellen und für Fahrzeuge ist es möglich durch einen Kunden bestellt zu werden. In diesem Fall spielt nun der server eine verbindende rolle, in dem er eine anfrage des Kunden entgegen nehmen kann und diese an ein von ihm ausgewähltes Fahrzeug weiterleitet. Die Wahl des passenden Fahrzeugs trifft hierbei der Server, da nur er die position aller Teilnehmer kennt und somit das nächst gelegene Fahrzeug auswählen kann.\\ 
+Eine anfrage durch einen kunden wird unter der im vorfeld bei der regestrierung neu geöffneten kanal in verbindung mit der ID des kunden und einer nachricht mit einem inhalt, der informationen über den kunden,die Koordinaten des Kunden und den gewünschten fahrzeug typ gibt gestartet werden. Beispielsweise kann durch den kunden $ID: 0, Name: Peter, Koordinaten: 2,4$ unter der $Adresse=\textsf{hshl/mqtt\_exercise/user/[ID] }$ mit folgender nachricht ein Taxi bestellt werden \begin{lstlisting}
+data = {
+	"type": "taxi",
+    "id": id,
+    "coordinates": coordinates
+    }
+\end{lstlisting}
+Intern verarbeitet der Server die anfrage des Kunden zuerst, indem er aus dem Type, die richtige liste an die Funktion \textit{findnextcar(car)} übergibt, die das nächst gelegene Fahrzeug des Typtest zu den durch den Kunden angegebene Koordinaten findet.
+\subsubsection{Finde das nächstgelegene Fahrzeug}
 
 \begin{thebibliography}{00}
 \bibitem{b1} 
