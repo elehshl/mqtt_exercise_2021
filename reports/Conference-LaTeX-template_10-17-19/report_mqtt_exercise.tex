@@ -182,8 +182,23 @@ and int(car[c][2].split(";")[1]) == j:
 \end{tabular}
 \end{table}
 Als Rückgabewert wird der datensatz des Fahrzeugs, dass dem Kunden am nächsten liegt an den Aufruf zurück gegeben, dieser kann anschließend an den Kunden übermittelt werden. 
-\subsection{}
-test
+\subsection{Ankunft am Ziel}
+Für den Server ist durch die Vermittlung des nächstgelegenen fahrzeugs an den Kunden der Haupteil seiner Aufgabe erledigt und das Primärziel erreicht. Demnach wurde dem Kunde auf effiziente weise ein Fahrzeug vermittelt und im falle einer buchung eines Service fahrzeug im Optimalfall sogar leben gerettet. Allerdings stehen nicht unbegrenzt fahrzeug ressourcen zur verfügen, weswegen eine einfach nutzung dieser im realen umfeld logischer weise niemals anwendung finden würde. Des wegen ist es zwingend erforderlich eine möglichkeit zu bieten fahrzeuge fortlaufend an Kunden zu vermitteln.\\
+Da aufgrund der zu beginn des Projektes beschriebenen systemumgebung, der server seinen einfluss an den  georderten fahrzeug  mit der übermittlung der fahrzeug daten zum kunden an  diesen die Kontroll gewalt abgibt. \cite[?] ist es dem server erst durch initiative des Kunden möglich fahrzeuge wieder in den status free zu nehemen. Dieses verfahren bieten auf einen erste logische betrachtung die Vorteile, dass solange der Kunde nicht aussteigt ein fahrzeug auf keinen fall frei werden kann, dies kommt der praxis sehr nahe und bildet deswegen sehr gut die realität ab. Ein nachteil für dieses vorgehen ist allerdings das durch die abgabe der Kontroll gewalt der server keinen einfluss mehr auf das fahrzeug hat, solange es nicht durch die nachricht des Kunden Freigegeben wird, sollte nun der kunde aussteigen und   keine nachricht an den server senden, oder sollte diese verloren gehen, so wird dieses fahrzeug auf unbegrenzte zeit als belegt verbucht bleiben und somit nicht genutzt werden können. \\ Eine lösung des problems wäre ein timer, der nach einer bestimmten zeit eine anfrage an jedes Belegte fahrzeug sendet, ob dies immernoch durch den kunden belegt ist. Des weiteren könnte eine Rückanmeldung eines fahrzeug auch auf nachricht des fahrzeugs umgesetzt werden, so das das fahrzeug sich in dem moment des frei werdens beim server zurück anmeldet.
+Allerdings würde der verwendete kern code auch in beiden ompimierungs fällen ähnliche funktionene aufweisen. 
+\\ 
+Eine nachricht zur freigabe eines fahrzeugs wird mittels einer nachricht über den kanal \textsf{"hshl/mqtt\_exercise/user/"id"/status/reset"} und dem inhalt "type" , "id" des Users und der id des fahrzeugs "idCar" an den server gesendet, dieser ist nun in der lage durch den aufruf der Funktion \textit{$statusReset(int(js["idCar"]),str(js["type"]))$} mittels fahrzeugtyp und dessen ID, dem benutzte fahrzeug wieder den status free zu zu ordnen, ein weiterer wichtiger schritt wird mittels Funktionsaufruf 
+\textit{$requestPosition(js["idCar"],js["type"],\\str(findcarname(js["idCar"],str(js["type"]))))$}
+vollzogen.  Angefragt wird der Aktuelle standort des freigegebenen fahrzeugs um in fortlaufenden Buchungen wieder die Möglichkeit zu bieten dem kunden sein nächstgelegenes fahrzeug zu verfügung zu stellen. demnach sendet der server dem gerade freigegebenen fahrzeug über den kanal \textsf{"hshl/mqtt\_exercise/get\_position"} eine anfrage mit dem inhalt "id" des fahrzeugs und dem dazu gehörigen namen und erhält im besten fall  eine Antwort über den kanal  \textsf{"hshl/mqtt\_exercise/set\_position} mit informationen über "id" des fahrzeugs,seines "typs" und zuletzt der aktuellen "coordinates". Diese informationen werden dann in der passenden liste des types für das aktuelle fahrzeug aktualisiert.
+\begin{lstlisting}
+    data = {
+    "type": cartype,
+    "id": id,
+    "idCar": idCar,
+    }
+\end{lstlisting}
+
+
 \begin{thebibliography}{00}
 \bibitem{b1} QUELLEN  
 \end{thebibliography}
