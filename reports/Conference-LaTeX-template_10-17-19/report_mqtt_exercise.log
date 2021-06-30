@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 19:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 20:43
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -621,10 +621,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5695 strings out of 480932
- 81189 string characters out of 2899905
+ 5696 strings out of 480932
+ 81197 string characters out of 2899905
  524902 words of memory out of 3000000
- 21501 multiletter control sequences out of 15000+200000
+ 21502 multiletter control sequences out of 15000+200000
  581797 words of font info for 124 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  30i,11n,40p,1414b,1615s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -641,7 +641,7 @@ sers/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb>
 <C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
 pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on report_mqtt_exercise.pdf (4 pages, 150670 bytes).
+Output written on report_mqtt_exercise.pdf (4 pages, 152231 bytes).
 PDF statistics:
  59 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
