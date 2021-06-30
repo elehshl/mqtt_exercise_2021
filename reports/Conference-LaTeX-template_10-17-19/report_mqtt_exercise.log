@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  29 JUN 2021 17:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 10:09
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -389,12 +389,65 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
                It should not contain an `m'! Please correct it.
                Found on input line 47.
 
-) [1{C:/Users/bened/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+)
+Underfull \hbox (badness 3158) in paragraph at lines 99--101
+\OT1/ptm/m/n/10 ak-tiven, freien Fahrzeuge auszuw[]ahlen und an-der-er-seits
+ []
+
+
+Underfull \hbox (badness 1418) in paragraph at lines 99--101
+\OT1/ptm/m/n/10 Clients reagieren zu k[]onnen, muss der ini-tia-tive Schritt
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
+\OT1/ptm/m/n/10 durch den Client er-fol-gen. Zur Reg-istrierung sendet
+ []
+
+
+Underfull \hbox (badness 2096) in paragraph at lines 99--101
+\OT1/ptm/m/n/10 der Client eine Nachricht mit-tels MQTT-Protokoll []uber
+ []
+
+
+Underfull \hbox (badness 5036) in paragraph at lines 99--101
+\OT1/ptm/m/n/10 die Adressen des Users oder der Fahrzeug-typen mit
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
+\OT1/ptm/m/n/10 dem er-sten Teil \OT1/phv/m/n/10 "adresse = hsh-l/mqtt[]exercis
+e/"
+ []
+
+
+Underfull \hbox (badness 6775) in paragraph at lines 99--101
+\OT1/ptm/m/n/10 und der En-dung des jew-eili-gen Fahrzeug-typen, also:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
+\OT1/phv/m/n/10 "user,taxi,police,firefighter,ambulance" \OT1/ptm/m/n/10 an den
+ Server.
+ []
+
+[1{C:/Users/bened/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
+Underfull \hbox (badness 1983) in paragraph at lines 107--109
+\OT1/ptm/m/n/10 Zuord-nung der Nachricht zu einen bes-timmten An-wen-
+ []
+
+
+Underfull \hbox (badness 3758) in paragraph at lines 107--109
+\OT1/ptm/m/n/10 der Funk-tion \OT1/ptm/m/it/10 mes-sage-pro-cess-ing \OT1/ptm/m
+/n/10 und eine Teilung des
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 113--115
-\OT1/ptm/m/n/10 Zur besseren Iden-ti-fizierung und klas-si-fizierung als
+\OT1/ptm/m/n/10 Zur besseren Iden-ti-fizierung und Klas-si-fizierung als
  []
 
 LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
@@ -404,6 +457,16 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 116.
+
+Underfull \hbox (badness 1609) in paragraph at lines 126--127
+\OT1/ptm/m/n/10 Eine An-frage durch einen Kun-den wird unter dem im
+ []
+
+
+Underfull \hbox (badness 1924) in paragraph at lines 126--127
+\OT1/ptm/m/n/10 Vor-feld bei der Regestrierung neu ge[]offneten Kanal in
+ []
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -423,11 +486,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  5643 strings out of 480932
  80454 string characters out of 2899905
- 522887 words of memory out of 3000000
+ 520887 words of memory out of 3000000
  21456 multiletter control sequences out of 15000+200000
  578652 words of font info for 120 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,11n,40p,613b,1644s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,11n,40p,614b,1296s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 }<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
@@ -438,7 +501,7 @@ rams/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/bened/AppData/Local/
 Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/bened/AppData/L
 ocal/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/bened/AppDa
 ta/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report_mqtt_exercise.pdf (2 pages, 101783 bytes).
+Output written on report_mqtt_exercise.pdf (2 pages, 102130 bytes).
 PDF statistics:
  42 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
