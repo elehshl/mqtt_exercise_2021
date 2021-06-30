@@ -147,7 +147,8 @@ def findnextCar(gpsUser,car):
 
                 print("j ist:"+str(j))
                 for c in range(0,len(car)):
-                    print("search for car: "+ str(car[c]))
+                    print("search for car: "
+                    		+ str(car[c]))
 ...
 \end{lstlisting}
 Ein nachteil den der beschriebene code inne hat ist allerdings, das bei jedem durchlauf nur um einen ring erweitert wird.In wirklichkeit wird hingegen nicht ein ring geprüft sondern ein quadrat jedesmal um einen ring erweitert, was zum nachteil hat das bei jedem durchlauf auch jedes mal bereits geprüfte felder ein weiteres mal geprüft werden, was ein deutlich hemmdenden einfluss auf die laufzeit des programmes hat und letztendlich auch ein unnötiges unterfangen ist. demnach ist bei einer möglichen Optimierung darauf zu achten, bereits geprüfte felder nicht ein weiteres mal zu überprüfen. Eine mögliche umsetzung wäre die vorhandene schleifen für die X- Achse  und die Y- Achse jeweils 2 Schleifen aufzuspalten, wobei in diesem fall die 1. schleife den negativen bereich auf der linken und oberen seite des Standortes prüfen würde und die 2. schleifen den Rechten und unteren positiven bereich der Karte.
@@ -181,6 +182,8 @@ and int(car[c][2].split(";")[1]) == j:
 \end{tabular}
 \end{table}
 Als Rückgabewert wird der datensatz des Fahrzeugs, dass dem Kunden am nächsten liegt an den Aufruf zurück gegeben, dieser kann anschließend an den Kunden übermittelt werden. 
+\subsection{}
+test
 \begin{thebibliography}{00}
 \bibitem{b1} QUELLEN  
 \end{thebibliography}

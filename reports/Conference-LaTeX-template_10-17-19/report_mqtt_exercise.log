@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 13:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 13:28
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -480,15 +480,10 @@ LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Overfull \hbox (26.40283pt too wide) in paragraph at lines 150--151
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][] 
- []
-
 <opti_findnextcar.png, id=16, 433.62pt x 428.802pt>
 File: opti_findnextcar.png Graphic file (type png)
 <use opti_findnextcar.png>
-Package pdftex.def Info: opti_findnextcar.png  used on input line 157.
+Package pdftex.def Info: opti_findnextcar.png  used on input line 158.
 (pdftex.def)             Requested size: 216.80946pt x 214.40047pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -530,7 +525,7 @@ sers/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb>
 <C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
 pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on report_mqtt_exercise.pdf (3 pages, 141161 bytes).
+Output written on report_mqtt_exercise.pdf (3 pages, 141206 bytes).
 PDF statistics:
  56 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
