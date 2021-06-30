@@ -21,7 +21,7 @@
         basicstyle=\ttfamily\small, 
         keywordstyle=\color{keywords},
         commentstyle=\color{comments},
-        stringstyle=\color{red},
+                stringstyle=\color{red},
         showstringspaces=false,
         identifierstyle=\color{green},
         keywords=[2]{pow},
@@ -85,71 +85,54 @@ component, formatting, style, styling, insert
 \newpage
 \section{Parts of Integration}
 \section{Server}
-In diesem Kontext spielt der Server eine sehr wichtige rolle in der Kommunikation zwischen den ausführenden parts des Projektes. Durch den Server und seine strukturen wird letztendlich erst eine plattform geschaffen, die Allen fahrzeuge und den Kunden (Usern) eine Möglichkeit bietet eine verbindung  unter einander zu schaffen und weitere Aufgaben zu erledigen. Konkret waren die aufgaben des Servers: 
+In diesem Kontext spielt der Server eine sehr wichtige Rolle in der Kommunikation zwischen den ausführenden Parts des Projektes. Durch den Server und seine Strukturen wird letztendlich erst eine Plattform geschaffen, die allen Fahrzeugen und den Kunden (Usern) eine Möglichkeit bietet, eine Verbindung untereinander zu schaffen und weitere Aufgaben zu erledigen. Konkret waren die Aufgaben des Servers: 
 \begin{table}[h]
 \begin{tabular}{lcr}
-Anmeldung von clients\\
+Anmeldung von Clients\\
 Das nächstgelegene Fahrzeug finden\\
-Jedem client eine eindeutige ID zuordnen \\
-Übermittelt fahrzeugdaten an den Kunden\\
-Interne verarbeitung einer fahrzeug bestellung\\
+Jedem Client eine eindeutige ID zuordnen \\
+Übermittelt Fahrzeugdaten an den Kunden\\
+Interne Verarbeitung einer Fahrzeugbestellung\\
 \end{tabular}
 \end{table}
-\subsection{Anmedlung von Clients}
-Aufgabe des Servers war es eine Anmeldung von clients zu ermöglichen um  einerseits nur aus dem pool der aktuell aktiven,freie fahrzeuge  auszuwählen und andererseits einer unbekannten menge an Fahrzeugen und kunden die Möglichkeit zu bieten am angebot teilzuhaben. Zu den Clients gehören sowohl die Kunden (User), wie auch alle Fahrzeug typen , damit sind alle Servicefahrzeuge mit den unterkategorien: Police, Firefighter, ambulance gemeint und zuletzt auch Fahrzeuge der Kategorie Taxi.\\ 
-Umgesetzt wurde die anmeldung der Clients in den Funktionen
-\textit{regestrierunUser}
+\subsection{Anmeldung von Clients}
+Aufgabe des Servers ist es, eine Anmeldung von Clients zu ermöglichen, um einerseits nur aus dem Pool der aktuell aktiven, freien Fahrzeuge auszuwählen und andererseits einer unbekannten Menge an Fahrzeugen und Kunden die Möglichkeit zu bieten, am Angebot teilzuhaben. Zu den Clients gehören sowohl die Kunden (User), wie auch alle Fahrzeugtypen. Damit sind alle Servicefahrzeuge mit den Unterkategorien: Police, Firefighter, Ambulance gemeint und zuletzt auch Fahrzeuge der Kategorie Taxi.\\ 
+Um auf eine unbekannte Anzahl an sich zu registrierenden Clients reagieren zu können, muss der initiative Schritt durch den Client erfolgen. Zur Registrierung sendet der Client eine Nachricht mittels MQTT-Protokoll über die Adressen des Users oder der Fahrzeugtypen mit dem ersten Teil \textsf{"adresse = hshl/mqtt\_exercise/"} und der Endung des jeweiligen Fahrzeugtypen, also: \textsf{"user,taxi,police,firefighter,ambulance"} an den Server. Dieser verarbeitet die Nachricht bei Erhalt in der Funktion  
 \begin{lstlisting}
-#registration for user
-def registrationUser(data):
-    inliste = False
-    for i in range(0,len(user)):    #alredy exists Requirement: F-S04
-        if str(data[0]) == str(user[i][0]):
-            inliste = True
-    if inliste == False:    # no ? add! Requirement: F-S05
-        user.append(data)
-    elif inliste == True:   #yes ? print(user exists alredy !)
-        print("#user bereits vorhanden")
+def receive()
+	....
+	messageprocessing(temp)
+	....
 \end{lstlisting}
-und für die Fahrzeuge wurde eine Regestrierung in der Funktion \textit{registrationCar} umgesetzt.
+ wobei die Aufgabe der Funktion  \textit{receive()} eher die generelle Verarbeitung der MQTT-Nachricht darstellt und nicht die Zuordnung der Nachricht zu einen bestimmten Anwendungszweck. 
+Dieser wird anschließend durch den Aufruf der Funktion \textit{messageprocessing} und eine Teilung des übergebenen Arrays in die Informationen zu Inhalt und Adresse der Nachricht erreicht.
+Um ein Auslesen der Nachricht überhaupt zu ermöglichen ist es notwending, die empfangene Nachricht erst in das Json-Format zu codieren, um anschließend die Vorteile einer Verarbeitung mit Json-Datasets zu nutzen. Dies wird mit der Textzeitle \begin{lstlisting}
+def messageprocessing(msg)
+	json.loads(str(msg[1]))
+\end{lstlisting}
+ erreicht.\\
+ Zur besseren Identifizierung und Klassifizierung als Registrierungs-Nachricht, wird in dieser die ID des Clients durch das Wort "register" ersetzt. Dies dient- wie schon erwähnt- einerseits der besseren Einordnung und andererseits half das Lesbar-Halten von Nachrichten für Menschen bei der Entwicklung ungemein. Einen negativen Einfluss auf den erfolgreichen Ablauf der Registrierung des Clients hat dies nicht, da eine ID erst mit Antwort des Servers an den Client vergeben wird. Die Nachricht, die ein Client zur Registrierung/Anmeldung senden muss, sieht wie folgt aus:
 \begin{lstlisting}
-def registrationCar(data,type):
-    car = []
-    inliste = False
-    if type == 0:
-        car = taxi
-    elif type == 1:
-        car = police
-    elif type == 2:
-        car = firefighter
-    elif type == 3:
-         car = ambulance
-    elif type == 99:
-        car = testcar
-    for i in range(0,len(car)):# Requirement: F-S07
-        if str(data[1]) == str(car[i][1]):
-            inliste = True
-    if inliste == False:
-        if type == 0:
-            data.append("free")
-            taxi.append(data)
-        elif type == 1:
-            data.append("free")
-            police.append(data)
-        elif type == 2:
-            data.append("free")
-            firefighter.append(data)
-        elif type == 3:
-            data.append("free")
-            ambulance.append(data)
-        elif type == 99:
-            data.append("free")
-            testcar.append(data)
-    elif inliste == True: #Requirements: F-S12
-        print("#Car already registered")
-#############################################
+    data={
+    "id": "register",
+    "name": name,
+    "coordinates":coor
+    }	
 \end{lstlisting}
-
+Zudem wird in der internen Verarbeitung ein neuer Kanal für die weitere Kommunikation mit dem Client geschaffen, sodass eine direkte Kommunikation mit diesem möglich ist, ohne dass andere Clients hierdurch beeinträchtigt werden. Die Adresse des neuen Kanals wird unter Zuhilfenahme  der durch den Server in den Funktionen \textit{regestrationUser(data)} und \textit{registrationCar(data, type)} vergebenen ID geöffnet und mittels einer Nachricht auf dem Kanal \textsf{"hshl/mqtt\_exercise/user/back"} an diesen zurück gesendet. \\
+Anhand des Quellcodes für das Registrieren des Users wird gezeigt, wie die Vergabe einer neuen ID und das Einspeichern des Clients in den Server funktioniert. Dies ist ganz ähnlich für das Vorgeben bei der Registrierung von Fahrzeugen mit dem einzigen Unterschied, dass in diesem Fall mittels einer Separierung durch den Übergabewert "type" die einzelnen Fahrzeuge unterschieden werden können. Des weiteren wird bei der Registrierung der Fahrzeuge noch der Status "free" vergeben.\\
+Zuerst wird durch den Aufruf der Funktion \textit{findid(user)} die kleinste noch freie ID aus der Liste der angemeldeten Fahrzeuge gesucht, indem die höchste vergebene ID gesucht wird und um einen Zähler höher zurückgegeben wird. Anschließend wird in der Methode \textit{registrationUser(data)} durch ein weiteres Durchlaufen der Liste geprüft, ob bereits ein User mit demselben Namen vorhanden ist und bei negativem Ergebnis in die Liste aller User eingetragen.\\ Der User bekommt abschließend auf dem Rückkanal eine Nachricht mit seiner eindeutigen ID. 
+\subsection{Bestellen eines Fahrzeugs}
+Nach erfolgreicher Registrierung ist es für den Kunden möglich, Fahrzeuge zu bestellen und für Fahrzeuge ist es möglich, durch einen Kunden bestellt zu werden. In diesem Fall spielt nun der Server eine verbindende Rolle, indem er eine Anfrage des Kunden entgegennehmen kann und diese an ein von ihm ausgewähltes Fahrzeug weiterleitet. Die Wahl des passenden Fahrzeugs trifft hierbei der Server, da nur er die Positionen aller Teilnehmer kennt und somit das nächstgelegene Fahrzeug auswählen kann.\\ 
+Eine Anfrage durch einen Kunden wird unter dem im Vorfeld bei der Regestrierung neu geöffneten Kanal in Verbindung mit der ID des Kunden und einer Nachricht mit einem Inhalt, der Informationen über den Kunden, den Koordinaten des Kunden und dem gewünschten Fahrzeugtyp, gestartet. Beispielsweise kann durch den Kunden $ID: 0, Name: Peter, Koordinaten: 2,4$ unter der $Adresse=\textsf{hshl/mqtt\_exercise/user/[ID] }$ mit folgender Nachricht ein Taxi bestellt werden \begin{lstlisting}
+data = {
+	"type": "taxi",
+    "id": id,
+    "coordinates": coordinates
+    }
+\end{lstlisting}
+Intern verarbeitet der Server die Anfrage des Kunden zuerst, indem er aus dem Type die richtige Liste an die Funktion \textit{findnextcar(car)} übergibt, die das nächstgelegene Fahrzeug des Typs Taxi durch die Koordinaten, die durch findet.
+\subsubsection{Finde das nächstgelegene Fahrzeug}
 
 \begin{thebibliography}{00}
 \bibitem{b1} 
