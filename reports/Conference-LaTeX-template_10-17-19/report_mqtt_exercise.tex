@@ -131,11 +131,57 @@ data = {
     "coordinates": coordinates
     }
 \end{lstlisting}
-Intern verarbeitet der Server die Anfrage des Kunden zuerst, indem er aus dem Type die richtige Liste an die Funktion \textit{findnextcar(car)} übergibt, die das nächstgelegene Fahrzeug des Typs Taxi durch die Koordinaten, die durch findet.
+Intern verarbeitet der Server die Anfrage des Kunden zuerst, indem er aus dem Type die richtige Liste an die Funktion \textit{findnextcar(gpsUser, car)} übergibt, die das nächstgelegene Fahrzeug des Typs Taxi durch die Koordinaten, die durch den Kunden übermittelt wurden findet.
 \subsubsection{Finde das nächstgelegene Fahrzeug}
+Um das Fahrzeug  zu finden,  das dem kunden am nächsten  gelegen ist, muss zu erst die vorhandene karte abgebildet werden können, dies wird erreicht in dem planquadrate eingezeichnet werden. Durch die festgelegten planquadrate lässt sich anschließen durch iterierern der planquadrate und abgleichen der liste der fahrzeuge, das gesuchte fahrzeug finden. So in der Vereinfachten theroie, allerdings entstehen bei der Umschlüsselung auf den konkreten fall diverse probleme, die das finden des nächst gelegenen fahrzeug und nicht irgend eines fahrzeugs komplizierter gestalten als zu anfang angenommen.\\
+durch den Umstand, dass der mittelpunkt der suche, bedingt durch den variablen standort des Kunden nicht zwingend der Mittelpunkt der Karte darstellen muss, kam als optimalste lösung ein ringartiges erweitern der Suche um den standort des Kunden in frage dieses wurde mittels schleifen iteration geschaffen.\\
+Die erste Schleife mit der laufvariable "k" gib an um welchen ring,um den Aktuellen standot des Kunden es sich handelt. Die 2. Schleife steht für die y-Achse der Karte und gibt somit die reihen der Quadrate an, sie iteriert von einem starpunkt an, der sich auszeichnet durch die gegenzahl von der ringstufe $k$ minus einem zähler $i_{starpunkt} = (k-1)*(-1)$ bis zu dem endpunkt der durch k plus einem zähler beschrieben werden kann $i_{endpunkt} = k+1$. Die X-Achse wird durch einen weiteren schleifen durchlauf abgebildet und spiegelt die spalten der Karte wieder. Die x-Achsen Schleife läuft vom startpunkt $j_{starpunkt} = i $ also der linken oberen ecke des aktuellen rings bis zum endpunkt $j_{endpunkt} = k+1$ also der rechten unteren ecke des aktuellen rings. Eine letze schleife vergleicht letztendlich die angegebene position mit der liste der angemeldeten fahrzeuge ab, um zu prüfen ob sich an der aktuellen koordinate ein fahrzeug befindet. 
+\begin{lstlisting}
+def findnextCar(gpsUser,car):
+    cancle = 0
+    for k in range(int(gpsUser.split(";")[0]),5):
+        for i in range((k-1)*(-1), k+1):
+            print("i ist:"+str(i))
+            for j in range(i, k+1):
 
+                print("j ist:"+str(j))
+                for c in range(0,len(car)):
+                    print("search for car: "+ str(car[c]))
+...
+\end{lstlisting}
+Ein nachteil den der beschriebene code inne hat ist allerdings, das bei jedem durchlauf nur um einen ring erweitert wird.In wirklichkeit wird hingegen nicht ein ring geprüft sondern ein quadrat jedesmal um einen ring erweitert, was zum nachteil hat das bei jedem durchlauf auch jedes mal bereits geprüfte felder ein weiteres mal geprüft werden, was ein deutlich hemmdenden einfluss auf die laufzeit des programmes hat und letztendlich auch ein unnötiges unterfangen ist. demnach ist bei einer möglichen Optimierung darauf zu achten, bereits geprüfte felder nicht ein weiteres mal zu überprüfen. Eine mögliche umsetzung wäre die vorhandene schleifen für die X- Achse  und die Y- Achse jeweils 2 Schleifen aufzuspalten, wobei in diesem fall die 1. schleife den negativen bereich auf der linken und oberen seite des Standortes prüfen würde und die 2. schleifen den Rechten und unteren positiven bereich der Karte.
+\begin{figure}[h]
+\caption{Optimierung Schleifendurchlauf findnextcar()}
+\centering
+\includegraphics[scale=0.5]{opti_findnextcar}
+\end{figure}
+Anschließend wird als letzter schritt innerhalb der letzten schleife noch abgeglichen ob sich ein freies Fahrzeug mit den passenden koordinaten auf der entsprechenden aktuell geprüften position befinden beispielhaft dargestellt für den bereich $-y,+x = \{-,+\}$. Aus der Tabelle \ref{tab.1} kann in verbindung mit den  aktuellen Schleifen variablen die aktuell zu prüfende position bestimmt werden, wie in Beispiel positionsabgleich zusehen. Zudem wird noch sicherheitshalber ein counter erstellt, der einen exit nach 3 durchläufen ohne ergebnis ermöglicht. 
+\begin{lstlisting}
+#Bespiel Positions-Abgleich#
+...
+elif int(car[c][2].split(";")[0]) == -i 
+and int(car[c][2].split(";")[1]) == j:
+	if car[c][3]== "free":#Requirements: F-S11
+    	return car[c]
+    else:
+        c=c-1
+       	cancle = cancle+1
+\end{lstlisting}
+\begin{table}[h]
+\centering
+\label{tab.1}
+\caption{abgleichtabelle für die Positionsbestimmung der fahrzeuge}
+\begin{tabular}{lcccccr}
+--,--&--,-&--,=&--,+&--,++\\
+-,--&-,-&-,=&-,+&-,++\\
+=,--&=,-&=,=&=,+&=,++\\
++,--&+,-&+,=&+,+&+,++\\
+++,--&++,-&++,=&++,+&++,++\\
+\end{tabular}
+\end{table}
+Als Rückgabewert wird der datensatz des Fahrzeugs, dass dem Kunden am nächsten liegt an den Aufruf zurück gegeben, dieser kann anschließend an den Kunden übermittelt werden. 
 \begin{thebibliography}{00}
-\bibitem{b1} 
+\bibitem{b1} QUELLEN  
 \end{thebibliography}
 \vspace{12pt}
 \end{document}

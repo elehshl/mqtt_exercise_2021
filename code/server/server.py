@@ -168,7 +168,7 @@ def findnextCar(gpsUser,car):
     for k in range(int(gpsUser.split(";")[0]),5):
         for i in range((k-1)*(-1), k+1):
             print("i ist:"+str(i))
-            for j in range((i-1)*(-1), i+1):
+            for j in range((i-1), i+1):
 
                 print("j ist:"+str(j))
                 for c in range(0,len(car)):

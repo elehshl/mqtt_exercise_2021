@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 10:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 13:08
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -301,6 +301,12 @@ LaTeX Warning: Label `lst:code_direct' multiply defined.
 
 LaTeX Warning: Label `lst:code_direct' multiply defined.
 
+
+LaTeX Warning: Label `lst:code_direct' multiply defined.
+
+
+LaTeX Warning: Label `lst:code_direct' multiply defined.
+
 )
 \openout1 = `report_mqtt_exercise.aux'.
 
@@ -467,6 +473,29 @@ Underfull \hbox (badness 1924) in paragraph at lines 126--127
 \OT1/ptm/m/n/10 Vor-feld bei der Regestrierung neu ge[]offneten Kanal in
  []
 
+[2]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+43.
+
+("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+Overfull \hbox (26.40283pt too wide) in paragraph at lines 149--150
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][] 
+ []
+
+<opti_findnextcar.png, id=16, 433.62pt x 428.802pt>
+File: opti_findnextcar.png Graphic file (type png)
+<use opti_findnextcar.png>
+Package pdftex.def Info: opti_findnextcar.png  used on input line 156.
+(pdftex.def)             Requested size: 216.80946pt x 214.40047pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -478,32 +507,35 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[2] (report_mqtt_exercise.aux)
+[3 <./opti_findnextcar.png>] (report_mqtt_exercise.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5643 strings out of 480932
- 80454 string characters out of 2899905
- 520887 words of memory out of 3000000
- 21456 multiletter control sequences out of 15000+200000
- 578652 words of font info for 120 fonts, out of 3000000 for 9000
+ 5691 strings out of 480932
+ 81158 string characters out of 2899905
+ 537903 words of memory out of 3000000
+ 21498 multiletter control sequences out of 15000+200000
+ 580690 words of font info for 123 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,11n,40p,614b,1296s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,11n,40p,995b,1299s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 }<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/bened/AppData/Local/Programs/Mi
-KTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/bened/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/bened/AppData/Local/
-Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/bened/AppData/L
-ocal/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/bened/AppDa
-ta/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report_mqtt_exercise.pdf (2 pages, 102130 bytes).
+lic/amsfonts/cm/cmmi7.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/bened/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/bened/AppData/Loca
+l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/bened/
+AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users
+/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/U
+sers/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb>
+<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
+pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utm
+ri8a.pfb>
+Output written on report_mqtt_exercise.pdf (3 pages, 140008 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
+ 56 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
