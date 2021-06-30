@@ -9,25 +9,27 @@ welche Aufgabe jeder einzelne für das Projekt erfüllen muss.
 
 \subsection{Requirements}
 
-Das Ergebnis des Brainstormings verfasste jeder in einer Requirements Tabelle zusammen, um später zu verhindern das Probleme zwischen den einzelnen Clients auftreten können.
+Das Ergebnis des Brainstormings, verfasste jeder in einer Requirements Tabelle zusammen, um später zu verhindern das Probleme zwischen den einzelnen Clients auftreten können.
 
 
-So wurde festgelegt das jeder Client seine eigene ID und Namen besitzt. 
+So wurde festgelegt das jeder Client seine eigene ID und Namen besitzen muss. 
 
 
-Zudem sind alle Clients mit dem Server verbunden, dort können sie sich mit ihrem eigenen Namen anmelden.
+Zudem sind alle Clients mit dem Server verbunden, dort sollen sie sich mit ihrem eigenen Namen anmelden.
 
 
-Ein weiterer Ansatz ist es das jeder Client, Nachrichten Senden und Empfangen kann. 
+Ein weiterer Ansatz ist, dass jeder Client, Nachrichten Senden und Empfangen soll. 
 
 
-So sollen die Standorte oder Aufgaben zum Server gesendet und dort verarbeitet werden.
+So müssen die Standorte oder 
+
+Aufgaben zum Server gesendet und dort verarbeitet werden.
 
 
 Die Nachrichten sollen innerhalb von 5 Sekunden zwischen den Clients ausgetauscht werden.
 
 
-Zum Schluss wurde festgelegt das jeder sein Programm mit Python programmieren soll um später alles reibungslos zusammenfassen zu können.
+Abschließend wurde festgelegt, dass jeder sein Programm mit Python programmieren soll, um später alles reibungslos zusammenfügen zu können.
 
 
 \begin{figure}[htbp] 
@@ -41,7 +43,7 @@ Zum Schluss wurde festgelegt das jeder sein Programm mit Python programmieren so
 
 \subsection{Use-Case}
 
-Der Nächste Schritt im Projekt ist, aus dem gesammelten Informationen der Requirements, Use-Case Diagramme für jeden Client zu erstellen.
+Der Nächste Schritt im Projekt, ist aus dem gesammelten Informationen der Requirements, Use-Case Diagramme für jeden Client zu erstellen.
 
 
 Use-Case Diagramme verdeutlichen die 
@@ -50,17 +52,18 @@ Aufgaben und
 Verbindungen zwischen den einzelnen Clients.
 
 
-So ist der Server mit jedem Client verbunden, vorab Registrieren sich alle Clients beim Server. 
+Vorab Registrieren sich alle Clients beim Server, so ist der Server mit jedem Client verbunden.
 
 
 Nun bekommt der Server eine Message vom User, 'request car'.
-Folgend wird 'select closest car' vom Server durchgeführt und dem nächsten Car mitgeteilt das er zum anfragendem User fahren muss. 
+Folgend wird 'select closest car' vom Server durchgeführt und dem nächsten gelegenen Car mitgeteilt, dass eine anfragende vom User eingegangen ist.
 
+Zudem sind in der Message die Koordinaten des Users enthalten, woraufhin das Car zu diesem Standort fährt.
 
 Der Server setzt das bestellte Car auf Busy, 'change car status'.
 
 
-Danach erhält das Car eine Message vom User mit den Wunsch Zielort und fährt dort hin.
+Danach erhält das Car eine Message vom User mit dem gewünschten Zielort und bringt ihn dort hin.
 
 
 Am Zielort setzt der User dann das Car beim Server wieder auf free.

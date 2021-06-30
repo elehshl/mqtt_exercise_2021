@@ -4,7 +4,7 @@ Die Aufgabe des Taxis ist es über den MQQT Server mit dem Server und dem User z
  
 Über die erhaltenen Messages fährt das Taxi zum User und bringt ihn zu seinem Zielort.
 
-Der erste Schritt vom Taxi ist es sich beim Server mit seinem Namen zu registrieren, folgend weißt der Server dann dem Taxi seine ID zu.
+Der erste Schritt vom Taxi ist, sich beim Server mit seinem Namen zu registrieren, folgend weißt der Server dann dem Taxi seine ID zu.
 
 \begin{lstlisting} 
 
@@ -18,7 +18,7 @@ data = {
 
 
 
-Daraufhin erhält das Taxi eine Message vom Server, dass ein User ein Taxi bestellt halt. 
+Daraufhin erhält das Taxi eine Message vom Server, dass ein User ein Taxi bestellt hat. 
 Nun liest das Taxi die Koordinaten vom User aus. 
 
 \begin{lstlisting} 
@@ -32,7 +32,7 @@ Nun liest das Taxi die Koordinaten vom User aus.
 
 
 Mit den erhaltenden Koordinaten, weiß das Taxi an welcher Stelle sich der User befindet und fährt zu seiner aktuellen Position.
-Am Ziel angekommen wartet das Taxi auf die neue Message vom User mit seinem neuen Zielort.
+Am Zielort angekommen, wartet das Taxi auf die neue Message vom User, mit seinem neuen Zielort.
 
 
 \begin{lstlisting} 
@@ -45,7 +45,7 @@ Am Ziel angekommen wartet das Taxi auf die neue Message vom User mit seinem neue
 
 
 
-Zum Schluss erhält das Taxi eine Anfrage vom Server mit seiner neuen Position und sendet diese dann zum Server.
+Zum Schluss erhält das Taxi eine Anfrage vom Server, mit seiner neuen Position und sendet diese dann zum Server.
 
 \begin{lstlisting} 
 data={
