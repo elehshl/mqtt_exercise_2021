@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  30 JUN 2021 20:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  1 JUL 2021 13:05
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -373,8 +373,10 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 73.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 73.
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 9
-8.
+(server.tex
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 1
+4.
+
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1phv.fd"
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 
@@ -399,145 +401,145 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
                Found on input line 47.
 
 )
-Underfull \hbox (badness 3158) in paragraph at lines 97--99
+Underfull \hbox (badness 3158) in paragraph at lines 13--15
 \OT1/ptm/m/n/10 ak-tiven, freien Fahrzeuge auszuw[]ahlen und an-der-er-seits
  []
 
 
-Underfull \hbox (badness 1418) in paragraph at lines 97--99
+Underfull \hbox (badness 1418) in paragraph at lines 13--15
 \OT1/ptm/m/n/10 Clients reagieren zu k[]onnen, muss der ini-tia-tive Schritt
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--99
+Underfull \hbox (badness 10000) in paragraph at lines 13--15
 \OT1/ptm/m/n/10 durch den Client er-fol-gen. Zur Reg-istrierung sendet
  []
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 97--99
+Underfull \hbox (badness 2096) in paragraph at lines 13--15
 \OT1/ptm/m/n/10 der Client eine Nachricht mit-tels MQTT-Protokoll []uber
  []
 
 
-Underfull \hbox (badness 5036) in paragraph at lines 97--99
+Underfull \hbox (badness 5036) in paragraph at lines 13--15
 \OT1/ptm/m/n/10 die Adressen des Users oder der Fahrzeug-typen mit
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--99
+Underfull \hbox (badness 10000) in paragraph at lines 13--15
 \OT1/ptm/m/n/10 dem er-sten Teil \OT1/phv/m/n/10 "adresse = hsh-l/mqtt[]exercis
 e/"
  []
 
 
-Underfull \hbox (badness 6775) in paragraph at lines 97--99
+Underfull \hbox (badness 6775) in paragraph at lines 13--15
 \OT1/ptm/m/n/10 und der En-dung des jew-eili-gen Fahrzeug-typen, also:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--99
+Underfull \hbox (badness 10000) in paragraph at lines 13--15
 \OT1/phv/m/n/10 "user,taxi,police,firefighter,ambulance" \OT1/ptm/m/n/10 an den
  Server.
  []
 
 
-Underfull \hbox (badness 1983) in paragraph at lines 105--107
+Underfull \hbox (badness 1983) in paragraph at lines 21--23
 \OT1/ptm/m/n/10 Zuord-nung der Nachricht zu einen bes-timmten An-wen-
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 105--107
+Underfull \hbox (badness 3758) in paragraph at lines 21--23
 \OT1/ptm/m/n/10 der Funk-tion \OT1/ptm/m/it/10 mes-sage-pro-cess-ing \OT1/ptm/m
 /n/10 und eine Teilung des
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 111--113
+Underfull \hbox (badness 10000) in paragraph at lines 27--29
 \OT1/ptm/m/n/10 Zur besseren Iden-ti-fizierung und Klas-si-fizierung als
  []
 
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
-14.
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 3
+0.
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 114.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 30.
 [1{C:/Users/bened/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-Underfull \hbox (badness 1609) in paragraph at lines 124--125
+Underfull \hbox (badness 1609) in paragraph at lines 40--41
 \OT1/ptm/m/n/10 Eine An-frage durch einen Kun-den wird unter dem im
  []
 
 
-Underfull \hbox (badness 1924) in paragraph at lines 124--125
+Underfull \hbox (badness 1924) in paragraph at lines 40--41
 \OT1/ptm/m/n/10 Vor-feld bei der Regestrierung neu ge[]offneten Kanal in
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-42.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 5
+8.
 ("C:\Users\bened\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ts1ptm.fd"
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [2]
 <opti_findnextcar.png, id=18, 433.62pt x 428.802pt>
 File: opti_findnextcar.png Graphic file (type png)
 <use opti_findnextcar.png>
-Package pdftex.def Info: opti_findnextcar.png  used on input line 156.
+Package pdftex.def Info: opti_findnextcar.png  used on input line 72.
 (pdftex.def)             Requested size: 216.80946pt x 214.40047pt.
 
 
-LaTeX Warning: Citation `i' on page 3 undefined on input line 185.
+LaTeX Warning: Citation `i' on page 3 undefined on input line 101.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 []\OT1/ptm/m/n/10 F[]ur den Server ist durch die Ver-mit-tlung des
  []
 
 
-Underfull \hbox (badness 4366) in paragraph at lines 184--191
+Underfull \hbox (badness 4366) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 wurde dem Kunde auf ef-fiziente weise ein Fahrzeug
  []
 
 
-Underfull \hbox (badness 6741) in paragraph at lines 184--191
+Underfull \hbox (badness 6741) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 Sys-te-mumge-bung, der Server seinen Ein-fluss an den
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 Eine Nachricht zur freigabe eines Fahrzeugs
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 wird mit-tels einer Nachricht []uber den Kanal
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OT1/phv/m/n/10 "hsh-l/mqtt[]exercise/user/"id"/status/reset" \OT1/ptm/m/n/10 u
 nd dem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 In-halt "type" , "id" des Users und der id des
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 Fahrzeugs "id-Car" an den Server gesendet, dieser
  []
 
 
-Underfull \hbox (badness 3049) in paragraph at lines 184--191
+Underfull \hbox (badness 3049) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 ist nun in der Lage durch den Aufruf der Funk-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OML/cmm/m/it/10 statusReset\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 int\OT1/cmr/m/n/1
 0 (\OML/cmm/m/it/10 js\OT1/cmr/m/n/10 ["\OML/cmm/m/it/10 idCar\OT1/cmr/m/n/10 "
 ])\OML/cmm/m/it/10 ; str\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 js\OT1/cmr/m/n/10 ["\
@@ -545,22 +547,22 @@ OML/cmm/m/it/10 type\OT1/cmr/m/n/10 "]))$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 mit-tels Fahrzeug-typ und dessen ID, dem be-nutzte
  []
 
 
-Underfull \hbox (badness 4899) in paragraph at lines 184--191
+Underfull \hbox (badness 4899) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 Fahrzeug wieder den Sta-tus free zu zu ord-nen, ein
  []
 
 
-Underfull \hbox (badness 5756) in paragraph at lines 184--191
+Underfull \hbox (badness 5756) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 weit-erer wichtiger schritt wird mit-tels Funk-tion-saufruf
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--191
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 \OML/cmm/m/it/10 str\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 findcarname\OT1/cmr/m/n/1
 0 (\OML/cmm/m/it/10 js\OT1/cmr/m/n/10 ["\OML/cmm/m/it/10 idCar\OT1/cmr/m/n/10 "
 ]\OML/cmm/m/it/10 ; str\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 js\OT1/cmr/m/n/10 ["\O
@@ -568,36 +570,36 @@ ML/cmm/m/it/10 type\OT1/cmr/m/n/10 "]))))$
  []
 
 
-Underfull \hbox (badness 6364) in paragraph at lines 184--191
+Underfull \hbox (badness 6364) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 vol-l-zo-gen. Ange-fragt wird der Ak-tuelle Stan-dort des
  []
 
 
-Underfull \hbox (badness 5756) in paragraph at lines 184--191
+Underfull \hbox (badness 5756) in paragraph at lines 100--107
 \OT1/ptm/m/n/10 wieder die M[]oglichkeit zu bi-eten dem Kun-den sein
  []
 
 
-Underfull \hbox (badness 2790) in paragraph at lines 184--191
+Underfull \hbox (badness 2790) in paragraph at lines 100--107
 []\OT1/ptm/m/n/10 uber "id" des Fahrzeugs,seines "typs" und zuletzt der
  []
 
-[3 <./opti_findnextcar.png>]
-Underfull \hbox (badness 6380) in paragraph at lines 199--200
+[3 <./opti_findnextcar.png>])
+Underfull \hbox (badness 6380) in paragraph at lines 115--86
 []\OT1/ptm/m/n/10 In der Re-alit[]at ste-hen Fahrzeuge wie Taxen oder
  []
 
 
-Underfull \hbox (badness 1874) in paragraph at lines 199--200
+Underfull \hbox (badness 1874) in paragraph at lines 115--86
 \OT1/ptm/m/n/10 Polizeifahrzeuge sel-ten still. Aus diesem Grund ist die
  []
 
 
-Underfull \hbox (badness 5726) in paragraph at lines 199--200
+Underfull \hbox (badness 5726) in paragraph at lines 115--86
 \OT1/ptm/m/n/10 Deswe-gen er-scheint es nur sin-nvoll in Regelm[]aigen
  []
 
-
+(mqtt.tex)
 Underfull \vbox (badness 1648) has occurred while \output is active []
 
 
@@ -621,13 +623,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5696 strings out of 480932
- 81197 string characters out of 2899905
- 524902 words of memory out of 3000000
- 21502 multiletter control sequences out of 15000+200000
+ 5702 strings out of 480932
+ 81431 string characters out of 2899905
+ 523902 words of memory out of 3000000
+ 21504 multiletter control sequences out of 15000+200000
  581797 words of font info for 124 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,11n,40p,1414b,1615s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,11n,40p,1429b,1615s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 }<C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmmi10.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
