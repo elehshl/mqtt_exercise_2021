@@ -1,0 +1,61 @@
+\section{TaxiCode}
+
+Die Aufgabe des Taxis ist es über den MQQT Server mit dem Server und dem User zu kommunizieren.
+ 
+Über die erhaltenen Messages fährt das Taxi zum User und bringt ihn zu seinem Zielort.
+
+Der erste Schritt vom Taxi ist, sich beim Server mit seinem Namen zu registrieren. 
+
+Folgend weißt der Server dann dem Taxi seine ID zu.
+
+\begin{lstlisting} 
+
+data = {
+	"id": "register", 
+	"name": name,
+	"coordinates": coor
+    }
+    
+\end{lstlisting}
+
+
+
+Daraufhin erhält das Taxi eine Message vom Server, dass ein User ein Taxi bestellt hat. 
+Nun liest das Taxi die Koordinaten vom User aus. 
+
+\begin{lstlisting} 
+        data = {
+        "id":id,
+        "msg": "Arrival",
+        "coordinates": js['coordinates']
+        }
+\end{lstlisting}
+
+
+
+Mit den erhaltenden Koordinaten, weiß das Taxi an welcher Stelle sich der User befindet und fährt zu seiner aktuellen Position.
+Am Zielort angekommen, wartet das Taxi auf die neue Message vom User, mit seinem neuen Zielort.
+
+
+\begin{lstlisting} 
+        data ={
+        "id":id,
+        "msg": "Arrival at destination",
+        "coordinates": js['destination']
+        }
+\end{lstlisting}
+
+
+
+Zum Schluss erhält das Taxi eine Anfrage vom Server, mit seiner neuen Position und sendet diese dann zum Server.
+
+\begin{lstlisting} 
+data={
+        "id":id,
+        "name":name,
+        "coordinates":coor
+        }
+        send(json.dumps(data),
+        "hshl/mqtt_exercise/set_position")
+
+\end{lstlisting}
