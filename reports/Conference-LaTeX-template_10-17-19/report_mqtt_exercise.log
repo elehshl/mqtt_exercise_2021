@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  1 JUL 2021 14:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  1 JUL 2021 20:23
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -401,8 +401,8 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
                Found on input line 47.
 
 )
-Underfull \hbox (badness 3158) in paragraph at lines 13--15
-\OT1/ptm/m/n/10 ak-tiven, freien Fahrzeuge auszuw[]ahlen und an-der-er-seits
+Underfull \hbox (badness 2261) in paragraph at lines 13--15
+\OT1/ptm/m/n/10 ak-tiven, freien Fahrzeuge auszuw[]ahlen und an-der-er-seits,
  []
 
 
@@ -493,7 +493,10 @@ Package pdftex.def Info: opti_findnextcar.png  used on input line 72.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-LaTeX Warning: Citation `i' on page 3 undefined on input line 101.
+LaTeX Warning: Citation `' on page 3 undefined on input line 101.
+
+
+LaTeX Warning: Citation `' on page 3 undefined on input line 101.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 100--107
@@ -501,18 +504,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--107
  []
 
 
-Underfull \hbox (badness 4366) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 wurde dem Kunde auf ef-fiziente weise ein Fahrzeug
+Underfull \hbox (badness 2469) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 wurde dem Kun-den auf ef-fiziente Weise ein Fahrzeug
  []
 
 
-Underfull \hbox (badness 6741) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 Sys-te-mumge-bung, der Server seinen Ein-fluss an den
+Underfull \hbox (badness 3209) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 ver-mit-telt und im Falle einer Buchung eines Service-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 Eine Nachricht zur freigabe eines Fahrzeugs
+\OT1/ptm/m/n/10 Sys-te-mumge-bung der Server seinen Ein-fluss an den
+ []
+
+
+Underfull \hbox (badness 3260) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 auch in bei-den Op-ti-mierungsf[]allen []ahnliche Funk-tio-nen
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 Eine Nachricht zur Freigabe eines Fahrzeugs
  []
 
 
@@ -533,7 +546,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--107
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 Fahrzeugs "id-Car" an den Server gesendet, dieser
+\OT1/ptm/m/n/10 Fahrzeugs "id-Car" an den Server gesendet. Dieser
  []
 
 
@@ -551,17 +564,17 @@ OML/cmm/m/it/10 type\OT1/cmr/m/n/10 "]))$
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 mit-tels Fahrzeug-typ und dessen ID, dem be-nutzte
+\OT1/ptm/m/n/10 mit-tels Fahrzeug-typ und dessen ID, dem be-nutzten
  []
 
 
-Underfull \hbox (badness 4899) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 Fahrzeug wieder den Sta-tus free zu zu ord-nen, ein
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 Fahrzeug wieder den Sta-tus "free" zuzuord-nen, ein
  []
 
 
-Underfull \hbox (badness 5756) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 weit-erer wichtiger schritt wird mit-tels Funk-tion-saufruf
+Underfull \hbox (badness 4819) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 weit-erer wichtiger Schritt wird mit-tels Funk-tion-saufruf
  []
 
 
@@ -573,18 +586,13 @@ ML/cmm/m/it/10 type\OT1/cmr/m/n/10 "]))))$
  []
 
 
-Underfull \hbox (badness 6364) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 vol-l-zo-gen. Ange-fragt wird der Ak-tuelle Stan-dort des
+Underfull \hbox (badness 7963) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 vol-l-zo-gen. Ange-fragt wird der ak-tuelle Stan-dort des
  []
 
 
-Underfull \hbox (badness 5756) in paragraph at lines 100--107
-\OT1/ptm/m/n/10 wieder die M[]oglichkeit zu bi-eten dem Kun-den sein
- []
-
-
-Underfull \hbox (badness 2790) in paragraph at lines 100--107
-[]\OT1/ptm/m/n/10 uber "id" des Fahrzeugs,seines "typs" und zuletzt der
+Underfull \hbox (badness 4752) in paragraph at lines 100--107
+\OT1/ptm/m/n/10 wieder die M[]oglichkeit zu bi-eten, dem Kun-den sein
  []
 
 [3 <./opti_findnextcar.png>])
@@ -598,8 +606,23 @@ Underfull \hbox (badness 1874) in paragraph at lines 115--85
  []
 
 
-Underfull \hbox (badness 5726) in paragraph at lines 115--85
-\OT1/ptm/m/n/10 Deswe-gen er-scheint es nur sin-nvoll in Regelm[]aigen
+Underfull \hbox (badness 2512) in paragraph at lines 115--85
+\OT1/ptm/m/n/10 Wahrschein-lichkeit ziem-lich hoch, dass diese Fahrzeuge
+ []
+
+
+Underfull \hbox (badness 3735) in paragraph at lines 115--85
+\OT1/ptm/m/n/10 nach ihrer An-mel-dung im Laufe der Zeit ihre Po-si-
+ []
+
+
+Underfull \hbox (badness 1983) in paragraph at lines 115--85
+\OT1/ptm/m/n/10 tion ver[]andern. Deswe-gen er-scheint es nur sin-nvoll, in
+ []
+
+
+Underfull \hbox (badness 1406) in paragraph at lines 115--85
+\OT1/ptm/m/n/10 regelm[]aigen Abst[]anden deren Po-si-tion zu kontrollieren-
  []
 
 (mqtt.tex
@@ -637,7 +660,7 @@ LaTeX Warning: There were multiply-defined labels.
  ) 
 Here is how much of TeX's memory you used:
  5710 strings out of 480932
- 81584 string characters out of 2899905
+ 81583 string characters out of 2899905
  523900 words of memory out of 3000000
  21512 multiletter control sequences out of 15000+200000
  581797 words of font info for 124 fonts, out of 3000000 for 9000
@@ -656,7 +679,7 @@ sers/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb>
 <C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
 pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on report_mqtt_exercise.pdf (5 pages, 415261 bytes).
+Output written on report_mqtt_exercise.pdf (5 pages, 415102 bytes).
 PDF statistics:
  64 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
