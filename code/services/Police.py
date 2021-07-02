@@ -24,7 +24,7 @@ def send(topic, object): #senden
     client = mqtt.Client("client")
     client.connect(BROKER_ADDRESS, PORT)
     name = object
-    print("Police")
+    print("Police") #Requirement: FA3
     def __init__(self, name):
             self.name = name
     print(" SEND Connected to MQTT Broker: " + BROKER_ADDRESS)
