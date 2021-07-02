@@ -27,7 +27,7 @@ def registration():
 Wenn ein Servicefahrzeug angefordert wird bekommt es den Standort des Users zugeschickt. 
 Das Fahrzeug fährt dann zu den vom User erhaltene Koordinaten und setzt seine Koordinaten auf den Standort des Users.
 
-\newline
+
 \textit{Zum User fahren}
 \begin{lstlisting}
 def drivetoUser(usercoor):
@@ -38,8 +38,6 @@ def drivetoUser(usercoor):
 \end{lstlisting}
 
 
-
-\newline
 Der neue Standort wird in einer jason Datei mit der zugewiesen id und einer msg: Arrival in einem Dataset gespeichert.
 \begin{lstlisting}
         data = {
@@ -54,7 +52,7 @@ Wenn das Fahrzeug beim User angekommen ist, wird es auf bussy (Fahrzeug ist unte
 Als nächstes bekommt das Fahrzeug eine Zielkoordinate vom User mit dem jeweiligen Usernamen.
 Über die Methode userDestination wird der User zum Zielort gefahren. Der neue Standort ist dann die Zielkoordinate (destinationcoor).
 
-\newline
+
 \textit{Zum Zielort fahren}
 \begin{lstlisting}
 def userDestination(destinationcoor, guestname):
