@@ -1,0 +1,109 @@
+\section{ServicesCode}
+In diesem Abschnitt wird der Teil Services beschrieben. 
+Die Aufgabe der Services war es, das sich verschiedene Servicefahrzeuge, wie Police, Firefighter und Ambulance über den Server anmelden können. Eine weitere Aufgabe war es das die Servicefahrzeuge auf Anfrage den User abholen und zu einem Zielort bringen.
+So wird über die Methode registration ein Service Fahrzeug (hier: Police) angemeldet. Wenn in id: register steht wird eine id vom Server zugewiesen.
+Damit das fahrzeug eine Startkoordinate zugeordnet wird, wird in der Methode policecoor eine Zufällige Koordinate generiert. 
+\newline
+\textit{registrierung Servicefahrzeug}
+\begin{lstlisting}
+def policecoor(): 
+    zahly = randint(0, 4)
+    zahlx = randint(0, 4)
+    return str(zahly)+";"+str(zahlx)
+
+def registration():
+    global coor
+    global name
+    coor = policecoor()
+
+    data = {
+    "id": "register",
+    "name": name,
+    "coordinates": coor #Requirement: FA4
+    }
+    send("hshl/mqtt_exercise/services/police", json.dumps(data)) #Requirement: FA2; Requirement: FA3
+\end{lstlisting}
+
+Wenn ein Servicefahrzeug angefordert wird bekommt es den Standort des Users zugeschickt. 
+Das Fahrzeug fährt dann zu den vom User erhaltene Koordinaten und setzt seine Koordinaten auf den Standort des Users.
+
+\newline
+\textit{Zum User fahren}
+\begin{lstlisting}
+def drivetoUser(usercoor):
+    print("New destination: "+usercoor) #textausgabe
+    coor = usercoor   #setzen der pickup koorindanten zu dem standkoordinaten
+    time.sleep(1)#warten
+    print("Arrival at: "+usercoor) #textausgabe
+\end{lstlisting}
+
+
+
+\newline
+Der neue Standort wird in einer jason Datei mit der zugewiesen id und einer msg: Arrival in einem Dataset gespeichert.
+\begin{lstlisting}
+        data = {
+        "id":id,
+        "msg": "Arrival",
+        "coordinates": js['coordinates']
+        }
+\end{lstlisting}
+Wenn das Fahrzeug beim User angekommen ist, wird es auf bussy (Fahrzeug ist unterwegs) gesetzt.
+
+
+Als nächstes bekommt das Fahrzeug eine Zielkoordinate vom User mit dem jeweiligen Usernamen.
+Über die Methode userDestination wird der User zum Zielort gefahren. Der neue Standort ist dann die Zielkoordinate (destinationcoor).
+
+\newline
+\textit{Zum Zielort fahren}
+\begin{lstlisting}
+def userDestination(destinationcoor, guestname):
+    print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
+    coor = destinationcoor #setzen der zielkoordinaten in den standort des fahrzeugs
+    time.sleep(1) #schlafen eine sekunde
+    print("Arrival at: "+destinationcoor)
+\end{lstlisting}
+
+Dies wird in einem Dataset mit der id des Fahrzeugs, der msg: Arrival at destination und der destinationcoor gespeichert.
+
+\begin{lstlisting}
+        data ={
+        "id":id,
+        "msg": "Arrival at destination",
+        "coordinates": js['destination']
+        }
+\end{lstlisting}
+Der User setzt das Fahrzeug wieder auf free (Fahrzeug bereit für neue Anfragen).
+
+
+Zuletzt sendet das Fahrzeug auf Anfrage des Servers seinen aktuellen Standort mit seiner id und dem Namen des Fahrzeugs. 
+\textit{übergabe der neuen Koordinaten}
+\begin{lstlisting}
+        data={
+        "id":id,
+        "name":name,
+        "coordinates":coor
+        }
+        send(json.dumps(data),"hshl/mqtt_exercise/set_position")
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
