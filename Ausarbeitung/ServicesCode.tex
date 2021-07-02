@@ -21,7 +21,8 @@ data = {
 "name": name,
 "coordinates": coor #Requirement: FA4
 }
-send("hshl/mqtt_exercise/services/police", json.dumps(data)) #Requirement: FA2; Requirement: FA3
+send("hshl/mqtt_exercise/services/police", 
+json.dumps(data)) #Requirement: FA2; Requirement: FA3
 \end{lstlisting}
 
 Wenn ein Servicefahrzeug angefordert wird bekommt es den Standort des Users zugeschickt. 
@@ -32,7 +33,8 @@ Das Fahrzeug fährt dann zu den vom User erhaltene Koordinaten und setzt seine K
 \begin{lstlisting}
 def drivetoUser(usercoor):
 print("New destination: "+usercoor) #textausgabe
-coor = usercoor   #setzen der pickup koorindanten zu dem standkoordinaten
+coor = usercoor   
+#Standort auf Standort des Users setzen
 time.sleep(1)#warten
 print("Arrival at: "+usercoor) #textausgabe
 \end{lstlisting}
@@ -56,8 +58,10 @@ Als nächstes bekommt das Fahrzeug eine Zielkoordinate vom User mit dem jeweilig
 \textit{Zum Zielort fahren}
 \begin{lstlisting}
 def userDestination(destinationcoor, guestname):
-print("New destination, drive "+guestname+" to: "+destinationcoor) #textausgabe
-coor = destinationcoor #setzen der zielkoordinaten in den standort des fahrzeugs
+print("New destination, drive "+guestname+" to: "
++destinationcoor) #textausgabe
+coor = destinationcoor 
+#zielkoordinate = Fahrzeugstandort
 time.sleep(1) #schlafen eine sekunde
 print("Arrival at: "+destinationcoor)
 \end{lstlisting}
