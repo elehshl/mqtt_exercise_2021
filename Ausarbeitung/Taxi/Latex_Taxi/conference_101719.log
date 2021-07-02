@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.1.21)  30 JUN 2021 15:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.1.21)  1 JUL 2021 12:42
 entering extended mode
 **./conference_101719.tex
 (conference_101719.tex
@@ -523,31 +523,31 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Calculating math sizes for size <11> on input line 79.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 82.
- (Einleitung.tex) (Diagramme.tex
-<Bsp_requirments.png, id=1, 398.6895pt x 257.16075pt>
-File: Bsp_requirments.png Graphic file (type png)
-<use Bsp_requirments.png>
-Package pdftex.def Info: Bsp_requirments.png  used on input line 35.
-(pdftex.def)             Requested size: 247.6778pt x 159.75584pt.
- [1{C:/Users/Michael/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+ (Einleitung.tex) (Diagramme.tex [1{C:/Users/Michael/AppData/Local/MiKTeX/2.9/p
+dftex/config/pdftex.map}
 
 
 ]
+<Bsp_requirments.png, id=9, 398.6895pt x 257.16075pt>
+File: Bsp_requirments.png Graphic file (type png)
+<use Bsp_requirments.png>
+Package pdftex.def Info: Bsp_requirments.png  used on input line 45.
+(pdftex.def)             Requested size: 247.6778pt x 159.75584pt.
 <Use-Case_Server.png, id=11, 585.387pt x 340.8735pt>
 File: Use-Case_Server.png Graphic file (type png)
 <use Use-Case_Server.png>
-Package pdftex.def Info: Use-Case_Server.png  used on input line 75.
+Package pdftex.def Info: Use-Case_Server.png  used on input line 86.
 (pdftex.def)             Requested size: 247.6778pt x 144.22174pt.
 ) (TaxiCode.tex
 LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
-1.
+3.
 
 ("C:\Users\Michael\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsptm.fd
 "
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
 ) [2 <./Bsp_requirments.png> <./Use-Case_Server.png>]
 
 ** Conference Paper **
@@ -570,11 +570,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  5976 strings out of 492448
  83067 string characters out of 3119045
- 349682 words of memory out of 3000000
+ 348682 words of memory out of 3000000
  10275 multiletter control sequences out of 15000+200000
  45928 words of font info for 101 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,11n,40p,348b,1322s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 30i,11n,40p,334b,1565s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Michael/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.e
 nc}<C:/Users/Michael/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmsy8.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX 2.9/fonts/type
@@ -582,7 +582,7 @@ nts/cm/cmsy8.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 s/type1/urw/times/utmbi8a.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX 2
 .9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Michael/AppData/Local/Programs/Mi
 KTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on conference_101719.pdf (3 pages, 125145 bytes).
+Output written on conference_101719.pdf (3 pages, 125267 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
