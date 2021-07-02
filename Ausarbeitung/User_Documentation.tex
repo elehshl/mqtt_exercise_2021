@@ -1,0 +1,60 @@
+\section{User Code}\label{usercode}
+Der Code des Users wurde hinsichtlich der Anforderungen so gestaltet, dass dieser dem Nutzer sowohl eine ID als auch einen Nutzernamen zuweist. Darüber hinaus werden dem Server für die Weiterverarbeitung auch die aktuellen Koordinaten der Person übergeben. Im Folgenden wird der in diesem Projekt durch Python realisierte Code, in Abschnitte unterteilt und kurz in seiner Funktion erläutert.\\
+\\
+Im ersten Schritt nach Programmstart wird der User gebeten sich mit dem Befehl \textit{reg} in der Eingabeaufforderung anzumelden. Daraufhin bekommt dieser seine ID, sowie seinen Nutzernamen und Standort übergeben und im Server hinterlegt. Den entsprechenden Ausschnitt des Codes ist im folgenden zu sehen.
+
+\begin{lstlisting}
+#Login des Users
+def userin(userinput):
+    if userinput =="reg":
+        getid()
+        receive()
+        pass
+\end{lstlisting}
+
+Gleiches gilt für die anschließende Bestellung eines der Services. Der Nutzer ist über den Eingabebefehl \textit{order(geforderter Service)} in der Lage den geforderten Service zu rufen. Hierbei stehen folgende Fahrzeugtypen zur Auswahl.
+
+\begin{itemize}
+
+	\item taxi
+	\item police
+	\item ambulance
+	\item firefighter
+
+\end{itemize}
+
+Die damit aufgerufene Methode, in diesem Beispiel für das Taxi, \textit{def ordertaxi()} übergibt die damit zusammenhängenden Daten des Users, mittels des Aufrufs \textit{send(…)} an den Server.
+Hier ist die Klasse des Taxis in der Lage sich die notwendigen Informationen auszulesen.
+
+\begin{lstlisting}
+#Call For Taxi
+def ordertaxi():
+    global id
+    global cartype
+    data1 = {
+        "type": "taxi",
+        "id": id,
+        "coordinates": coordinates
+        }
+    cartype = "taxi"
+    time.sleep(5)
+    send(json.dumps(data1),"hshl/mqtt_exercise/user/"+str(id))
+\end{lstlisting}
+
+In den weiteren Schritten wird der User direkt mit dem Taxi verbunden um miteinander zu kommunizieren. Dies entlastet zum einen den Server und hat zum anderen den Vorteil die Ausführungszeiten zu verringern. Das Taxi wird sich mitteilen sobald es den Nutzer erreicht hat und dieser wiederum ein weiteres Paar Koordinaten als sein Ziel angeben. Nach erreichen der vom User geforderten Position kann das Servicefahrzeug von eben diesem wieder als \textit{free} gesetzt werden und kann sich um weitere Aufträge anderer Nutzer kümmern.
+
+\begin{lstlisting}
+#Seting Vehicle Status To Free
+def setToFree():
+    global id
+    global idCar
+    global cartype
+    print("SERVICE VEHICLE SET TO FREE")
+    data = {
+    "type": cartype,
+    "id": id,
+    "idCar": idCar,
+    }
+    send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(id)+"/status/reset")
+\end{lstlisting}
+
