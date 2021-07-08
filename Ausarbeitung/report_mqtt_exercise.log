@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  2 JUL 2021 15:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7380 64-bit) (preloaded format=pdflatex 2021.6.23)  8 JUL 2021 20:13
 entering extended mode
 **./report_mqtt_exercise.tex
 (report_mqtt_exercise.tex
@@ -479,32 +479,13 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
 
-Overfull \hbox (208.80469pt too wide) in paragraph at lines 24--25
+Overfull \hbox (2.40259pt too wide) in paragraph at lines 25--26
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][] 
+][][][][][][][][] 
  []
 
 
-Overfull \hbox (98.40356pt too wide) in paragraph at lines 35--36
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (127.20386pt too wide) in paragraph at lines 59--60
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (132.0039pt too wide) in paragraph at lines 60--61
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (16.80273pt too wide) in paragraph at lines 85--87
+Overfull \hbox (16.80273pt too wide) in paragraph at lines 89--91
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
@@ -758,7 +739,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  5772 strings out of 480932
  82928 string characters out of 2899905
- 554921 words of memory out of 3000000
+ 550921 words of memory out of 3000000
  21555 multiletter control sequences out of 15000+200000
  581797 words of font info for 124 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -777,7 +758,7 @@ fb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb
 utmbi8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/t
 imes/utmr8a.pfb><C:/Users/bened/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on report_mqtt_exercise.pdf (8 pages, 495189 bytes).
+Output written on report_mqtt_exercise.pdf (8 pages, 495113 bytes).
 PDF statistics:
  82 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
