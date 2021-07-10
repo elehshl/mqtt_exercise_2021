@@ -19,7 +19,7 @@ def dataVerification(msg): #Prüfung der gesendeten Daten, ist die Datei empty =
         return False
         pass
 
-def send(object,topic): #Senden & Registrieren      #Requirement: F2
+def send(object,topic): #Senden                   #Requirement: F2
     time.sleep(2)
     client = mqtt.Client("client")
     client.connect(SERVER_ADDRESS, PORT)
@@ -119,7 +119,7 @@ def register():  #Registierung        #Requirement: F3
     "name": name,
     "coordinates":coor
     }
-    send(json.dumps(data), "hshl/mqtt_exercise/taxi")  # Senden der brechneten Coordinaten
+    send(json.dumps(data), "hshl/mqtt_exercise/taxi") 
 
 print("Reg. Name:")
 name = input() #Eingabe vom Name
