@@ -38,7 +38,8 @@ def ordertaxi():
         }
     cartype = "taxi"
     time.sleep(5)
-    send(json.dumps(data1),"hshl/mqtt_exercise/user/"+str(id))
+    send(json.dumps(data1),
+    "hshl/mqtt_exercise/user/"+str(id))
 \end{lstlisting}
 
 In den weiteren Schritten wird der User direkt mit dem Taxi verbunden um miteinander zu kommunizieren. Dies entlastet zum einen den Server und hat zum anderen den Vorteil die Ausführungszeiten zu verringern. Das Taxi wird sich mitteilen sobald es den Nutzer erreicht hat und dieser wiederum ein weiteres Paar Koordinaten als sein Ziel angeben. Nach erreichen der vom User geforderten Position kann das Servicefahrzeug von eben diesem wieder als \textit{free} gesetzt werden und kann sich um weitere Aufträge anderer Nutzer kümmern.
@@ -55,6 +56,8 @@ def setToFree():
     "id": id,
     "idCar": idCar,
     }
-    send(json.dumps(data),"hshl/mqtt_exercise/user/"+str(id)+"/status/reset")
+    send(json.dumps(data),
+    "hshl/mqtt_exercise/user/
+    "+str(id)+"/status/reset")
 \end{lstlisting}
 
