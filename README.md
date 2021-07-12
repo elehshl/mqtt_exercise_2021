@@ -48,9 +48,9 @@
 
 ## 6. Meilenstein Slides (12.07.2021)
 
-| PP                                                                                                                   
+| Power Point                                                                                                                  
 | ------------- |
-|Power Point](https://github.com/elehshl/mqtt_exercise_2021/tree/master/presentation)
+| [Power Point](https://github.com/elehshl/mqtt_exercise_2021/tree/master/presentation)
 
 
 
