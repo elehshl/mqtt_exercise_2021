@@ -46,9 +46,9 @@
 | ------------- |
 | [Alle](https://github.com/elehshl/mqtt_exercise_2021/tree/master/Ausarbeitung)  
 
-## 6. Meilenstein Slides (??.??.2021)
+## 6. Meilenstein Slides (12.07.2021)
 
-[![N|Power Point](https://github.com/elehshl/mqtt_exercise_2021/tree/master/presentation)
+|Power Point](https://github.com/elehshl/mqtt_exercise_2021/tree/master/presentation)
 
 
 
