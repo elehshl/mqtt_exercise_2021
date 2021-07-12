@@ -31,12 +31,11 @@ Der Nächste Schritt im Projekt, ist aus dem gesammelten Informationen der Requi
 Use-Case Diagramme verdeutlichen die Aufgaben und Verbindungen zwischen den einzelnen Clients.
 
 Vorab Registrieren sich alle Clients beim Server, so ist der Server mit jedem Client verbunden. Nun bekommt der Server eine Message vom User, 'request car'.
-Folgend wird 'select closest car' vom Server durchgeführt und dem nächsten gelegenen Car mitgeteilt, das eine anfragende vom User eingegangen ist.
-Zudem sind in der Message die Koordinaten des Users enthalten, woraufhin das Car zu diesem Standort fährt.
+
+Folgend wird 'select closest car' vom Server durchgeführt und dem nächsten gelegenen Car mitgeteilt, das eine anfragende vom User eingegangen ist. Zudem sind in der Message die Koordinaten des Users enthalten, woraufhin das Car zu diesem Standort fährt.
 
 Der Server setzt das bestellte Car auf Busy, 'change car status'.
-Danach erhält das Car eine Message vom User mit dem gewünschten Zielort und bringt ihn dort hin. Am Zielort setzt der User dann das Car beim Server wieder auf free.
-Zum Schluss erfragt der Server den neuen Standort des Cars und schließt die Handlung damit ab.
+Danach erhält das Car eine Message vom User mit dem gewünschten Zielort und bringt ihn dort hin. Am Zielort setzt der User dann das Car beim Server wieder auf free. Zum Schluss erfragt der Server den neuen Standort des Cars und schließt die Handlung damit ab.
 
 
 \begin{figure}[htbp] 
