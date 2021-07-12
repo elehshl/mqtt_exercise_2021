@@ -56,7 +56,7 @@
 
 | Ausarbeitung
 | ------------ |
-| [Pdf](https://github.com/elehshl/mqtt_exercise_2021/blob/master/reports/report_mqtt_exercise.pdf)
+| [PDF](https://github.com/elehshl/mqtt_exercise_2021/blob/master/reports/report_mqtt_exercise.pdf)
 
 
 
