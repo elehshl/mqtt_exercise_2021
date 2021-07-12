@@ -50,10 +50,13 @@
 
 | Power Point                                                                                                                  
 | ------------- |
-| [Power Point](https://github.com/elehshl/mqtt_exercise_2021/tree/master/presentation)
+| [Folien](https://github.com/elehshl/mqtt_exercise_2021/tree/master/presentation)
 
+## 7. Ausarbeitung (12.07.2021)
 
-
+| Ausarbeitung
+| ------------ |
+| [Pdf](https://github.com/elehshl/mqtt_exercise_2021/blob/master/reports/report_mqtt_exercise.pdf)
 
 
 
